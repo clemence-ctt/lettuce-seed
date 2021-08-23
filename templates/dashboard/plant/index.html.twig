@@ -7,6 +7,8 @@
 
     <h1>Plant index</h1>
 
+    <a href="{{ path('dashboard_plants_new') }}">Add a plant</a>
+
     <table class="table">
         <thead>
             <tr>
@@ -27,8 +29,9 @@
                 <td>{{ plant.description }}</td>
                 <td>{{ plant.date ? plant.date|date('Y-m-d') : '' }}</td>
                <td>
-                     <!-- <a href="">show</a>
-                    <a href="">edit</a> -->
+                <a href="{{ path('dashboard_plants_show', {'id': plant.id}) }}">show</a> 
+                || <a href="{{ path('dashboard_plants_edit', {'id': plant.id}) }}">edit</a> 
+
                 </td>
                 <td>
                     {% for  picture in plant.getPictures %}

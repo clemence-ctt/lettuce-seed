@@ -41,7 +41,7 @@ class DashboardController extends AbstractController
     /**
      * @Route("/profile", name="dashboard_profile", methods={"GET"})
      */
-    public function showProfile(): Response
+    public function profile(): Response
     {
         // get the connected user Entity
         $user = $this->getUser();
@@ -54,7 +54,7 @@ class DashboardController extends AbstractController
     /**
      * @Route("/profile/edit", name="dashboard_profile_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, UserPasswordHasherInterface $encoder): Response
+    public function editProfile(Request $request, UserPasswordHasherInterface $encoder): Response
     {
         $user = $this->getUser();
         $form = $this->createForm(UserType::class, $user);

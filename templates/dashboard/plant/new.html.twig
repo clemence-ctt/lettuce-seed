@@ -1,0 +1,24 @@
+{% extends 'default.html.twig' %}
+
+{% block flash %}
+    {# read and display all flash messages #}
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{ label }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+{% endblock %}
+
+{% block title %}New Plant{% endblock %}
+
+{% block body %}
+
+<a href="{{ path('dashboard_index') }}">back to index</a>
+
+    <h1>Create new Plant</h1>
+
+    {{ include('dashboard/_partials/_plant-new-form.html.twig', {'button_label': 'ALEA JACTA EST'}) }}
+
+{% endblock %}

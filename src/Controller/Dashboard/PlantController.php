@@ -10,9 +10,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+//LATER PLANTCONTROLLER 1- flash ; 2- changer l'id de la plante par autre chose
+//♥JULIEN PLANTCONTROLLER renommer les routes ?
 
 /**
- * @Route("/me/plant")
+ * @Route("/me/plants")
  */
 class PlantController extends AbstractController
 {
@@ -30,4 +32,86 @@ class PlantController extends AbstractController
             'plants' => $userPlants,
         ]);
     }
+
+    /**
+     * @Route("/new", name="dashboard_plants_new", methods={"GET","POST"})
+     */
+    public function new(Request $request): Response
+    {
+        $plant = new Plant();
+        $form = $this->createForm(PlantType::class, $plant);
+        $form->handleRequest($request);
+
+        // REMINDER récupération du user connecté
+        // sends back to login page if an anonymous user tries to create a plant
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        // get the connected user Entity
+        $user = $this->getUser();
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // setting createdAt to current datetime and the user to current user
+            $plant->setCreatedAt();
+            $plant->setUser($user);
+            // load the toilet and flush
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($plant);
+            $entityManager->flush();
+
+            $id = $plant->getId();
+            //JK ↑ ca c'est ok. mais je le mets où ? génère ce truc moche là : me/plants/?0=$id   (ou ?id=$id si ['id' => $id])
+            return $this->redirectToRoute('dashboard_plants_show', ['id' => $id] , Response::HTTP_SEE_OTHER);
+        }
+    
+        return $this->renderForm('dashboard/plant/new.html.twig', [
+            'plant' => $plant,
+            'form' => $form,
+        ]);
+    }
+
+    /**
+     * @Route("/{id}", name="dashboard_plants_show", methods={"GET"})
+     */
+    public function plant(Plant $plant): Response
+    { 
+        return $this->render('dashboard/plant/plant.html.twig', [
+            'plant' => $plant,
+        ]);
+    }
+
+    /**
+     * @Route("/{id}/edit", name="dashboard_plants_edit", methods={"GET","POST"})
+     */
+    public function edit(Request $request, Plant $plant): Response
+    {
+        $form = $this->createForm(PlantType::class, $plant);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $plant->setUpdatedAt();
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('plant_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('dashboard/plant/edit.html.twig', [
+            'plant' => $plant,
+            'form' => $form,
+        ]);
+    }
+
+    //♥JULIEN ça dégage ça ou il faut l'ajouter sur le tree.drawio ?
+    /**
+     * @Route("/{id}", name="dashboard_plants_delete", methods={"POST"})
+     */
+    public function delete(Request $request, Plant $plant): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$plant->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($plant);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('dashboard_plants', [], Response::HTTP_SEE_OTHER);
+    }
+    
 }
