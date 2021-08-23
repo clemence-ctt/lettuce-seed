@@ -1,0 +1,18 @@
+App\Entity\Plant: 
+    plant_{1..4}:
+        name (unique): '<word()>'
+        description: '<catchPhrase()>'  
+        date: '<date_create()>'
+        # user: '1'
+        createdAt: '<dateTime()>'
+
+App\Entity\Picture:
+    picture_{1..50}:
+        name : '<word()>'
+        description: '<catchPhrase()>'  
+        date: '<dateTime()>'
+        file: '<word()>'
+        is_cover: '<numberBetween(1, 2)>'
+        like_counter: '<numberBetween(0, 500)>' 
+        createdAt: '<dateTime()>'
+        plants: '@plant*'

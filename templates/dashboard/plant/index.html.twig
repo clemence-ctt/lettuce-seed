@@ -1,0 +1,47 @@
+{% extends 'default.html.twig' %}
+
+{% block title %}Plant index{% endblock %}
+
+{% block body %}
+<a href="{{ path('dashboard_index') }}"> Back to index</a>
+
+    <h1>Plant index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Date</th>
+                <th>actions</th>
+                <th>pictures</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for plant in plants %}
+            <tr>
+                <!--JK  plant.id gardé pour raisons pratiques...-->
+                <td>{{ plant.id }}</td> 
+                <td>{{ plant.name }}</td>
+                <td>{{ plant.description }}</td>
+                <td>{{ plant.date ? plant.date|date('Y-m-d') : '' }}</td>
+               <td>
+                     <!-- <a href="">show</a>
+                    <a href="">edit</a> -->
+                </td>
+                <td>
+                    {% for  picture in plant.getPictures %}
+                        {{ picture.getName }}
+                    {% endfor %}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    
+{% endblock %}

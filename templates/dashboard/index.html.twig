@@ -1,0 +1,11 @@
+{% extends 'default.html.twig' %}
+
+{% block title %}User{% endblock %}
+
+{% block body %}
+    <h1>Welcome {{ user.username }}</h1>
+
+    <a href="{{ path('dashboard_profile') }}">Go to my profile</a> 
+    <br>
+    <a href="{{ path('dashboard_plants') }}">See my plants</a>
+{% endblock %}

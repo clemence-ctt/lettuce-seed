@@ -1,0 +1,23 @@
+{% extends 'default.html.twig' %}
+
+{% block title %}Edit User{% endblock %}
+
+{% block flash %}
+    {# read and display all flash messages #}
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{ label }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+{% endblock %}
+
+{% block body %}
+    <h1>Edit User</h1>
+
+    {{ include('/dashboard/_partials/_profile-edit-form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('dashboard_profile') }}">back to profile</a>
+
+{% endblock %}

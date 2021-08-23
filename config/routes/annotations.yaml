@@ -1,0 +1,7 @@
+controllers:
+    resource: ../../src/Controller/
+    type: annotation
+    # prefix: /lettuce-seed/public
+kernel:
+    resource: ../../src/Kernel.php
+    type: annotation

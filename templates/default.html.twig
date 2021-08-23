@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {{ include('_partials/_head.html.twig') }}
+    </head>
+    <body>
+        <!-- REMINDER TWIG partial inclusion -->
+        {{ include('_partials/components/_navbar.html.twig') }}
+        
+        {% block flash %}{% endblock %}
+        {% block body %}{% endblock %}
+    </body>
+
+</html>
