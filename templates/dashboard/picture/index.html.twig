@@ -1,0 +1,53 @@
+{% extends 'default.html.twig' %}
+
+{% block title %}
+    Plant index
+{% endblock %}
+
+{% block body %}
+    <a href="{{ path('dashboard_index') }}"> Back to dashboard</a> || <a href="{{ path('dashboard_plants') }}">back to list</a>
+
+    <h1>Pictures of {{ currentPlant.name }}</h1>
+
+    {# ♥ je choisis lequel ?  #}
+    <!-- DOC https://symfony.com/doc/current/routing.html#getting-the-route-name-and-parameters -->
+    {% set route_parameters = app.request.attributes.get('_route_params') %}
+    <a href="{{ path('dashboard_picture_new', {'plantId' : route_parameters.plantId}) }}">Create new</a>
+    <a href="{{ path('dashboard_picture_new', {'plantId' : currentPlant.id}) }}">Create new</a>
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Date</th>
+                <th>File</th>
+                <th>Is_cover</th>
+                <th>Like_counter</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for picture in pictures %}
+            <tr>
+                <td>{{ picture.name }}</td>
+                <td>{{ picture.description }}</td>
+                <td>{{ picture.date ? picture.date|date('Y-m-d') : '' }}</td>
+                <td>{{ picture.file }}</td>
+                <td>{{ picture.isCover ? 'Yes' : 'No' }}</td>
+                <td>{{ picture.likeCounter }}</td>
+                <td>
+                    <a href="{{ path('dashboard_picture_show', {'plantId' : currentPlant.id, 'id': picture.id}) }}">show</a>
+                    <a href="{{ path('dashboard_picture_edit', {'plantId' : currentPlant.id, 'id': picture.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="10">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

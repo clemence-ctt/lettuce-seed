@@ -10,8 +10,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-//LATER PLANTCONTROLLER 1- flash ; 2- changer l'id de la plante par autre chose
-//♥JULIEN PLANTCONTROLLER renommer les routes ?
+//LATER PLANTCONTROLLER 1- flash ; 2- changer l'id de la plante par son nom ?
+//♥ PLANTCONTROLLER renommer les routes ?
 
 /**
  * @Route("/me/plants")
@@ -34,7 +34,7 @@ class PlantController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="dashboard_plants_new", methods={"GET","POST"})
+     * @Route("/new", name="dashboard_plant_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
@@ -56,9 +56,8 @@ class PlantController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($plant);
             $entityManager->flush();
-
+            // redirects to the created plant
             $id = $plant->getId();
-            //JK ↑ ca c'est ok. mais je le mets où ? génère ce truc moche là : me/plants/?0=$id   (ou ?id=$id si ['id' => $id])
             return $this->redirectToRoute('dashboard_plants_show', ['id' => $id] , Response::HTTP_SEE_OTHER);
         }
     
@@ -69,7 +68,7 @@ class PlantController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="dashboard_plants_show", methods={"GET"})
+     * @Route("/{id}", name="dashboard_plant_show", methods={"GET"})
      */
     public function plant(Plant $plant): Response
     { 
@@ -79,7 +78,7 @@ class PlantController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="dashboard_plants_edit", methods={"GET","POST"})
+     * @Route("/{id}/edit", name="dashboard_plant_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Plant $plant): Response
     {
@@ -99,9 +98,9 @@ class PlantController extends AbstractController
         ]);
     }
 
-    //♥JULIEN ça dégage ça ou il faut l'ajouter sur le tree.drawio ?
+    //♥PLANT DELETE ça dégage ça ou il faut l'ajouter sur le tree.drawio ?
     /**
-     * @Route("/{id}", name="dashboard_plants_delete", methods={"POST"})
+     * @Route("/{id}", name="dashboard_plant_delete", methods={"POST"})
      */
     public function delete(Request $request, Plant $plant): Response
     {

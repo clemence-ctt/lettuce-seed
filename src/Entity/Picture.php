@@ -61,6 +61,7 @@ class Picture
      */
     private $like_counter;
 
+    //♥ PICTURE ENTITY pourquoi le nullable prend pas ici ???
     /**
      * @ORM\ManyToMany(targetEntity=Plant::class, inversedBy="pictures")
      */

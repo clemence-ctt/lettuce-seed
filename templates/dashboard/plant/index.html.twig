@@ -3,11 +3,11 @@
 {% block title %}Plant index{% endblock %}
 
 {% block body %}
-<a href="{{ path('dashboard_index') }}"> Back to index</a>
+<a href="{{ path('dashboard_index') }}"> Back to dashboard</a>
 
     <h1>Plant index</h1>
 
-    <a href="{{ path('dashboard_plants_new') }}">Add a plant</a>
+    <a href="{{ path('dashboard_plant_new') }}">Add a plant</a>
 
     <table class="table">
         <thead>
@@ -22,15 +22,15 @@
         </thead>
         <tbody>
         {% for plant in plants %}
-            <tr>
-                <!--JK  plant.id gardé pour raisons pratiques...-->
-                <td>{{ plant.id }}</td> 
+            <tr> 
+                <!--LATER PLANT VIEW ajouter les 3 dernières photos de chaque plante ? -->
                 <td>{{ plant.name }}</td>
                 <td>{{ plant.description }}</td>
                 <td>{{ plant.date ? plant.date|date('Y-m-d') : '' }}</td>
                <td>
-                <a href="{{ path('dashboard_plants_show', {'id': plant.id}) }}">show</a> 
-                || <a href="{{ path('dashboard_plants_edit', {'id': plant.id}) }}">edit</a> 
+                <a href="{{ path('dashboard_plant_show', {'id': plant.id}) }}">show</a> 
+                || <a href="{{ path('dashboard_plant_edit', {'id': plant.id}) }}">edit</a> 
+                || <a href="{{ path('dashboard_plant_pictures', {'plantId': plant.id}) }}">photos</a>
 
                 </td>
                 <td>

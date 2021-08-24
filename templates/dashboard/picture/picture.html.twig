@@ -1,0 +1,68 @@
+{% extends 'default.html.twig' %}
+
+{% block flash %}
+    {# read and display all flash messages #}
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{ label }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+{% endblock %}
+
+{% block title %}Picture{% endblock %}
+
+{% block body %}
+    {% set route_parameters = app.request.attributes.get('_route_params') %}    
+    
+    <h1>Picture</h1>
+    {# mettre directement la photo, ou le nom s'il y en a un ?  #}
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Name</th>
+                <td>{{ picture.name }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ picture.description }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ picture.date ? picture.date|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>File</th>
+                <td>{{ picture.file }}</td>
+            </tr>
+            <tr>
+                <th>Is_cover</th>
+                <td>{{ picture.isCover ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Like_counter</th>
+                <td>{{ picture.likeCounter }}</td>
+            </tr>
+            
+            <tr>
+                {#♥ VIEW PICTURE si plus d'une plante afficher :  #}
+                <th>Other plants in this picture</th>
+                <td>
+                    {% for plant in picture.plants %}
+                        {% if (plant.id != currentPlant.id) %}
+                            <a href="{{ path('dashboard_plant_pictures', {'plantId' : plant.id}) }}">{{ plant.name }}</a>
+                        {% endif %}
+                    {% endfor %}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <a href="{{ path('dashboard_plant_pictures', {'plantId' : currentPlant.id}) }}">back to plant photos</a>
+
+    <a href="{{ path('dashboard_picture_edit', {'plantId' : currentPlant.id, 'id': picture.id}) }}">edit</a>
+    
+    {{ include('dashboard/_partials/_picture-delete-form.html.twig') }}
+
+{% endblock %}

@@ -17,8 +17,11 @@ class PictureType extends AbstractType
             ->add('description')
             ->add('date')
             ->add('file')
+            // TODO PICTURETYPE il faudra changer le iscover de facon à ce qu'une seule soit la couv... (au pire automatiquement la dernière)
             ->add('is_cover')
-            ->add('like_counter')
+            
+            // LATER PICTURETYPE préselectionner la plante depuis laquelle on arrive OU l'ajout de photo se fait depuis dashboard directement ?
+            // TODO PICTURETYPE obliger la selection d'au moins un champs 
             ->add('plants', null, [
                 'label' => 'Which plant is it ?',
                 'choice_label' => 'name',
@@ -42,6 +45,7 @@ class PictureType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Picture::class,
+            //NOTICE FORM novalidate (pour ne pas avoir les messages du navig)
             'attr' => [
                 'novalidate' => 'novalidate'
             ]
