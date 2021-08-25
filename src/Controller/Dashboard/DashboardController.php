@@ -52,9 +52,9 @@ class DashboardController extends AbstractController
     }
 
     /**
-     * @Route("/profile/edit", name="dashboard_profile_edit", methods={"GET","POST"})
+     * @Route("/profile-edit", name="dashboard_profile_edit", methods={"GET","POST"})
      */
-    public function editProfile(Request $request, UserPasswordHasherInterface $encoder): Response
+    public function profileEdit(Request $request, UserPasswordHasherInterface $encoder): Response
     {
         $user = $this->getUser();
         $form = $this->createForm(UserType::class, $user);

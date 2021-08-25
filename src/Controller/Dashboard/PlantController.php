@@ -11,10 +11,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 //LATER PLANTCONTROLLER 1- flash ; 2- changer l'id de la plante par son nom ?
-//♥ PLANTCONTROLLER renommer les routes ?
 
 /**
  * @Route("/me/plants")
+ * @Route("/me/plant")
  */
 class PlantController extends AbstractController
 {
@@ -42,7 +42,6 @@ class PlantController extends AbstractController
         $form = $this->createForm(PlantType::class, $plant);
         $form->handleRequest($request);
 
-        // REMINDER récupération du user connecté
         // sends back to login page if an anonymous user tries to create a plant
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         // get the connected user Entity
@@ -52,7 +51,7 @@ class PlantController extends AbstractController
             // setting createdAt to current datetime and the user to current user
             $plant->setCreatedAt();
             $plant->setUser($user);
-            // load the toilet and flush
+            // load and flush
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($plant);
             $entityManager->flush();
@@ -70,9 +69,9 @@ class PlantController extends AbstractController
     /**
      * @Route("/{id}", name="dashboard_plant_show", methods={"GET"})
      */
-    public function plant(Plant $plant): Response
+    public function show(Plant $plant): Response
     { 
-        return $this->render('dashboard/plant/plant.html.twig', [
+        return $this->render('dashboard/plant/show.html.twig', [
             'plant' => $plant,
         ]);
     }

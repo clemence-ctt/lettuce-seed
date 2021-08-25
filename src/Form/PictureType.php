@@ -45,7 +45,7 @@ class PictureType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Picture::class,
-            //NOTICE FORM novalidate (pour ne pas avoir les messages du navig)
+            //REMINDER FORMS : novalidate (pour ne pas avoir les messages du navig)
             'attr' => [
                 'novalidate' => 'novalidate'
             ]

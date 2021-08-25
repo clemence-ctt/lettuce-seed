@@ -76,12 +76,12 @@ class PictureController extends AbstractController
     /**
      * @Route("/{id}", name="dashboard_picture_show", methods={"GET"})
      */
-    public function picture(int $plantId, PlantRepository $plantRepository, Picture $picture): Response
+    public function show(int $plantId, PlantRepository $plantRepository, Picture $picture): Response
     {
         $currentPlant = $plantRepository->find($plantId);
-        //TODO les afficher par ordre de date dans la vue
+        //TODO PICTURE ordre d'affichage / les afficher par ordre de date dans la vue
         
-        return $this->render('dashboard/picture/picture.html.twig', [
+        return $this->render('dashboard/picture/show.html.twig', [
             'picture' => $picture,
             'currentPlant' => $currentPlant
         ]);

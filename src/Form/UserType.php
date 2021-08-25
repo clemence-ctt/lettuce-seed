@@ -20,7 +20,7 @@ class UserType extends AbstractType
             ->add('email')
             ->add('username')
 
-            // REMINDER PRE_SET_DATA LISTENER pour le mdp
+            // REMINDER FORMS : mdp et event listener PRE_SET_DATA 
             ->addEventListener(FormEvents::PRE_SET_DATA, function(FormEvent $event) {
                 // On récupère l'entité User
                 $user = $event->getData();
@@ -31,6 +31,7 @@ class UserType extends AbstractType
                 // S'il est existant en database, on applique le mapped=false.
                 if ($user->getId() !== null) {
                     $builder
+                        // LATER FORMS MDP mettre à la fin pour vérif même au changement d'email/pseudo
                         ->add('oldPassword', PasswordType::class, [
                             'empty_data' => '',
                             'mapped' => false,

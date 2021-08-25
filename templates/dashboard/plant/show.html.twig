@@ -29,10 +29,10 @@
     </table>
     
     <br>
-    <a href="{{ path('dashboard_plants') }}">back to list</a>
+    <a href="{{ path('dashboard_plants') }}">back to plant list</a>
     || 
-    <a href="{{ path('dashboard_plant_edit', {'id': plant.id}) }}">edit</a> 
-    
+    <a href="{{ path('dashboard_plant_edit', {'id': plant.id}) }}">edit infos </a> 
+    <br><br>
     {{ include('dashboard/_partials/_plant-delete-form.html.twig') }}
 
     {% endblock %}
