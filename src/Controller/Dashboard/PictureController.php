@@ -46,6 +46,17 @@ class PictureController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             // setting createdAt to current datetime and the user to current user
             $picture->setCreatedAt();
+
+            // STEP UPLOAD controller image
+            $pictureFile = $form->get('file')->getData();
+            //JK dd($pictureFile);  // OKKKK   -originalName: "vegetables.jpg"    -mimeType: "image/jpeg"
+            // On génère un nom de fichier unique en devinant l'extension MIME avant de sauvegarder
+            $fileName = md5(uniqid()).'.'.$pictureFile->guessExtension();
+            // Déplacement du fichier dans un répertoire de notre projet
+            $pictureFile->move($this->getParameter('pictures_directory'), $fileName);
+            // Met à jour le nom de l'image finale dans notre Post
+            $picture->setFile($fileName);
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($picture);
             $entityManager->flush();

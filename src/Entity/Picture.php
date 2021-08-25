@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\PictureRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Constraints\Length;
 
 /**
@@ -47,9 +48,12 @@ class Picture
     private $date;
 
     /**
+     * @File(mimeTypes={ "image/jpeg" })
+     * TODO ajouter des types
      * @ORM\Column(type="string", length=255)
      */
     private $file;
+    //♥ il veut pas faire les getter setter -_-
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
@@ -61,7 +65,7 @@ class Picture
      */
     private $like_counter;
 
-    //♥ PICTURE ENTITY pourquoi le nullable prend pas ici ???
+    //♥ PICTURE ENTITY pourquoi le nullable prend pas ici ???  > bah ptet parce qu'il n'y est pas #stoplirelalignedudessus
     /**
      * @ORM\ManyToMany(targetEntity=Plant::class, inversedBy="pictures")
      */
