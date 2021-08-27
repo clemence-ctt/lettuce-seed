@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Entity\Plant;
 use App\Form\PlantType;
 use App\Repository\PlantRepository;
+use App\Repository\PictureRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -25,7 +26,7 @@ class PlantController extends AbstractController
     {
         $user = $this->getUser();
         $userPlants = $user->getPlants();
-        // JK dd($userPlants->toArray());
+        //REMINDER toArray dd($userPlants->toArray());
 
         return $this->render 
         ('dashboard/plant/index.html.twig' , [

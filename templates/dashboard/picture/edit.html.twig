@@ -16,7 +16,7 @@
 {% block body %}
     <h1>Edit Picture</h1>
 
-    {{ include('dashboard/_partials/_picture-form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('dashboard/_partials/_picture-form-edit.html.twig', {'button_label': 'Update'}) }}
 
     
     <a href="{{ path('dashboard_picture_show', {'plantId' : currentPlant.id, 'id': picture.id}) }}">back to picture infos</a>  

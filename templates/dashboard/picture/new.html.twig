@@ -16,7 +16,7 @@
 {% block body %}
     <h1>Create new Picture</h1>
 
-    {{ include('dashboard/_partials/_picture-form.html.twig', {'button_label': 'ALEA JACTA EST'}) }}
+    {{ include('dashboard/_partials/_picture-form-new.html.twig', {'button_label': 'ALEA JACTA EST'}) }}
 
     {% set route_parameters = app.request.attributes.get('_route_params') %}
     <a href="{{ path('dashboard_plant_pictures', {'plantId' : route_parameters.plantId}) }}">back to plant photos</a>

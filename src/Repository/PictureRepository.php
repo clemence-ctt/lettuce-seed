@@ -19,6 +19,25 @@ class PictureRepository extends ServiceEntityRepository
         parent::__construct($registry, Picture::class);
     }
 
+
+    public function findLastThreePictures($plantId)
+    {
+        return $this->createQueryBuilder('picture')
+            ->andWhere('picture.plant = :val')
+            ->setParameter('val', $plantId)
+            ->orderBy('picture.date', 'DESC')
+            ->setMaxResults(3)
+            ->getQuery()
+            ->getResult();
+    }
+
+    // SLQ : (testé et ça marche) remplacer plant_id
+    //     SELECT name, date, file FROM picture 
+    //     INNER JOIN picture_plant ON picture.id = picture_plant.picture_id 
+    //     WHERE plant_id = 482 
+    //     ORDER BY date DESC
+    //     LIMIT 3
+
     // /**
     //  * @return Picture[] Returns an array of Picture objects
     //  */
@@ -35,7 +54,7 @@ class PictureRepository extends ServiceEntityRepository
         ;
     }
     */
-
+    
     /*
     public function findOneBySomeField($value): ?Picture
     {

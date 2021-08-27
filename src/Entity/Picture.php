@@ -53,7 +53,6 @@ class Picture
      * @ORM\Column(type="string", length=255)
      */
     private $file;
-    //♥ il veut pas faire les getter setter -_-
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
@@ -65,7 +64,6 @@ class Picture
      */
     private $like_counter;
 
-    //♥ PICTURE ENTITY pourquoi le nullable prend pas ici ???  > bah ptet parce qu'il n'y est pas #stoplirelalignedudessus
     /**
      * @ORM\ManyToMany(targetEntity=Plant::class, inversedBy="pictures")
      */

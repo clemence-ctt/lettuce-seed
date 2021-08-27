@@ -7,8 +7,10 @@ use App\Entity\Picture;
 use App\Form\PictureType;
 use App\Repository\PlantRepository;
 use App\Repository\PictureRepository;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -48,8 +50,9 @@ class PictureController extends AbstractController
             $picture->setCreatedAt();
 
             // STEP UPLOAD controller image
+            // DOC UPLOAD https://symfony.com/doc/current/controller/upload_file.html
+
             $pictureFile = $form->get('file')->getData();
-            //JK dd($pictureFile);  // OKKKK   -originalName: "vegetables.jpg"    -mimeType: "image/jpeg"
             // On génère un nom de fichier unique en devinant l'extension MIME avant de sauvegarder
             $fileName = md5(uniqid()).'.'.$pictureFile->guessExtension();
             // Déplacement du fichier dans un répertoire de notre projet
@@ -91,7 +94,7 @@ class PictureController extends AbstractController
     {
         $currentPlant = $plantRepository->find($plantId);
         //TODO PICTURE ordre d'affichage / les afficher par ordre de date dans la vue
-        
+    
         return $this->render('dashboard/picture/show.html.twig', [
             'picture' => $picture,
             'currentPlant' => $currentPlant
@@ -103,15 +106,38 @@ class PictureController extends AbstractController
      */
     public function edit(Request $request, int $plantId, PlantRepository $plantRepository, Picture $picture): Response
     {
+        $oldPictureFile = $picture->getFile();
+        // $this->getRequest()->getUriForPath('/uploads/myimage.jpg');
+
+        $picture->setFile(
+            new File($this->getParameter('pictures_directory').'/'.$picture->getFile())
+            // new File($picture->getFile())
+        );
+
         $form = $this->createForm(PictureType::class, $picture);
         $form->handleRequest($request);
 
         $currentPlant = $plantRepository->find($plantId);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // set updated_at
             $picture->setUpdatedAt();
+            // upload picture : if the form's 'file' field is modified, save the picture
+            if(!empty($form->get('file')->getData())) {
+                $pictureFile = $form->get('file')->getData();
+                $fileName = md5(uniqid()).'.'.$pictureFile->guessExtension();
+                $pictureFile->move($this->getParameter('pictures_directory'), $fileName);
+                $picture->setFile($fileName);
+            }
+            // if it's empty, set to the previous picture name
+            else {
+                $picture->setFile($oldPictureFile);
+            }
+
+            // flush
             $this->getDoctrine()->getManager()->flush();
 
+            // redirection
             $routeParameters = $request->attributes->get('_route_params');
             $id = $picture->getId();
             return $this->redirectToRoute('dashboard_picture_show', ['plantId' => $routeParameters['plantId'], 'id' => $id], Response::HTTP_SEE_OTHER);
@@ -120,7 +146,8 @@ class PictureController extends AbstractController
         return $this->renderForm('dashboard/picture/edit.html.twig', [
             'picture' => $picture,
             'form' => $form,
-            'currentPlant' => $currentPlant
+            'currentPlant' => $currentPlant,
+            'oldPictureFile' => $oldPictureFile
         ]);
     }
 
@@ -129,8 +156,15 @@ class PictureController extends AbstractController
      */
     public function delete(Request $request, Picture $picture): Response
     {
+        
+        $filesystem = new Filesystem();
+        $filePath = $this->getParameter('pictures_directory').'/'.$picture->getFile();
+        //JK dd($filePath);
+
         if ($this->isCsrfTokenValid('delete'.$picture->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
+            //removes the file from uploads/pictures directory  https://symfony.com/doc/current/components/filesystem.html
+            $filesystem->remove(['', $filePath, 'activity.log']);
             $entityManager->remove($picture);
             $entityManager->flush();
         }
