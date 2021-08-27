@@ -1,0 +1,1 @@
+console.log('%cmain.js loaded', 'color: #f00; font-size: 2rem');

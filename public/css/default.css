@@ -1,0 +1,24 @@
+:root {
+    --color-medium: #ccc;
+    --color-medium-light: #ddd;
+    --color-medium-dark: #aaa;
+
+    --color-darkest: #000;
+
+    --font-default: Verdana, Geneva, Tahoma, sans-serif;
+
+
+    --color-highlight: #b4d455;
+
+    --gutter-default: 1rem;
+    --gutter-large: calc(var(--gutter-default) * 2);
+    --gutter-small: calc(var(--gutter-default) * 0.5);
+}
+
+body {
+    background-color : var(--color-medium-light);
+    font-family: var(--font-default);
+}
+
+
+
