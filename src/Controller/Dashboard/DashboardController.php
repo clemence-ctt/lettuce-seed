@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBag;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-
+// TODO DASHBOARDCONTROLLER new/picture (add another plant ou juste un new depuis l'index)
 
 /**
  * @Route("/me")

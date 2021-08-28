@@ -1,9 +1,9 @@
 :root {
-    --color-medium: #ccc;
-    --color-medium-light: #ddd;
-    --color-medium-dark: #aaa;
+    --color-medium: #ccc9;
+    --color-medium-light: #ddd9;
+    --color-medium-dark: #aaa9;
 
-    --color-darkest: #000;
+    --color-darkest: #0009;
 
     --font-default: Verdana, Geneva, Tahoma, sans-serif;
 
@@ -13,12 +13,25 @@
     --gutter-default: 1rem;
     --gutter-large: calc(var(--gutter-default) * 2);
     --gutter-small: calc(var(--gutter-default) * 0.5);
+
+    --default-width: 920px;
 }
 
 body {
+    min-width: 100vw;
+    min-height: 100vh;
     background-color : var(--color-medium-light);
     font-family: var(--font-default);
+
+    background-image: url('https://64.media.tumblr.com/6140e221315db8943ff5d7c40c6864fa/tumblr_pffa9tBY691svq6hoo1_1280.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
+#main {
+    width: var(--default-width);
+    margin: auto;
+}
 
 

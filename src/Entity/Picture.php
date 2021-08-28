@@ -55,11 +55,6 @@ class Picture
     private $file;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
-     */
-    private $is_cover;
-
-    /**
      * @ORM\Column(type="integer", nullable=true)
      */
     private $like_counter;
@@ -150,20 +145,6 @@ class Picture
 
         return $this;
     }
-
-
-    public function getIsCover(): ?bool
-    {
-        return $this->is_cover;
-    }
-
-    public function setIsCover(?bool $is_cover): self
-    {
-        $this->is_cover = $is_cover;
-
-        return $this;
-    }
-
 
     public function getLikeCounter(): ?int
     {

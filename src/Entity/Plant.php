@@ -53,6 +53,11 @@ class Plant
     private $pictures;
 
     /**
+     * @ORM\ManyToOne(targetEntity=Picture::class)
+     */
+    private $cover;
+
+    /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="plants")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -67,6 +72,7 @@ class Plant
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $updated_at;
+
 
 
     public function __construct()
@@ -144,6 +150,19 @@ class Plant
         if ($this->pictures->removeElement($picture)) {
             $picture->removePlant($this);
         }
+
+        return $this;
+    }
+    
+
+    public function getCover(): ?Picture
+    {
+        return $this->cover;
+    }
+
+    public function setCover(?Picture $cover): self
+    {
+        $this->cover = $cover;
 
         return $this;
     }

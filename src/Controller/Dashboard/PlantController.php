@@ -11,7 +11,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-//LATER PLANTCONTROLLER 1- flash ; 2- changer l'id de la plante par son nom ?
+//LATER PLANTCONTROLLER 2- changer l'id de la plante par son nom 
+// TODO PLANTCONTROLLER flash
 
 /**
  * @Route("/me/plants")
@@ -98,7 +99,7 @@ class PlantController extends AbstractController
         ]);
     }
 
-    //♥PLANT DELETE ça dégage ça ou il faut l'ajouter sur le tree.drawio ?
+    
     /**
      * @Route("/{id}", name="dashboard_plant_delete", methods={"POST"})
      */

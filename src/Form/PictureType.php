@@ -23,9 +23,7 @@ class PictureType extends AbstractType
                 //↓ avoids this error : The form's view data is expected to be a "Symfony\Component\HttpFoundation\File\File", but it is a "string". You can avoid this error by setting the "data_class" option to null or by adding a view transformer that transforms "string" to an instance of "Symfony\Component\HttpFoundation\File\File".
                 'mapped' => false,
             ])
-            //JK possible de rajouter multiple(bool) pour ajout multiple
-            //DOC https://symfony.com/doc/current/reference/forms/types/file.html
-            //DOC https://symfony.com/doc/current/controller/upload_file.html
+            
                 // 'constraints' => [
                 //     new File([
                 //         'maxSize' => '1024k',
@@ -37,10 +35,6 @@ class PictureType extends AbstractType
                 //     ])
                 // ],
 
-
-            //♥ PICTURETYPE il faudra changer le iscover de facon à ce qu'une seule soit la couv... (au pire automatiquement la dernière)
-            ->add('is_cover')
-            
             // LATER PICTURETYPE préselectionner la plante depuis laquelle on arrive OU l'ajout de photo se fait depuis dashboard directement ?
             // TODO PICTURETYPE obliger la selection d'au moins un champs 
             ->add('plants', null, [
