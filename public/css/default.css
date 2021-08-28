@@ -1,20 +1,5 @@
-:root {
-    --color-medium: #ccc9;
-    --color-medium-light: #ddd9;
-    --color-medium-dark: #aaa9;
-
-    --color-darkest: #0009;
-
-    --font-default: Verdana, Geneva, Tahoma, sans-serif;
-
-
-    --color-highlight: #b4d455;
-
-    --gutter-default: 1rem;
-    --gutter-large: calc(var(--gutter-default) * 2);
-    --gutter-small: calc(var(--gutter-default) * 0.5);
-
-    --default-width: 920px;
+* {
+    box-sizing: border-box;
 }
 
 body {
@@ -29,9 +14,45 @@ body {
     background-attachment: fixed;
 }
 
+a {
+    text-decoration: none;
+}
+
+img {
+    max-width: 100%;
+}
+
+
+
 #main {
-    width: var(--default-width);
+    max-width: var(--default-width);
     margin: auto;
+}
+
+
+figure.picture {
+    border: var(--border-default);
+    position: relative;
+    margin-bottom: var(--spacing-default);
+}
+
+
+figure.picture img  {
+    min-width: 100%;
+}
+
+
+figure.picture .picture__meta   {
+    display: flex;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    border-top: solid 1px var(--color-lightest);
+    padding: var(--spacing-default);
+    font-size: var(--font-size-big);
+    background-color: var(--color-medium-light);
+    backdrop-filter: grayscale(0.5) blur(3px);
+    justify-content: space-between;
 }
 
 

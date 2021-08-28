@@ -1,0 +1,24 @@
+
+.plant__pictures {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    flex-direction: row;
+    
+}
+
+
+.plant__pictures .picture {
+    /*flex-grow: 1;*/
+    flex-basis: calc(50% - var(--spacing-smallest) * 2 - var(--border-width-default));
+    margin: var(--spacing-smallest);
+    background-size: contain;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+}
+
+.plant__pictures .picture img {
+
+    visibility: hidden;
+}
+

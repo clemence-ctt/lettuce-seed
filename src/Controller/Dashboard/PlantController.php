@@ -2,6 +2,7 @@
 
 namespace App\Controller\Dashboard;
 
+use App\Controller\CoreController;
 use App\Entity\User;
 use App\Entity\Plant;
 use App\Form\PlantType;
@@ -17,7 +18,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 /**
  * @Route("/me/plants")
  */
-class PlantController extends AbstractController
+class PlantController extends CoreController
 {
     /**
      * @Route("/", name="dashboard_plants", methods={"GET"})
@@ -28,6 +29,8 @@ class PlantController extends AbstractController
         $userPlants = $user->getPlants();
         //REMINDER toArray dd($userPlants->toArray());
 
+        $userPlants = array_reverse($userPlants->toArray());
+        
         return $this->render 
         ('dashboard/plant/index.html.twig' , [
             'plants' => $userPlants,
@@ -44,7 +47,11 @@ class PlantController extends AbstractController
         $form->handleRequest($request);
 
         // sends back to login page if an anonymous user tries to create a plant
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+        // TIPS ACL denying access
+        // $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+
         // get the connected user Entity
         $user = $this->getUser();
 
@@ -52,13 +59,10 @@ class PlantController extends AbstractController
             // setting createdAt to current datetime and the user to current user
             $plant->setCreatedAt();
             $plant->setUser($user);
-            // load and flush
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($plant);
-            $entityManager->flush();
+            $this->persist($plant);
             // redirects to the created plant
             $id = $plant->getId();
-            return $this->redirectToRoute('dashboard_plants_show', ['id' => $id] , Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('dashboard_plant_show', ['id' => $id] , Response::HTTP_SEE_OTHER);
         }
     
         return $this->renderForm('dashboard/plant/new.html.twig', [
@@ -70,25 +74,18 @@ class PlantController extends AbstractController
     /**
      * @Route("/set-cover/{plantId}/{pictureId}", name="dashboard_plant_setcover", methods={"GET"})
      */
-    public function setCover(int $plantId, int $pictureId, PlantRepository $plantRepository, PictureRepository $pictureRepository)
+    public function setCover(int $plantId, int $pictureId)
     {
 
-        $plant = $plantRepository->find($plantId);
-        $picture = $pictureRepository->find($pictureId);
+        $plant = $this->getPlantById($plantId);
+        $picture = $this->getPictureById($pictureId);
 
         $plant->setCover($picture);
-
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->persist($plant);
-        $this->getDoctrine()->getManager()->flush();
-
-        
-        
+        $this->persist($plant);
+                
         return $this->json([
             'message' => 'success'
         ]);
-        // $plants = $plantRepository->findAll();
-        // return $this->json($plants, 200, [], ['groups' => 'plant_cover']);
     }
 
     /**
@@ -113,6 +110,7 @@ class PlantController extends AbstractController
             $plant->setUpdatedAt();
             $this->getDoctrine()->getManager()->flush();
 
+            // TODO HTTP_SEE_OTHER https://developer.mozilla.org/fr/docs/Web/HTTP/Status/303
             return $this->redirectToRoute('plant_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -129,9 +127,7 @@ class PlantController extends AbstractController
     public function delete(Request $request, Plant $plant): Response
     {
         if ($this->isCsrfTokenValid('delete'.$plant->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($plant);
-            $entityManager->flush();
+            $this->remove($plant);
         }
 
         return $this->redirectToRoute('dashboard_plants', [], Response::HTTP_SEE_OTHER);
