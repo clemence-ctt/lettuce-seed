@@ -14,9 +14,9 @@ use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-//♥ les noms ? attention plant ici ; plantS dans le plantcontroller
+
 /**
- * @Route("/me/plant/{plantId}/photos")
+ * @Route("/me/plants/{plantId}/photos")
  */
 class PictureController extends AbstractController
 {
@@ -26,9 +26,7 @@ class PictureController extends AbstractController
     public function index(int $plantId, PlantRepository $plantRepository): Response
     {
         $currentPlant = $plantRepository->find($plantId);
-        //JK dd($currentPlant);
         $pictures = $currentPlant->getPictures();
-        //JK dd($pictures->toArray());
 
         return $this->render('dashboard/picture/index.html.twig', [
             'pictures' => $pictures,
@@ -69,26 +67,27 @@ class PictureController extends AbstractController
                 'Your picture has successfully been added'
             );
 
-           // redirection : if the current plant is still in the picture infos, redirects to the picture
-           $routeParameters = $request->attributes->get('_route_params');
-           $id = $picture->getId();
-           $plantArray = $picture->getPlants()->toArray();
-           $plantIds = [];
-           foreach ($plantArray as $key => $plant) {
-               $plantIds[] = $plant->getId();
-               
-           };
-           
-           if (in_array($routeParameters['plantId'], $plantIds)) {
-               return $this->redirectToRoute('dashboard_picture_show', ['plantId' => $routeParameters['plantId'], 'id' => $id], Response::HTTP_SEE_OTHER);
-           } else {
-               // but if the plant has been removed, redirects to the plant's photos' list
-               // return $this->redirectToRoute('dashboard_plant_pictures', ['plantId' => $routeParameters['plantId']], Response::HTTP_SEE_OTHER);
-               
-               // or to the pictures, but through another plant id >> fucks the view though
-               $plantId = $plantArray[0]->getId();
-               return $this->redirectToRoute('dashboard_picture_show', ['plantId' => $plantId, 'id' => $id], Response::HTTP_SEE_OTHER);
-           }
+            // DOC route parameters https://symfony.com/doc/current/routing.html#getting-the-route-name-and-parameters 
+            // redirection : if the current plant is still in the picture infos, redirects to the picture
+            $routeParameters = $request->attributes->get('_route_params');
+            $id = $picture->getId();
+            $plantArray = $picture->getPlants()->toArray();
+            $plantIds = [];
+            foreach ($plantArray as $key => $plant) {
+                $plantIds[] = $plant->getId();
+                
+            };
+            
+            if (in_array($routeParameters['plantId'], $plantIds)) {
+                return $this->redirectToRoute('dashboard_picture_show', ['plantId' => $routeParameters['plantId'], 'id' => $id], Response::HTTP_SEE_OTHER);
+            } else {
+                // but if the plant has been removed, redirects to the plant's photos' list
+                // return $this->redirectToRoute('dashboard_plant_pictures', ['plantId' => $routeParameters['plantId']], Response::HTTP_SEE_OTHER);
+                
+                // or to the pictures, but through another plant id >> fucks the view though
+                $plantId = $plantArray[0]->getId();
+                return $this->redirectToRoute('dashboard_picture_show', ['plantId' => $plantId, 'id' => $id], Response::HTTP_SEE_OTHER);
+            }
 
             return $this->redirectToRoute('dashboard_picture_show', ['plantId' => $routeParameters['plantId'], 'id' => $id] , Response::HTTP_SEE_OTHER);
         

@@ -22,8 +22,7 @@ class PictureType extends AbstractType
                 'required' => false,
                 //↓ avoids this error : The form's view data is expected to be a "Symfony\Component\HttpFoundation\File\File", but it is a "string". You can avoid this error by setting the "data_class" option to null or by adding a view transformer that transforms "string" to an instance of "Symfony\Component\HttpFoundation\File\File".
                 'mapped' => false,
-            ])
-            
+            ]) 
                 // 'constraints' => [
                 //     new File([
                 //         'maxSize' => '1024k',
@@ -35,13 +34,13 @@ class PictureType extends AbstractType
                 //     ])
                 // ],
 
-            // LATER PICTURETYPE préselectionner la plante depuis laquelle on arrive OU l'ajout de photo se fait depuis dashboard directement ?
-            // TODO PICTURETYPE obliger la selection d'au moins un champs 
+            // TODO PICTURETYPE obliger la selection d'au moins une plante ; ajouter contraintes de files 
             ->add('plants', null, [
                 'label' => 'Which plant is it ?',
                 'choice_label' => 'name',
                 'multiple' => true,
                 'expanded' => true,
+                'required' => true
             ]) 
             
             // TIPS custom fields on entity, see src/Entity/Picture.php ; $tutu property (around line 76)

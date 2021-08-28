@@ -16,7 +16,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * @Route("/me/plants")
- * @Route("/me/plant")
  */
 class PlantController extends AbstractController
 {
@@ -69,6 +68,15 @@ class PlantController extends AbstractController
     }
 
     /**
+     * @Route("/set-cover", name="dashboard_plant_setcover", methods={"GET"})
+     */
+    public function setCover(PlantRepository $plantRepository)
+    {
+        $plants = $plantRepository->findAll();
+        return $this->json($plants, 200, [], ['groups' => 'plant_cover']);
+    }
+
+    /**
      * @Route("/{id}", name="dashboard_plant_show", methods={"GET"})
      */
     public function show(Plant $plant): Response
@@ -114,4 +122,5 @@ class PlantController extends AbstractController
         return $this->redirectToRoute('dashboard_plants', [], Response::HTTP_SEE_OTHER);
     }
     
+
 }

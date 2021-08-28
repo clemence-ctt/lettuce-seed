@@ -125,7 +125,7 @@ ___
     - Entity : Plant
 
 
-!!! attention /me/plant/{plantId}/photos/
+!!! attention /me/plants/{plantId}/photos/
     - Http Verb : [GET]
     - Name : dashboard_plant_pictures
     - Description : list of pictures for one plant
@@ -134,7 +134,7 @@ ___
     - View : templates/dashboard/picture/index.html.twig
     - Entity : Plant, Picture
 
-!!! note /me/plant/{plantId}/photos/new
+!!! note /me/plants/{plantId}/photos/new
     - Http Verb : [GET|POST]
     - Name : dashboard_picture_new   
     - Description : add a new picture 
@@ -143,7 +143,7 @@ ___
     - View : templates/dashboard/picture/new.html.twig
     - Entity : Plant, Picture
 
-!!! attention /me/plant/{plantId}/photos/{id}
+!!! attention /me/plants/{plantId}/photos/{id}
     - Http Verb : [GET]
     - Name : dashboard_picture_show
     - Description : picture infos
@@ -152,7 +152,7 @@ ___
     - View : templates/dashboard/picture/show.html.twig
     - Entity : Plant, Picture
 
-!!! danger /me/plant/{plantId}/photos/{id}
+!!! danger /me/plants/{plantId}/photos/{id}
     - Http Verb : [POST]
     - Name : dashboard_picture_delete
     - Description : delete a picture
@@ -161,7 +161,7 @@ ___
     - View : //
     - Entity : Plant, Picture
 
-!!! note /me/plant/{plantId}/photos/{id}/edit
+!!! note /me/plants/{plantId}/photos/{id}/edit
     - Http Verb : [GET|POST]
     - Name : dashboard_picture_edit
     - Description : edit picture infos

@@ -38,16 +38,12 @@
                 <td><img src="{{ asset('uploads/pictures/' ~ picture.file ) }}"/></td>
             </tr>
             <tr>
-                <th>Is_cover</th>
-                <td>{{ picture.isCover ? 'Yes' : 'No' }}</td>
-            </tr>
-            <tr>
                 <th>Like_counter</th>
                 <td>{{ picture.likeCounter }}</td>
             </tr>
             
             <tr>
-                {#♥ VIEW PICTURE comment je fais si je veux ça uniquement quand il y a plus d'une plante sur la photo :  #}
+                {#LATER VIEW PICTURE afficher uniquement quand il y a plus d'une plante sur la photo :  #}
                 <th>Other plants in this picture</th>
                 <td>
                     {% for plant in picture.plants %}

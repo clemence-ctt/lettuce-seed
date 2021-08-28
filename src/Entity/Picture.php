@@ -8,6 +8,7 @@ use App\Repository\PictureRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints\Length;
 
 /**
@@ -19,6 +20,7 @@ class Picture
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"plant_cover"})
      */
     private $id;
 
@@ -49,10 +51,11 @@ class Picture
 
     /**
      * @File(mimeTypes={ "image/jpeg" })
-     * TODO ajouter des types
      * @ORM\Column(type="string", length=255)
+     * @Groups({"plant_cover"})
      */
     private $file;
+    //TODO ajouter des types
 
     /**
      * @ORM\Column(type="integer", nullable=true)
