@@ -169,3 +169,11 @@ ___
     - Method : edit
     - View : templates/dashboard/picture/edit.html.twig
     - Entity : Plant, Picture
+
+!!! attention /me/plants/set-cover"
+    - HTTP Verb : [GET]
+    - Name : dashboard_plant_setcover"
+    - Description : set cover for the plant folders
+    - Methods : setCover
+    - View : // (json)
+    - Entity : Plant, Picture

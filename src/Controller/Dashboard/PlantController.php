@@ -68,12 +68,27 @@ class PlantController extends AbstractController
     }
 
     /**
-     * @Route("/set-cover", name="dashboard_plant_setcover", methods={"GET"})
+     * @Route("/set-cover/{plantId}/{pictureId}", name="dashboard_plant_setcover", methods={"GET"})
      */
-    public function setCover(PlantRepository $plantRepository)
+    public function setCover(int $plantId, int $pictureId, PlantRepository $plantRepository, PictureRepository $pictureRepository)
     {
-        $plants = $plantRepository->findAll();
-        return $this->json($plants, 200, [], ['groups' => 'plant_cover']);
+
+        $plant = $plantRepository->find($plantId);
+        $picture = $pictureRepository->find($pictureId);
+
+        $plant->setCover($picture);
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($plant);
+        $this->getDoctrine()->getManager()->flush();
+
+        
+        
+        return $this->json([
+            'message' => 'success'
+        ]);
+        // $plants = $plantRepository->findAll();
+        // return $this->json($plants, 200, [], ['groups' => 'plant_cover']);
     }
 
     /**
