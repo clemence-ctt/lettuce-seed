@@ -9,6 +9,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=PlantRepository::class)
@@ -19,7 +20,6 @@ class Plant
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"plant_cover"})
      */
     private $id;
 
@@ -32,7 +32,8 @@ class Plant
      *      minMessage = "The plant name must be at least {{ limit }} characters long",
      *      maxMessage = "The plant name cannot be longer than {{ limit }} characters"
      * )
-     * @Groups({"plant_cover"})
+     * @Assert\NotBlank(
+     *      message = "You must name you plant.")
      */
     private $name;
 
@@ -47,19 +48,18 @@ class Plant
 
     /**
      * @ORM\Column(type="date", nullable=true)
-     * @Groups({"plant_cover"})
+     * @Assert\NotBlank(
+     *      message = "You must enter a planting date.")
      */
     private $date;
 
     /**
      * @ORM\ManyToMany(targetEntity=Picture::class, mappedBy="plants")
-     * @Groups({"plant_cover"})
      */
     private $pictures;
 
     /**
      * @ORM\ManyToOne(targetEntity=Picture::class)
-     * @Groups({"plant_cover"})
      */
     private $cover;
 

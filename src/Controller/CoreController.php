@@ -71,9 +71,25 @@ class CoreController extends AbstractController
         $this->flush();
     }
 
-
     private function flush()
     {
         $this->em()->flush();
+    }
+
+
+    protected function addSuccessFlash($name, $status) 
+    {
+        return $this->addFlash(
+            'success',
+            'Your ' . $name . ' has been ' . $status . ' !'
+        );
+    }
+
+    protected function addFailFlash()
+    { 
+        return $this->addFlash(
+            'fail',
+            'Fail, try again.'
+        );
     }
 }

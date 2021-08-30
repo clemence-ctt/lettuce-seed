@@ -28,17 +28,6 @@ class MemberController extends AbstractController
         
         $form->handleRequest($request);
 
-        /*
-        if ($form->isSubmitted()) {
-            if($form->isValid()) {
-                echo __FILE__.':'.__LINE__; exit();
-            }
-            else {
-                echo __FILE__.':'.__LINE__; exit();
-            }
-        }
-        */
-
         if ($form->isSubmitted() && $form->isValid()) {
             // password hashed
             $user->setPassword($encoder->hashPassword($user, $user->getPassword()));
@@ -48,7 +37,7 @@ class MemberController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
-
+            
             return $this->redirectToRoute('member_signup_success', [], Response::HTTP_SEE_OTHER);
         }
 

@@ -31,8 +31,7 @@ class PlantController extends CoreController
 
         $userPlants = array_reverse($userPlants->toArray());
         
-        return $this->render 
-        ('dashboard/plant/index.html.twig' , [
+        return $this->render('dashboard/plant/index.html.twig' , [
             'plants' => $userPlants,
         ]);
     }
@@ -46,11 +45,9 @@ class PlantController extends CoreController
         $form = $this->createForm(PlantType::class, $plant);
         $form->handleRequest($request);
 
-        // sends back to login page if an anonymous user tries to create a plant
-
         // TIPS ACL denying access
         // $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
-
+        // sends back to login page if an anonymous user tries to create a plant
 
         // get the connected user Entity
         $user = $this->getUser();
@@ -59,7 +56,9 @@ class PlantController extends CoreController
             // setting createdAt to current datetime and the user to current user
             $plant->setCreatedAt();
             $plant->setUser($user);
+            //flush and flash
             $this->persist($plant);
+            $this->addSuccessFlash('plant', 'created');
             // redirects to the created plant
             $id = $plant->getId();
             return $this->redirectToRoute('dashboard_plant_show', ['id' => $id] , Response::HTTP_SEE_OTHER);
@@ -108,10 +107,16 @@ class PlantController extends CoreController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $plant->setUpdatedAt();
-            $this->getDoctrine()->getManager()->flush();
-
-            // TODO HTTP_SEE_OTHER https://developer.mozilla.org/fr/docs/Web/HTTP/Status/303
-            return $this->redirectToRoute('plant_index', [], Response::HTTP_SEE_OTHER);
+            //flush and flash
+            $this->persist($plant);
+            $this->addSuccessFlash('plant', 'modified');
+            //redirection
+            $id = $plant->getId();
+            return $this->redirectToRoute('dashboard_plant_show', ['id' => $id], Response::HTTP_SEE_OTHER);
+        
+        } else if ($form->isSubmitted() && $form->isValid()) {
+            //flash
+            $this->addFailFlash();
         }
 
         return $this->renderForm('dashboard/plant/edit.html.twig', [

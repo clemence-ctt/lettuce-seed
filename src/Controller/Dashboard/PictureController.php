@@ -45,10 +45,7 @@ class PictureController extends CoreController
             return $this->redirectAfterPersist($request, $picture);
         
         } else if ($form->isSubmitted() && !($form->isValid())) {
-            $this->addFlash(
-                'warning',
-                'You died ! Try again.'
-            );
+            $this->addFailFlash();
         }
 
         return $this->renderForm('dashboard/picture/new.html.twig', [
@@ -64,7 +61,6 @@ class PictureController extends CoreController
     public function show(int $plantId, Picture $picture): Response
     {
         $currentPlant = $this->getPlantById($plantId);
-        //TODO PICTURE ordre d'affichage / les afficher par ordre de date dans la vue
     
         return $this->render('dashboard/picture/show.html.twig', [
             'picture' => $picture,
@@ -92,6 +88,8 @@ class PictureController extends CoreController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->updatePicture($form, $picture, $oldPictureFile);
             return $this->redirectAfterPersist($request, $picture);
+        } else if ($form->isSubmitted() && !($form->isValid())) {
+            $this->addFailFlash();
         }
 
         return $this->renderForm('dashboard/picture/edit.html.twig', [
@@ -137,13 +135,9 @@ class PictureController extends CoreController
         $pictureFile->move($this->getParameter('pictures_directory'), $fileName);
         // Met à jour le nom de l'image finale dans notre Post
         $picture->setFile($fileName);
-
+        // flush and flash
         $this->persist($picture);
-
-        $this->addFlash(
-            'success',
-            'Your picture has successfully been added'
-        );
+        $this->addSuccessFlash('picture', 'created');
     }
 
     protected function updatePicture($form, $picture, $oldPictureFile)
@@ -161,9 +155,9 @@ class PictureController extends CoreController
         else {
             $picture->setFile($oldPictureFile);
         }
-
-        // flush
+        // flush and flash 
         $this->em()->flush();
+        $this->addSuccessFlash('picture', 'modified');
     }
 
     protected function redirectAfterPersist($request, $picture)
@@ -180,11 +174,11 @@ class PictureController extends CoreController
         if (in_array($routeParameters['plantId'], $plantIds)) {
             return $this->redirectToRoute('dashboard_picture_show', ['plantId' => $routeParameters['plantId'], 'id' => $id], Response::HTTP_SEE_OTHER);
         } else {
-            // but if the plant has been removed, redirects to the plant's photos' list
+            // if the plant has been removed, redirects to the plant's photos' list
             // return $this->redirectToRoute('dashboard_plant_pictures', ['plantId' => $routeParameters['plantId']], Response::HTTP_SEE_OTHER);
             
-            // or to the pictures, but through another plant id
             // TIPS reset($array) ; return first element of array
+            // or to the pictures, but through another plant id
             $plantId = reset($plantArray)->getId();
 
             return $this->redirectToRoute('dashboard_picture_show', ['plantId' => $plantId, 'id' => $id], Response::HTTP_SEE_OTHER);

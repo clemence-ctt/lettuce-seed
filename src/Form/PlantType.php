@@ -6,6 +6,7 @@ use App\Entity\Plant;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 class PlantType extends AbstractType
 {
@@ -14,7 +15,10 @@ class PlantType extends AbstractType
         $builder
             ->add('name')
             ->add('description')
-            ->add('date')
+            ->add('date', DateType::class, [
+                'widget' => 'single_text',
+                'format' => 'yyyy-MM-dd',
+            ])
         // REMINDER FORMS : add('user') in da controller (sinon c'est une faille de sécurité (le gars peut faire F12 et changer tout seul))
         ;
     }

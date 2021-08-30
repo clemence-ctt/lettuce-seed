@@ -16,7 +16,6 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBag;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-// TODO DASHBOARDCONTROLLER new/picture (add another plant ou juste un new depuis l'index)
 
 /**
  * @Route("/me")
@@ -79,21 +78,19 @@ class DashboardController extends AbstractController
                 } else {
                     // if the passwords don't match, send a message
                     if(!empty($formOldPassword)) {
-                        $this->addFlash('warning', 'Your old password is incorrect.');
+                        $this->addFlash('fail', 'Your old password is incorrect.');
                     } else {
-                        $this->addFlash('warning', 'Your must enter your old password.');
+                        $this->addFlash('fail', 'Your must enter your old password.');
                     }
                     // and go back to edition
-                    return $this->redirectToRoute('dashboard_profile_edit', [], Response::HTTP_SEE_OTHER);
+                    //♥ HTTP not modified ? https://developer.mozilla.org/fr/docs/Web/HTTP/Status/304
+                    return $this->redirectToRoute('dashboard_profile_edit', [], Response::HTTP_NOT_MODIFIED);
                 };
             }
             
             // Fantastic ! 
             $this->getDoctrine()->getManager()->flush();
-            $this->addFlash(
-                'success',
-                'Your profile has been modified'
-            );
+            $this->addFlash('success', 'Your profile has been modified');
 
             return $this->redirectToRoute('dashboard_profile', [], Response::HTTP_SEE_OTHER);
 

@@ -1,0 +1,6 @@
+
+# DOC ERROR PAGES TESTING https://symfony.com/doc/current/controller/error_pages.html#testing-error-pages-during-development
+
+_errors:
+    resource: '@FrameworkBundle/Resources/config/routing/errors.xml'
+    prefix:   /_error

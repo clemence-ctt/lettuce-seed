@@ -8,8 +8,8 @@ use App\Repository\PictureRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints\File;
-use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=PictureRepository::class)
@@ -20,7 +20,6 @@ class Picture
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"plant_cover"})
      */
     private $id;
 
@@ -45,17 +44,23 @@ class Picture
     private $description;
 
     /**
-     * @ORM\Column(type="date", nullable=true)
+     * @ORM\Column(type="date")
+     * @Assert\LessThanOrEqual("today",
+     *      message = "Unless you're Marty McFly, this photo probably hasn't been taken in the future.")
+     * @Assert\NotBlank(
+     *      message = "You must enter a date.")
      */
     private $date;
 
+    //DOC MIMETYPES https://developer.mozilla.org/fr/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types
+    // TODO corriger claudia potiron fucké a cause du txt et voir @Image
     /**
      * @File(mimeTypes={ "image/jpeg" })
      * @ORM\Column(type="string", length=255)
-     * @Groups({"plant_cover"})
+     * @Assert\NotBlank(
+     *      message = "You must choose an image.")
      */
     private $file;
-    //TODO ajouter des types
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -64,8 +69,11 @@ class Picture
 
     /**
      * @ORM\ManyToMany(targetEntity=Plant::class, inversedBy="pictures")
+     * @Assert\NotBlank(
+     *      message = "You must choose at least one plant.")
      */
     private $plants;
+    //♥ notblank pourquoi ca marche pas !!
 
     /**
      * @ORM\Column(type="datetime")
