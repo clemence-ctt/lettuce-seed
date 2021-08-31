@@ -2,6 +2,7 @@
 
 namespace App\Controller\Dashboard;
 
+use DateTime;
 use App\Controller\CoreController;
 use App\Entity\Picture;
 use App\Form\PictureType;
@@ -38,6 +39,7 @@ class PictureController extends CoreController
     {
         $picture = new Picture();
         $plant = $this->getPlantById($plantId);
+        $picture->setDate(DateTime::createFromFormat('Y-m-d', date('Y-m-d')));
         $picture->addPlant($plant);
 
         $form = $this->createForm(PictureType::class, $picture);
@@ -84,14 +86,26 @@ class PictureController extends CoreController
             //JK new File($picture->getFile())
         );
 
+        //dd($picture->getPlants()->toArray());
         $form = $this->createForm(PictureType::class, $picture);
         $form->handleRequest($request);
 
         $currentPlant = $this->getPlantById($plantId);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->updatePicture($form, $picture, $oldPictureFile);
-            return $this->redirectAfterPersist($request, $picture);
+            if($form->get('plants')->getData()->count() === 0) {
+                $this->addFlash('fail', 'You must choose at least one plant.');
+                return $this->renderForm('dashboard/picture/edit.html.twig', [
+                    'picture' => $picture,
+                    'form' => $form,
+                    'currentPlant' => $currentPlant,
+                    'oldPictureFile' => $oldPictureFile
+                ]);
+            } else {
+                //dd($form->get('plants')->getData());
+                $this->updatePicture($form, $picture, $oldPictureFile);
+                return $this->redirectAfterPersist($request, $picture);
+            }
         } else if ($form->isSubmitted() && !($form->isValid())) {
             $this->addFailFlash();
         }
@@ -188,4 +202,5 @@ class PictureController extends CoreController
             return $this->redirectToRoute('dashboard_picture_show', ['plantId' => $plantId, 'id' => $id], Response::HTTP_SEE_OTHER);
         }
     }
+
 }

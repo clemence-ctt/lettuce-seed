@@ -72,11 +72,9 @@ class Picture
 
     /**
      * @ORM\ManyToMany(targetEntity=Plant::class, inversedBy="pictures")
-     * @Assert\NotBlank(
-     *      message = "You must choose at least one plant.")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $plants;
-    //♥ notblank pourquoi ca marche pas !!
 
     /**
      * @ORM\Column(type="datetime")

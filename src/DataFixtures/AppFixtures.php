@@ -134,7 +134,7 @@ class AppFixtures extends Fixture
         $picture->setName($faker->name);
         $picture->setDescription($faker->text);
         $picture->setFile($picture->getName());
-        $picture->setIsCover(1);
+        // $picture->setIsCover(1);
         $picture->setLikeCounter(random_int(0,500));
         $picture->setDate($faker->dateTime($max = 'now', $timezone = null));
         $picture->setCreatedAt($now);

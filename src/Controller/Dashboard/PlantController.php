@@ -2,18 +2,14 @@
 
 namespace App\Controller\Dashboard;
 
-use App\Controller\CoreController;
-use App\Entity\User;
+use DateTime;
 use App\Entity\Plant;
 use App\Form\PlantType;
-use App\Repository\PlantRepository;
-use App\Repository\PictureRepository;
+use App\Controller\CoreController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 //LATER PLANTCONTROLLER 2- changer l'id de la plante par son nom 
-// TODO PLANTCONTROLLER flash
 
 /**
  * @Route("/me/plants")
@@ -42,6 +38,8 @@ class PlantController extends CoreController
     public function new(Request $request): Response
     {
         $plant = new Plant();
+        $plant->setDate(DateTime::createFromFormat('Y-m-d', date('Y-m-d')));
+        
         $form = $this->createForm(PlantType::class, $plant);
         $form->handleRequest($request);
 
