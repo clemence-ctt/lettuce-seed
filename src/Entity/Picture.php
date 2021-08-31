@@ -53,12 +53,15 @@ class Picture
     private $date;
 
     //DOC MIMETYPES https://developer.mozilla.org/fr/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types
-    // TODO corriger claudia potiron fucké a cause du txt et voir @Image
     /**
-     * @File(mimeTypes={ "image/jpeg" })
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(
-     *      message = "You must choose an image.")
+     *      message = "You should upload a picture.")
+     * @Assert\File(
+     *     maxSize = "1024k",
+     *     mimeTypes = {"image/png", "image/jpg", "image/jpeg"},
+     *     mimeTypesMessage = "The mime type of the file is invalid ({{ type }}). Allowed mime types are {{ types }}"
+     * )
      */
     private $file;
 

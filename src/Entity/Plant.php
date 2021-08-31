@@ -33,7 +33,7 @@ class Plant
      *      maxMessage = "The plant name cannot be longer than {{ limit }} characters"
      * )
      * @Assert\NotBlank(
-     *      message = "You must name you plant.")
+     *      message = "You must name your plant.")
      */
     private $name;
 

@@ -10,7 +10,6 @@ use Symfony\Component\Filesystem\Filesystem;
 class CoreController extends AbstractController
 {
 
-
     public function deleteFile($file, $log = 'activity.log')
     {
         //DOC REMOVING FILES from uploads/pictures directory  https://symfony.com/doc/current/components/filesystem.html
@@ -65,15 +64,15 @@ class CoreController extends AbstractController
         return $entity;
     }
 
+    private function flush()
+    {
+        $this->em()->flush();
+    }
+
     protected function remove($entity)
     {
         $this->em()->remove($entity);
         $this->flush();
-    }
-
-    private function flush()
-    {
-        $this->em()->flush();
     }
 
 

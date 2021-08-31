@@ -19,7 +19,7 @@ class PlantType extends AbstractType
                 'widget' => 'single_text',
                 'format' => 'yyyy-MM-dd',
             ])
-        // REMINDER FORMS : add('user') in da controller (sinon c'est une faille de sécurité (le gars peut faire F12 et changer tout seul))
+        // REMINDER FORMS : add('user') in da controller (sinon c'est une faille de sécurité)
         ;
     }
 

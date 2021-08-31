@@ -3,11 +3,10 @@
     {{ form_row(form.description) }}
     {{ form_row(form.date) }}
     {{ form_row(form.file) }} 
-
-        {% if form.vars.data is not null and form.vars.data.file is not null %} <!-- useless du coup ?! -->
+        {# Décommenter si edit form = new form #}
+        {# {% if form.vars.data is not null and form.vars.data.file is not null %} #}
         <img src="{{ asset('uploads/pictures/' ~ oldPictureFile) }}"/>
-        {% endif %}
-    
+        {# {% endif %} #}
     {{ form_row(form.plants) }}
 
     <button class="btn">{{ button_label|default('Update') }}</button>

@@ -34,13 +34,17 @@ class PictureController extends CoreController
     /**
      * @Route("/new", name="dashboard_picture_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, int $plantId): Response
     {
         $picture = new Picture();
+        $plant = $this->getPlantById($plantId);
+        $picture->addPlant($plant);
+
         $form = $this->createForm(PictureType::class, $picture);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            //dd($form->get('file')->getData());
             $this->savePicture($form, $picture);
             return $this->redirectAfterPersist($request, $picture);
         
@@ -106,8 +110,6 @@ class PictureController extends CoreController
     public function delete(Request $request, Picture $picture): Response
     {
         $filePath = $this->getParameter('pictures_directory').'/'.$picture->getFile();
-        //JK dd($filePath);
-
         if ($this->isCsrfTokenValid('delete'.$picture->getId(), $request->request->get('_token'))) {
             $this->remove($picture);
             $this->deleteFile($filePath);
@@ -150,6 +152,8 @@ class PictureController extends CoreController
             $fileName = $this->generatePictureFileName($pictureFile);
             $pictureFile->move($this->getParameter('pictures_directory'), $fileName);
             $picture->setFile($fileName);
+            //delete the old image
+            $this->deleteFile($this->getParameter('pictures_directory').'/'.$oldPictureFile);
         }
         // if it's empty, set to the previous picture name
         else {
