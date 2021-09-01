@@ -18,6 +18,7 @@ class PlantType extends AbstractType
             ->add('date', DateType::class, [
                 'widget' => 'single_text',
                 'format' => 'yyyy-MM-dd',
+                'label' => "Planting date : "
             ])
         // REMINDER FORMS : add('user') in da controller (sinon c'est une faille de sécurité)
         ;
