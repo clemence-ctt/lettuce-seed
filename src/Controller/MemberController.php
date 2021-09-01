@@ -14,7 +14,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 /**
  * @Route("/member")
  */
-class MemberController extends AbstractController
+class MemberController extends CoreController
 {
     /**
      * @Route("/signup", name="member_signup", methods={"GET","POST"})
@@ -55,5 +55,70 @@ class MemberController extends AbstractController
         return $this->renderForm('member/signup-success.html.twig');
     }
 
+    /**
+     * @Route("/", name="members_index", methods={"GET"})
+     */
+    public function getAllUsers()
+    {
+        $usersList = $this->getUserRepository()->findAll();
+        dd($usersList);
+    }
+    
+    //♥utilité ?
+    /**
+     * @Route("/{userId}", name="user_show", methods={"GET"})
+     */
+    public function showOneUser(int $userId)
+    {
+        $user = $this->getUserById($userId);
+        dd($user);
+    }
+
+    //https://localhost/lettuce-seed/public/member/14/plants
+    /**
+     * @Route("/{userId}/plants", name="user_plants", methods={"GET"})
+     */
+    public function showUserPlants(int $userId)
+    {
+        $user = $this->getUserById($userId);
+        $plants = $user->getPlants();
+        dump($user);
+        foreach ($plants as $plant) {
+            dump($plant);
+        }
+        exit;
+    }
+
+    //https://localhost/lettuce-seed/public/member/14/plant/482/photos
+    /**
+     * @Route("/{userId}/plant/{plantId}/photos", name="user_plant_pictures", methods={"GET"})
+     */
+    public function showUserPlantPictures(int $userId, int $plantId)
+    {      
+        $user = $this->getUserById($userId);
+        $plants = $user->getPlants();
+        dump($plants);
+        
+        foreach ($plants as $plant) {
+        
+            if ($plant->getId() === $plantId){
+                $pictures = $plant->getPictures();
+                dump($pictures);
+        
+                foreach($pictures as $picture) {
+                    dump($picture);
+                }
+        
+                exit;
+            }
+        }
+
+        // dd($plants->containsKey('2'));
+        //faire correspondre les id avec les keys du tableau user/plant?
+        //$plant = $plants->get('2');
+        //dd($plant);
+        // ou chercher 
+        //$plant->getId() === $plantId;
+    }
 
 }

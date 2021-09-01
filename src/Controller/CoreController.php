@@ -2,10 +2,11 @@
 
 namespace App\Controller;
 
-use App\Entity\Picture;
+use App\Entity\User;
 use App\Entity\Plant;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\Picture;
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class CoreController extends AbstractController
 {
@@ -46,6 +47,10 @@ class CoreController extends AbstractController
         return $this->getPictureRepository()->find($pictureId);
     }
 
+    protected function getUserById($userId)
+    {
+        return $this->getUserRepository()->find($userId);
+    }
 
     protected function getPlantRepository()
     {
@@ -55,6 +60,11 @@ class CoreController extends AbstractController
     protected function getPictureRepository()
     {
         return $this->getRepository(Picture::class);
+    }
+
+    protected function getUserRepository()
+    {
+        return $this->getRepository(User::class);
     }
 
     protected function persist($entity)
