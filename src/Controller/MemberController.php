@@ -58,17 +58,17 @@ class MemberController extends CoreController
     /**
      * @Route("/", name="members_index", methods={"GET"})
      */
-    public function getAllUsers()
+    public function index()
     {
         $usersList = $this->getUserRepository()->findAll();
-        dd($usersList);
+        $lastThree = $this->getDoctrine()->getRepository(User::class)->findLastCreatedUsers(3);
+        dd($usersList, $lastThree);
     }
     
-    //♥utilité ?
     /**
      * @Route("/{userId}", name="user_show", methods={"GET"})
      */
-    public function showOneUser(int $userId)
+    public function show(int $userId)
     {
         $user = $this->getUserById($userId);
         dd($user);

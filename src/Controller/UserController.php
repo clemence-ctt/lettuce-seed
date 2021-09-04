@@ -18,7 +18,7 @@ class UserController extends CoreController
     {
         $user = $this->getUser();
 
-        $userPlants = array_reverse($userPlants->toArray());
+        $userPlants = array_reverse($user->getPlants()->toArray());
         
         return $this->render('dashboard/plant/index.html.twig' , [
             'plants' => $userPlants,
