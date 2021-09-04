@@ -39,6 +39,7 @@ class PictureType extends AbstractType
                 if ($picture->getId() !== null) {
                     $builder
                         ->add('file', FileType::class, [
+                            'label' => "Select a file",
                             'required' => true,
                             //↓ avoids this error : The form's view data is expected to be a "Symfony\Component\HttpFoundation\File\File", but it is a "string". You can avoid this error by setting the "data_class" option to null or by adding a view transformer that transforms "string" to an instance of "Symfony\Component\HttpFoundation\File\File".
                             // 'data_class' => null,
@@ -47,6 +48,7 @@ class PictureType extends AbstractType
                 } else {
                     $builder
                         ->add('file', FileType::class, [
+                            'label' => "Select a file",
                             'required' => true,
                             //↓ avoids this error : The form's view data is expected to be a "Symfony\Component\HttpFoundation\File\File", but it is a "string". You can avoid this error by setting the "data_class" option to null or by adding a view transformer that transforms "string" to an instance of "Symfony\Component\HttpFoundation\File\File".
                             'data_class' => null,

@@ -2,26 +2,20 @@
 
 namespace App\Controller\Dashboard;
 
-use App\Entity\User;
-use App\Entity\Plant;
+
 use App\Form\UserType;
-use App\Entity\Picture;
-use App\Form\PlantType;
-use App\Form\PictureType;
-use App\Repository\UserRepository;
-use App\Repository\PlantRepository;
+use App\Controller\CoreController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Session\Flash\FlashBag;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 /**
  * @Route("/me")
  * Routes for the logged user's own profile
  */
-class DashboardController extends AbstractController
+class DashboardController extends CoreController
 {
 
     /**
@@ -56,12 +50,22 @@ class DashboardController extends AbstractController
     public function profileEdit(Request $request, UserPasswordHasherInterface $encoder): Response
     {
         $user = $this->getUser();
+
+        $oldFile = $user->getAvatar();
+
+        if (!empty($oldFile)) {
+            $user->setAvatar(
+                new File($this->getParameter('avatars_directory').'/'.$user->getAvatar())
+                //JK new File($picture->getFile())
+            );    
+        }
+
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $user->setUpdatedAt();
-
+            $this->updateAvatar($form, 'avatar', $user, $oldFile, 'avatars_directory');
             // Le nouveau password transmis non mappé sur l'entité (voir UserType)
             $newPassword = $form->get('password')->getData();
 
@@ -83,7 +87,7 @@ class DashboardController extends AbstractController
                         $this->addFlash('fail', 'Your must enter your old password.');
                     }
                     // and go back to edition
-                    //♥ HTTP not modified ? https://developer.mozilla.org/fr/docs/Web/HTTP/Status/304
+                    //DOC 304 NOT_MODIFIED https://developer.mozilla.org/fr/docs/Web/HTTP/Status/304
                     return $this->redirectToRoute('dashboard_profile_edit', [], Response::HTTP_NOT_MODIFIED);
                 };
             }
@@ -99,6 +103,52 @@ class DashboardController extends AbstractController
         return $this->renderForm('dashboard/profile-edit.html.twig', [
             'user' => $user,
             'form' => $form,
+            'oldAvatarFile' => $oldFile
         ]);
     }
+
+    /**
+     * @Route("/avatar-delete", name="dashboard_avatar_delete", methods={"GET"})
+     */
+    public function deleteAvatar(Request $request): Response
+    {
+        $user = $this->getUser();
+
+        $filePath = $this->getParameter('avatars_directory').'/'.$user->getAvatar();
+        if (is_file($filePath)) {
+            $this->deleteFile($filePath);
+            $user->setAvatar(null);
+            $this->persist($user);
+        }
+
+        $routeParameters = $request->attributes->get('_route_params');
+        return $this->redirectToRoute('dashboard_profile', [], Response::HTTP_SEE_OTHER);
+    }
+        
+
+//----------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------
+
+    protected function updateAvatar($form, $formField, $entity, $oldFile, $directory)
+    {
+        // upload picture : if the form's 'file' field is modified, save the picture
+        if(!empty($form->get($formField)->getData())) {
+            $file = $form->get($formField)->getData();
+            $fileName = $this->generatePictureFileName($file);
+            $file->move($this->getParameter($directory), $fileName);
+            $entity->setAvatar($fileName);
+            //delete the old image if there was one
+            if (!empty($oldFile)) {
+                $this->deleteFile($this->getParameter($directory).'/'.$oldFile);
+            }
+        }
+        // if it's empty, set to the previous picture name
+        else {
+            $entity->setAvatar($oldFile);
+        }
+        // flush and flash 
+        $this->em()->flush();
+        $this->addSuccessFlash('picture', 'modified');
+    }
+
 }

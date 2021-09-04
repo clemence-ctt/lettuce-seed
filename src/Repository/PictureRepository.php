@@ -20,7 +20,8 @@ class PictureRepository extends ServiceEntityRepository
     }
 
 
-    public function findLastThreePictures($plantId)
+    // for the dashboard's plant list 
+    public function findLastThreePictures(int $plantId)
     {
         return $this->createQueryBuilder('picture')
             ->andWhere('picture.plant = :val')
@@ -37,6 +38,17 @@ class PictureRepository extends ServiceEntityRepository
     //     WHERE plant_id = 482 
     //     ORDER BY date DESC
     //     LIMIT 3
+
+    // for the index page
+    public function findLastCreatedPictures(int $limit)
+    {
+        return $this->createQueryBuilder('picture')
+        ->orderBy('picture.created_at', 'DESC')
+        ->setMaxResults($limit)
+        ->getQuery()
+        ->getResult();
+    }
+
 
     // /**
     //  * @return Picture[] Returns an array of Picture objects
