@@ -1,0 +1,32 @@
+
+
+{% if currentPlant is defined %}
+<section class="ftco-section ftco-bread" style="background-image: url({{ asset('uploads/avatars/' ~ currentPlant.cover) }})">
+{% else %} 
+<section class="ftco-section ftco-bread">
+{% endif %}
+
+<div class="container">
+    <div class="row no-gutters slider-text justify-content-center align-items-center">
+        <div class="col-md-8 ftco-animate">
+
+
+            {% if currentPlant is defined %}
+                <h1 class="bread">{{ currentPlant.name }}</h1>
+            {% else %} 
+                <h1 class="bread">Lettuce seed</h1>
+            {% endif %}
+            
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+
+                <p class="breadcrumbs">
+                    <span class="mr-2"><a href="{{ path('dashboard_profile') }}">Go to my profile</a></span>
+                    <span><a href="{{ path('dashboard_plants') }}">See my plants</a></span>
+                </p>
+            {% endif %}
+                                            
+
+        </div>
+    </div>
+</div>
+</section>

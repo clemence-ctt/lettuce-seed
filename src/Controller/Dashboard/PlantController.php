@@ -29,6 +29,7 @@ class PlantController extends CoreController
         
         return $this->render('dashboard/plant/index.html.twig' , [
             'plants' => $userPlants,
+            'user' => $this->getUser(),
         ]);
     }
 
@@ -65,6 +66,7 @@ class PlantController extends CoreController
         return $this->renderForm('dashboard/plant/new.html.twig', [
             'plant' => $plant,
             'form' => $form,
+            'user' => $this->getUser(),
         ]);
     }
 
@@ -92,6 +94,7 @@ class PlantController extends CoreController
     { 
         return $this->render('dashboard/plant/show.html.twig', [
             'plant' => $plant,
+            'user' => $this->getUser(),
         ]);
     }
 
@@ -120,6 +123,7 @@ class PlantController extends CoreController
         return $this->renderForm('dashboard/plant/edit.html.twig', [
             'plant' => $plant,
             'form' => $form,
+            'user' => $this->getUser(),
         ]);
     }
 

@@ -28,7 +28,8 @@ class PictureController extends CoreController
 
         return $this->render('dashboard/picture/index.html.twig', [
             'pictures' => $pictures,
-            'currentPlant' => $currentPlant
+            'currentPlant' => $currentPlant,
+            'user' => $this->getUser(),
         ]);
     }
 
@@ -57,6 +58,7 @@ class PictureController extends CoreController
         return $this->renderForm('dashboard/picture/new.html.twig', [
             'picture' => $picture,
             'form' => $form,
+            'user' => $this->getUser(),
         ]);
     }
 
@@ -70,7 +72,8 @@ class PictureController extends CoreController
     
         return $this->render('dashboard/picture/show.html.twig', [
             'picture' => $picture,
-            'currentPlant' => $currentPlant
+            'currentPlant' => $currentPlant,
+            'user' => $this->getUser(),
         ]);
     }
 

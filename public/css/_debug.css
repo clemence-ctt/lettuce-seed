@@ -1,0 +1,26 @@
+:root {
+    --debug-border: dashed 1px #f0f;
+}
+
+
+/** debug rules **/
+
+/*
+.section {
+    border: var(--debug-border);
+}
+
+.component {
+    outline: dotted 1px #0ff;
+    background-color: #ff88;
+}
+
+.sf-form {
+    outline: solid 1px #f00;
+}
+
+
+.sf-form > div {
+    background-color: #f008;
+}
+*/

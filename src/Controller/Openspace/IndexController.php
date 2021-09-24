@@ -18,8 +18,8 @@ class IndexController extends CoreController
     public function index(SecurityController $secu): Response
     {    
         $lastCreatedUsers = $this->getUserRepository()->findLastCreatedUsers(3);
-        $lastCreatedPictures = $this->getPictureRepository()->findLastCreatedPictures(10);
-        // dd($lastCreatedUsers, $lastCreatedPictures);
+        $lastCreatedPictures = $this->getPictureRepository()->findLastUploadedPictures(5);
+        
         
         return $this->render('openspace/index.html.twig', [
             'lastCreatedUsers' => $lastCreatedUsers,

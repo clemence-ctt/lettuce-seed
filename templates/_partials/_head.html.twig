@@ -6,18 +6,47 @@
     {#{{ encore_entry_link_tags('app') }}#}
 
     
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- THEME assets importation -->
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Herr+Von+Muellerhoff" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ asset('theme/css/open-iconic-bootstrap.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('theme/css/animate.css') }}" />
+    <link rel="stylesheet" href="{{ asset('theme/css/owl.carousel.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('theme/css/owl.theme.default.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('theme/css/magnific-popup.css') }}" />
+    <link rel="stylesheet" href="{{ asset('theme/css/aos.css') }}" />
+    <link rel="stylesheet" href="{{ asset('theme/css/ionicons.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('theme/css/bootstrap-datepicker.css') }}" />
+    <link rel="stylesheet" href="{{ asset('theme/css/jquery.timepicker.css') }}" />
+    <link rel="stylesheet" href="{{ asset('theme/css/flaticon.css') }}" />
+    <link rel="stylesheet" href="{{ asset('theme/css/icomoon.css') }}" />
+    <link rel="stylesheet" href="{{ asset('theme/css/style.css') }}" />
+
+
+
+
+
     <!-- TIPS DATATABLE jquery integration -->
     <link rel="stylesheet" href="//cdn.datatables.net/1.11.0/css/jquery.dataTables.min.css"/> 
 
-    <link rel="stylesheet" href="{{ asset('css/_reset.css') }}"/> 
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/> 
     
     <link rel="stylesheet" href="{{ asset('css/_variables.css') }}"/> 
     <link rel="stylesheet" href="{{ asset('css/default.css') }}"/> 
 
+    <!--
     <link rel="stylesheet" href="{{ asset('css/_components.css') }}"/> 
     <link rel="stylesheet" href="{{ asset('css/entities-list.css') }}"/>
-    <link rel="stylesheet" href="{{ asset('css/theme-default.css') }}"/> 
+    //-->
+
+    
+
 {% endblock %}
 
 {% block javascripts %}

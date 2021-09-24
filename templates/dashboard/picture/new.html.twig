@@ -16,6 +16,10 @@
 {% block body %}
     <h1>Create new Picture</h1>
 
+    <p class="component info">
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Doloremque est repellendus ducimus cupiditate pariatur maxime aperiam voluptatem cumque quibusdam error quasi ex distinctio consequuntur explicabo blanditiis accusantium, similique voluptatum nesciunt temporibus nihil eos! Excepturi quo nihil voluptatem a perspiciatis non placeat repellendus unde, suscipit architecto corporis, aspernatur nemo rerum dolor.
+    </p>
+
     {{ include('dashboard/_partials/_picture-new-form.html.twig', {'button_label': 'ALEA JACTA EST'}) }}
 
     {% set route_parameters = app.request.attributes.get('_route_params') %}

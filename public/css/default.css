@@ -1,58 +1,148 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Paaji+2:wght@400;500;600;700;800&display=swap');
+
+
+@import '_debug.css';
+
+
+body {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: var(--color-lightest) !important;
+}
+
+
+
 * {
     box-sizing: border-box;
 }
 
-body {
-    min-width: 100vw;
-    min-height: 100vh;
-    background-color : var(--color-medium-light);
-    font-family: var(--font-default);
 
-    background-image: url('https://64.media.tumblr.com/6140e221315db8943ff5d7c40c6864fa/tumblr_pffa9tBY691svq6hoo1_1280.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+/** Base **/
+h1 {
+    font-family: var(--font-fancy-00);
+    font-size: 3rem;
+    margin-bottom: var(--spacing-default);;
 }
 
-a {
-    text-decoration: none;
-}
-
-img {
-    max-width: 100%;
+h3 {
+    font-family: var(--font-fancy-00);
+    font-size: 2rem;
 }
 
 
 
-#main {
-    max-width: var(--default-width);
+/* =================================================*/
+.main-menu {
+    background-color: var(--color-medium) !important;
+    
+}
+
+.main-menu a {
+    color: #fff !important;
+}
+
+/* =================================================*/
+
+
+
+
+form {
+    padding: calc(var(--spacing-default) * 3);
+}
+
+form img {
+    height: 100px;
+    max-width: 100px;
+
+    transform: scale(3);
+
+    display: block;
     margin: auto;
+
+    margin-top: 150px;
+    margin-bottom: 150px;
+
+    border-radius: 50%;
+    border: var(--border-default);
+}
+
+form label {
+    font-weight: bold;
+    margin-bottom: var(--spacing-smallest);
 }
 
 
-figure.picture {
+input, textarea {
     border: var(--border-default);
-    position: relative;
+    border-radius: 4px;
+    padding:  var(--spacing-smallest);
+    width: 100%;
+    margin-bottom: calc(var(--spacing-default) * 1.5);
+}
+
+textarea {
+    min-height: 200px;
+}
+
+/** Layout **/
+
+
+
+/** Generic styles **/
+
+.info {
     margin-bottom: var(--spacing-default);
 }
 
 
-figure.picture img  {
-    min-width: 100%;
+
+.sf-form > div {
+    margin-bottom: var(--gutter-large);
 }
 
-
-figure.picture .picture__meta   {
-    display: flex;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    border-top: solid 1px var(--color-lightest);
-    padding: var(--spacing-default);
+.sf-form > div > label {
+    color: var(--color-darkest);
     font-size: var(--font-size-big);
-    background-color: var(--color-medium-light);
-    backdrop-filter: grayscale(0.5) blur(3px);
-    justify-content: space-between;
+    display: block;
+    margin-top: var(--gutter-large);
+    margin-bottom: var(--gutter-default);
 }
 
+
+.sf-form  #picture_plants {
+    /* display: flex; */
+    /* flex-wrap: wrap; */
+    text-align: center;
+}
+
+.sf-form  #picture_plants .choice {
+    display: inline-block;
+}
+
+.sf-form  #picture_plants .choice label {
+    cursor: pointer;
+    font-size: 1rem;
+    /* width: 50%; */
+    overflow: hidden;
+    border: solid 1px var(--color-medium-dark);
+    background-color: var(--color-medium-light);
+    display: inline-block;
+    border-radius: 0.5rem;
+    margin: 2px 2px;
+    padding: 0 0.5rem;
+    /* flex-grow: 1; */
+}
+
+.sf-form  #picture_plants .choice label:hover {
+    background-color: var(--color-medium);
+    box-shadow: 3px 3px 3px var(--color-medium-dark);
+}
+
+.sf-form  #picture_plants .choice label.checked {
+    background-color: var(--color-highlight);
+    
+}
+
+.sf-form  #picture_plants .choice input {
+    display: none;
+}
 

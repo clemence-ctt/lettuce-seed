@@ -1,0 +1,29 @@
+{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+{% if user is defined %}
+<h1 id="colorlib-logo"><a href="index.html"><span class="img"
+            style="background-image: url({{ asset('uploads/avatars/' ~ user.avatar) }});"></span>{{ user.username }}</a>
+</h1>
+{% endif %}
+{% endif %}
+
+
+
+<!-- STEP navbar -->
+<nav id="colorlib-main-menu" role="navigation">
+    <ul>
+        <li><a href="{{ path('home') }}">Home</a></li>
+        {# If the user is logged on, we shd only show the logout button and his username #}
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <li><a href="{{ path('dashboard_index') }}">Dashboard</a></li>
+        <li><a href="{{ path('dashboard_profile') }}">My profile</a></li>
+        <li><a href="{{ path('dashboard_plants') }}">My plants</a></li>
+        <li><a href="{{ path('security_logout') }}">Logout</a></li>
+
+        {# If he's not, show the login button  #}
+        {% else %}
+        <li><a href="{{ path('security_login') }}">Login</a></li>
+        <li><a href="{{ path('member_signup') }}">Sign up</a></li>
+        {% endif %}
+    </ul>
+</nav>
+

@@ -36,7 +36,6 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->_em->flush();
     }
 
-
     /**
      * @return User[]
      */
@@ -45,7 +44,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $entityManager = $this->getEntityManager();
 
         $query = $entityManager->createQuery(
-            'SELECT u.username, u.id
+            'SELECT u.username, u.id, u.avatar
             FROM App\Entity\User u
             ORDER BY u.created_at DESC'
         );

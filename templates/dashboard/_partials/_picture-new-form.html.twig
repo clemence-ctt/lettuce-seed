@@ -1,9 +1,15 @@
-{{ form_start(form) }}
-    {{ form_row(form.name) }}
-    {{ form_row(form.description) }}
-    {{ form_row(form.date) }}
-    {{ form_row(form.file) }} 
-    {{ form_row(form.plants) }}
+<div>
+    {{ form_start(form, {
+        'attr': {
+            'class': 'sf-form'
+        }
+    }) }}
+        {{ form_row(form.name) }}
+        {{ form_row(form.description) }}
+        {{ form_row(form.date) }}
+        {{ form_row(form.file) }} 
+        {{ form_row(form.plants) }}
 
-    <button class="btn">{{ button_label|default('Update') }}</button>
-{{ form_end(form) }}
+        <button class="btn">{{ button_label|default('Update') }}</button>
+    {{ form_end(form) }}
+</div>
