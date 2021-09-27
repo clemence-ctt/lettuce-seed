@@ -1,9 +1,14 @@
 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-{% if user is defined %}
-<h1 id="colorlib-logo"><a href="index.html"><span class="img"
-            style="background-image: url({{ asset('uploads/avatars/' ~ user.avatar) }});"></span>{{ user.username }}</a>
-</h1>
-{% endif %}
+    {% if user is defined %}
+        <h1 id="colorlib-logo"><a href="index.html">
+            {% if oldAvatarFile is defined %}
+                <span class="img" style="background-image: url({{ asset('uploads/avatars/' ~ oldAvatarFile) }});"></span>
+            {% else %}
+                <span class="img" style="background-image: url({{ asset('uploads/avatars/' ~ user.avatar) }});"></span>  
+            {% endif %}    
+            {{ user.username }}</a>
+        </h1>
+    {% endif %}    
 {% endif %}
 
 

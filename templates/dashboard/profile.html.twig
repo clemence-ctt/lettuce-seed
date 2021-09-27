@@ -1,5 +1,9 @@
 {% extends 'default.html.twig' %}
 
+{% block title %}
+    My profile
+{% endblock %}
+
 {% block flash %}
     {# read and display all flash messages #}
     {% for label, messages in app.flashes %}
@@ -10,8 +14,6 @@
         {% endfor %}
     {% endfor %}
 {% endblock %}
-
-{% block title %}User{% endblock %}
 
 {% block body %}
 

@@ -103,7 +103,8 @@ class PictureController extends CoreController
                     'picture' => $picture,
                     'form' => $form,
                     'currentPlant' => $currentPlant,
-                    'oldPictureFile' => $oldPictureFile
+                    'oldPictureFile' => $oldPictureFile,
+                    'user' => $this->getUser(),
                 ]);
             } else {
                 //JK dd($form->get('plants')->getData());
@@ -118,7 +119,8 @@ class PictureController extends CoreController
             'picture' => $picture,
             'form' => $form,
             'currentPlant' => $currentPlant,
-            'oldPictureFile' => $oldPictureFile
+            'oldPictureFile' => $oldPictureFile,
+            'user' => $this->getUser(),
         ]);
     }
 

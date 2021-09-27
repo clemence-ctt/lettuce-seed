@@ -24,6 +24,7 @@ class IndexController extends CoreController
         return $this->render('openspace/index.html.twig', [
             'lastCreatedUsers' => $lastCreatedUsers,
             'lastCreatedPictures' => $lastCreatedPictures,
+            'user' => $this->getUser(),
         ]);
     }
 }

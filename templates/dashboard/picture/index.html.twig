@@ -1,80 +1,63 @@
 {% extends 'default.html.twig' %}
 
 {% block title %}
-    Plant index
+    Pictures of {{ currentPlant.name }}
 {% endblock %}
 
 {% block body %}
-    
 
-    <h1>Pictures of {{ currentPlant.name }}</h1>
+<h1>Pictures of {{ currentPlant.name }}</h1>
 
-    <section class="menu">
-        <a href="{{ path('dashboard_plants') }}">back to plant list</a>
-        <a href="{{ path('dashboard_picture_new', {'plantId' : currentPlant.id}) }}">Create new</a>
-    </section>
-
-    <section class="plant__pictures">
-
-        {% for picture in pictures %}
-            <figure class="picture" style="background-image: url({{ asset('uploads/pictures/' ~ picture.file ) }})">
-                <img src="{{ asset('uploads/pictures/' ~ picture.file ) }}"/>
-                <figcaption class="picture__meta">
-                    <h3 class="meta__caption">{{ picture.name }}</h3>
-                    <div class="meta__actions">
-                        <a class="button--icon" href="{{ path('dashboard_picture_show', {'plantId' : currentPlant.id, 'id': picture.id}) }}">
-                            <i class="fas fa-eye"></i>
-                        </a>
-                        <a class="button--icon" href="{{ path('dashboard_picture_edit', {'plantId' : currentPlant.id, 'id': picture.id}) }}">
-                            <i class="fas fa-pen"></i>
-                        </a>
-
-                        <a class="button--icon" href="{{ path('dashboard_plant_setcover', {'plantId' : currentPlant.id, 'pictureId': picture.id}) }}" title="Set as cover">
-                            <i class="fas fa-bullseye"></i>
-                        </a>
-                        
-
-                    </div>
-                </figcaption>
-
-            </figure>
-        {% endfor %}
+<section class="menu">
+    <a class="button" href="{{ path('dashboard_plants') }}">back to plant list</a>
+    <a class="button" href="{{ path('dashboard_picture_new', {'plantId' : currentPlant.id}) }}">Create new</a>
+</section>
 
 
-        <!--
 
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Description</th>
-                    <th>Date</th>
-                    <th>File</th>
-                    <th>Like_counter</th>
-                    <th>actions</th>
-                </tr>
-            </thead>
-            <tbody>
+
+
+
+<section class="ftco-section-3">
+    <div class="photograhy">
+        <div class="row">
             {% for picture in pictures %}
-                <tr>
-                    <td>{{ picture.name }}</td>
-                    <td>{{ picture.description }}</td>
-                    <td>{{ picture.date ? picture.date|date('Y-m-d') : '' }}</td>
-                    <td>{{ picture.file }}</td>
-                    <td>{{ picture.likeCounter }}</td>
-                    <td>
-                        <a href="{{ path('dashboard_picture_show', {'plantId' : currentPlant.id, 'id': picture.id}) }}">show</a>
-                        <a href="{{ path('dashboard_picture_edit', {'plantId' : currentPlant.id, 'id': picture.id}) }}">edit</a>
-                    </td>
-                </tr>
-            {% else %}
-                <tr>
-                    <td colspan="10">no records found</td>
-                </tr>
+
+                <div class="col-md-4 ftco-animate">
+                    <span href="{{ asset('uploads/pictures/' ~ picture.file ) }}" class="thumbnail photography-entry img  d-flex justify-content-start align-items-end" style="background-image: url({{ asset('uploads/pictures/' ~ picture.file ) }});">
+                        <div class="overlay"></div>
+                        <div class="text ml-4 mb-4">
+                            <h3>
+                                {{ picture.name }}
+                            </h3>
+                            <span class="tag">
+                                <div>
+                                    <button class="button" onclick="document.location='{{ path('dashboard_picture_show', {'plantId' : currentPlant.id, 'id': picture.id}) }}'">show</button>
+                                    <button class="button" onclick="document.location='{{ path('dashboard_picture_edit', {'plantId' : currentPlant.id, 'id': picture.id}) }}'">edit</button>
+                                </div>
+                            </span>
+                        </div>
+                    </span>
+                </div>
             {% endfor %}
-            </tbody>
-        </table>
-        //-->
-    </section>
+        </div>
+    </div>
+</section>
 
 {% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

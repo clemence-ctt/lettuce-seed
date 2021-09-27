@@ -7,6 +7,7 @@
 body {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     background-color: var(--color-lightest) !important;
+    min-height: 100vh;
 }
 
 
@@ -29,6 +30,54 @@ h3 {
 }
 
 
+/* THEME CUSTOMIZATION=================================================*/
+
+.main-content > h1 {
+    margin-left: 2rem;
+}
+
+#colorlib-main {
+    min-height: 100vh;
+}
+
+#colorlib-page {
+    min-height: 100vh;
+}
+
+
+main.main-content {
+    padding: calc(var(--spacing-default) * 2 ) var(--spacing-default);
+}
+
+.ftco-footer {
+    padding: calc(var(--spacing-default) * 2 ) var(--spacing-default);
+}
+
+.thumbnail {
+    margin: var(--spacing-smallest);
+    border: var(--border-default);
+    border-color: var(--color-medium);
+    border-width: 2px;
+    border-radius: var(--border-radius-small);
+
+    background-color: #fff;
+
+    /*filter: grayscale(0.5);*/
+}
+
+.thumbnail:hover {
+    box-shadow: 3px 3px 3px var(--color-medium);
+    transform: translateY(5px) /*rotateZ(-5deg)*/ scale(1.1);
+    /*filter: grayscale(0);*/
+}
+
+
+
+#colorlib-main {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
 
 /* =================================================*/
 .main-menu {
@@ -42,6 +91,56 @@ h3 {
 
 /* =================================================*/
 
+
+/* =================================================*/
+.ftco-section.ftco-bread {
+    background-image: url(../default-assets/head1.jpg) !important;
+    background-size: cover !important;
+}
+.ftco-section.ftco-bread h1 {
+    color: var(--color-lightest) !important;
+}
+
+
+.ftco-section.ftco-bread a {
+    color: var(--color-lightest) !important;
+}
+
+/* =================================================*/
+
+.button {
+    border: var(--border-default);
+    border-radius: var(--border-radius-small);
+    padding: var(--spacing-smallest) var(--spacing-default) !important;
+
+    padding-top: var(--spacing-smallest) !important;
+    padding-bottom: var(--spacing-smallest) !important;
+
+    background-color: var(--color-medium);
+    color: var(--color-lightest);
+    font-size: 1rem;
+    display: inline-block;
+
+    appearance: button;
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    
+
+}
+
+.button:hover {
+    box-shadow: 3px 3px 3px var(--color-medium);
+}
+
+
+/* =================================================*/
+
+.cta {
+    margin-top: var(--spacing-biggest);
+    text-align: right;
+}
+
+/* =================================================*/
 
 
 
@@ -145,4 +244,5 @@ textarea {
 .sf-form  #picture_plants .choice input {
     display: none;
 }
+
 
