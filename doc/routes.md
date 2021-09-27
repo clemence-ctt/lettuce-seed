@@ -1,7 +1,7 @@
 !!! attention simple view / GET page
 !!! note form
-!!! error logout only ("action" ?)
-!!! danger delete route / POST
+!!! todo interactive routes
+!!! danger delete routes
 
 <!-- TODO ROUTES A MAJ -->
 ## Public
@@ -10,7 +10,7 @@
     - Http Verb : ANY
     - Name : home
     - Description : homepage
-    - Controller : src/Controller/IndexController.php
+    - Controller : src/Controller/Openspace/IndexController.php
     - Method : index
     - View : templates/public/index.html.twig
     - Entity : 
@@ -23,7 +23,7 @@
     - View : templates/security/login.html.twig
     - Entity : User
 
-!!! error logout
+!!! todo logout
     - Http Verb : ANY
     - Name : security_logout
     - Controller : src/Controller/SecurityController.php
@@ -76,6 +76,15 @@ ___
     - Controller : src/Controller/Dashboard/DashboardController.php
     - Method : profileEdit
     - View : templates/dashboard/profile-edit.html.twig
+    - Entity : User
+
+!!! danger /me/avatar-delete
+    - Http Verb : [GET]
+    - Name : dashboard_avatar_edit
+    - Description : delete the user's avatar path and file 
+    - Controller : src/Controller/Dashboard/DashboardController.php
+    - Method : deleteAvatar
+    - View : //
     - Entity : User
 
 
@@ -170,10 +179,48 @@ ___
     - View : templates/dashboard/picture/edit.html.twig
     - Entity : Plant, Picture
 
-!!! attention /me/plants/set-cover"
+!!! todo /me/plants/set-cover/{plantId}/{pictureId}
     - HTTP Verb : [GET]
-    - Name : dashboard_plant_setcover"
+    - Name : dashboard_plant_setcover
     - Description : set cover for the plant folders
     - Methods : setCover
     - View : // (json)
     - Entity : Plant, Picture
+
+## Useless 
+
+!!! attention /users
+    - HTTP Verb : [GET]
+    - Name : members_index
+    - Description : list the members
+    - Controller : src/Controller/Openspace/UserController.php
+    - Methods : index
+    - View : //
+    - Entity : User
+
+!!! attention /users/show"
+    - HTTP Verb : [GET]
+    - Name : user_show
+    - Description : show infos of one user
+    - Controller : src/Controller/Openspace/UserController.php
+    - Methods : show
+    - View : // 
+    - Entity : User
+
+!!! attention /{userId}/plants"
+    - HTTP Verb : [GET]
+    - Name : user_plants
+    - Description : shows all the plants of 1 user (public version)
+    - Controller : src/Controller/Openspace/UserController.php
+    - Methods : showUserPlants
+    - View : // 
+    - Entity : User, Plant
+
+!!! attention /{userId}/plant/{plantId}/photos"
+    - HTTP Verb : [GET]
+    - Name : user_plant_pictures
+    - Description : shows a plant gallery (public version)
+    - Controller : src/Controller/Openspace/UserController.php
+    - Methods : showUserPlantPictures
+    - View : // 
+    - Entity : User, Plant, Picture
