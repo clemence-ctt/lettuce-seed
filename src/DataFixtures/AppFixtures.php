@@ -12,6 +12,7 @@ use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
+//DOC FIXTURES https://symfony.com/bundles/DoctrineFixturesBundle/current/index.html
 class AppFixtures extends Fixture
 {
     // Une propriété pour accueillir notre encodeur
