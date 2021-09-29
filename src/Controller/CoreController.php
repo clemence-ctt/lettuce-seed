@@ -13,7 +13,7 @@ class CoreController extends AbstractController
 
     public function deleteFile($file, $log = 'activity.log')
     {
-        //DOC REMOVING FILES from uploads/pictures directory  https://symfony.com/doc/current/components/filesystem.html
+        //DOC REMOVING FILES from directory  https://symfony.com/doc/current/components/filesystem.html
         $filesystem = new Filesystem();
         $filesystem->remove(['', $file, $log]);
     }
@@ -97,7 +97,7 @@ class CoreController extends AbstractController
     protected function addFailFlash()
     { 
         return $this->addFlash(
-            'fail',
+            'warning',
             'Fail, try again.'
         );
     }

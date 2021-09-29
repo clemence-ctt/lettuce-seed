@@ -31,18 +31,26 @@ class UserType extends AbstractType
                 // S'il est existant en database, on applique le mapped=false.
                 if ($user->getId() !== null) {
                     $builder
+                        ->add('avatar', FileType::class, [
+                            'label' => "Upload your avatar",
+                            'required' => true,
+                            //↓ avoids this error : The form's view data is expected to be a "Symfony\Component\HttpFoundation\File\File", but it is a "string". You can avoid this error by setting the "data_class" option to null or by adding a view transformer that transforms "string" to an instance of "Symfony\Component\HttpFoundation\File\File".
+                            // 'data_class' => null,
+                            'mapped' => false
+                        ])
                         // LATER FORMS MDP mettre à la fin pour vérif même au changement d'email/pseudo
                         ->add('oldPassword', PasswordType::class, [
                             'empty_data' => '',
                             'mapped' => false,
                             'attr' => ['placeholder' => 'Leave empty if unmodified.'],
+                            'label' => 'Current Password',
                         ])
                         ->add('password', RepeatedType::class, [
                             'type' => PasswordType::class,
                             'empty_data' => '',
                             'mapped' => false,
                             'first_options'  => [
-                                'label' => 'Password',
+                                'label' => 'New Password',
                                 'attr' => ['placeholder' => 'Leave empty if unmodified.']
                             ],
                             'second_options' => [
@@ -51,26 +59,19 @@ class UserType extends AbstractType
                             ],
                             //NOTICE USERTYPE "the value is not valid" si les passwords don't match // corrigé mais ca vient d'ou ?! (vu que ça override les messages d'erreur par def du repeated ET du password type !?)
                             'invalid_message' => "The passwords don't match."
-                        ])
-                        ->add('avatar', FileType::class, [
-                            'label' => "Upload your avatar",
-                            'required' => true,
-                            //↓ avoids this error : The form's view data is expected to be a "Symfony\Component\HttpFoundation\File\File", but it is a "string". You can avoid this error by setting the "data_class" option to null or by adding a view transformer that transforms "string" to an instance of "Symfony\Component\HttpFoundation\File\File".
-                            // 'data_class' => null,
-                            'mapped' => false
                         ]);
                 } else {
                     $builder
                         ->add('password', PasswordType::class, [
                         'empty_data' => '',
-                        ])
-                        ->add('avatar', FileType::class, [
-                            'label' => "Upload your avatar",
-                            'required' => true,
-                            //↓ avoids this error : The form's view data is expected to be a "Symfony\Component\HttpFoundation\File\File", but it is a "string". You can avoid this error by setting the "data_class" option to null or by adding a view transformer that transforms "string" to an instance of "Symfony\Component\HttpFoundation\File\File".
-                            'data_class' => null,
-                            //'mapped' => false
                         ]);
+                        // ->add('avatar', FileType::class, [
+                        //     'label' => "Upload your avatar",
+                        //     'required' => true,
+                        //     //↓ avoids this error : The form's view data is expected to be a "Symfony\Component\HttpFoundation\File\File", but it is a "string". You can avoid this error by setting the "data_class" option to null or by adding a view transformer that transforms "string" to an instance of "Symfony\Component\HttpFoundation\File\File".
+                        //     'data_class' => null,
+                        //     //'mapped' => false
+                        // ]);
                 }
             });
         ;

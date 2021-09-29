@@ -33,7 +33,7 @@ class SecurityController extends AbstractController
      */
     public function logout()
     {
-        // WARNING LOGOUT clueless to implement this method ; following code is useless
+        // WARNING LOGOUT pointless to implement this method ; following code is useless
         // throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
 }

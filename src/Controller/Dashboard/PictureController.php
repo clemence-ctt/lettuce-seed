@@ -47,7 +47,6 @@ class PictureController extends CoreController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            //dd($form->get('file')->getData());
             $this->savePicture($form, $picture);
             return $this->redirectAfterPersist($request, $picture);
         

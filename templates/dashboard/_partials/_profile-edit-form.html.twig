@@ -1,11 +1,11 @@
 {{ form_start(form) }}
     {{ form_row(form.email) }}
     {{ form_row(form.username) }}
-    {{ form_row(form.oldPassword) }}
-    {{ form_row(form.password) }} 
     {{ form_row(form.avatar) }}
         {% if oldAvatarFile is empty == false %}
             <img src="{{ asset('uploads/avatars/' ~ oldAvatarFile) }}"/>
-        {% endif %}       
-    <button class="btn">{{ button_label|default('Save') }}</button>
+        {% endif %}     
+    {{ form_row(form.password) }} 
+    {{ form_row(form.oldPassword) }}  
+    <button class="button">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}

@@ -50,7 +50,6 @@ class DashboardController extends CoreController
     public function profileEdit(Request $request, UserPasswordHasherInterface $encoder): Response
     {
         $user = $this->getUser();
-
         $oldFile = $user->getAvatar();
 
         if (!empty($oldFile)) {
@@ -64,40 +63,7 @@ class DashboardController extends CoreController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $user->setUpdatedAt();
-            $this->updateAvatar($form, 'avatar', $user, $oldFile, 'avatars_directory');
-            // Le nouveau password transmis non mappé sur l'entité (voir UserType)
-            $newPassword = $form->get('password')->getData();
-
-            if (!empty($newPassword)) {
-                // hash the new password for future use
-                $passwordHashed = $encoder->hashPassword($user, $newPassword);
-                // retrieves the old password from the form
-                $formOldPassword = $form->get('oldPassword')->getData();
-
-                // checks if the entered password matches the old one in DB
-                if($encoder->isPasswordValid($this->getUser(), $formOldPassword)){
-                    // It works ! set pwd in the entity User before flushing it
-                    $user->setPassword($passwordHashed);
-                } else {
-                    // if the passwords don't match, send a message
-                    if(!empty($formOldPassword)) {
-                        $this->addFlash('fail', 'Your old password is incorrect.');
-                    } else {
-                        $this->addFlash('fail', 'Your must enter your old password.');
-                    }
-                    // and go back to edition
-                    //DOC 304 NOT_MODIFIED https://developer.mozilla.org/fr/docs/Web/HTTP/Status/304
-                    return $this->redirectToRoute('dashboard_profile_edit', [], Response::HTTP_NOT_MODIFIED);
-                };
-            }
-            
-            // Fantastic ! 
-            $this->getDoctrine()->getManager()->flush();
-            $this->addFlash('success', 'Your profile has been modified');
-
-            return $this->redirectToRoute('dashboard_profile', [], Response::HTTP_SEE_OTHER);
-
+            $this->updateInfos($form, $encoder, $user, $oldFile);
         }
 
         return $this->renderForm('dashboard/profile-edit.html.twig', [
@@ -129,6 +95,42 @@ class DashboardController extends CoreController
 //----------------------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------------------
 
+    protected function updateInfos ($form, $encoder, $user, $oldFile) {
+        $user->setUpdatedAt();
+        $this->updateAvatar($form, 'avatar', $user, $oldFile, 'avatars_directory');
+        // Le nouveau password transmis non mappé sur l'entité (voir UserType)
+        $newPassword = $form->get('password')->getData();
+
+        if (!empty($newPassword)) {
+            // hash the new password for future use
+            $passwordHashed = $encoder->hashPassword($user, $newPassword);
+            // retrieves the old password from the form
+            $formOldPassword = $form->get('oldPassword')->getData();
+
+            // checks if the entered password matches the old one in DB
+            if($encoder->isPasswordValid($this->getUser(), $formOldPassword)){
+                // It works ! set pwd in the entity User before flushing it
+                $user->setPassword($passwordHashed);
+            } else {
+                // if the passwords don't match, send a message
+                if(!empty($formOldPassword)) {
+                    $this->addFlash('danger', 'Your old password is incorrect.');
+                } else {
+                    $this->addFlash('danger', 'Your must enter your current password.');
+                }
+                // and go back to edition
+                //DOC 304 NOT_MODIFIED https://developer.mozilla.org/fr/docs/Web/HTTP/Status/304 ne marche pas avec redirect
+                return $this->redirectToRoute('dashboard_profile_edit', [], Response::HTTP_SEE_OTHER);
+            };
+        }
+        
+        // Fantastic ! 
+        $this->getDoctrine()->getManager()->flush();
+        $this->addFlash('success', 'Your profile has been modified');
+
+        return $this->redirectToRoute('dashboard_profile', [], Response::HTTP_SEE_OTHER);
+    }
+
     protected function updateAvatar($form, $formField, $entity, $oldFile, $directory)
     {
         // upload picture : if the form's 'file' field is modified, save the picture
@@ -140,7 +142,8 @@ class DashboardController extends CoreController
             //delete the old image if there was one
             if (!empty($oldFile)) {
                 $this->deleteFile($this->getParameter($directory).'/'.$oldFile);
-            }
+            };
+            $this->addSuccessFlash('picture', 'modified');
         }
         // if it's empty, set to the previous picture name
         else {
@@ -148,7 +151,7 @@ class DashboardController extends CoreController
         }
         // flush and flash 
         $this->em()->flush();
-        $this->addSuccessFlash('picture', 'modified');
+        
     }
 
 }
