@@ -19,7 +19,6 @@ class PictureRepository extends ServiceEntityRepository
         parent::__construct($registry, Picture::class);
     }
 
-
     // for the dashboard's plant list 
     public function findLastPictures(int $plantId, int $nbPics)
     {
@@ -37,14 +36,6 @@ class PictureRepository extends ServiceEntityRepository
         return $query->getResult();
     }   
    
-
-    // SLQ : (testé et ça marche) remplacer plant_id
-    //     SELECT name, date, file FROM picture 
-    //     INNER JOIN picture_plant ON picture.id = picture_plant.picture_id 
-    //     WHERE plant_id = 482 
-    //     ORDER BY date DESC
-    //     LIMIT 3
-
     // for the index page
     public function findLastUploadedPictures(int $limit)
     {
@@ -55,6 +46,13 @@ class PictureRepository extends ServiceEntityRepository
         ->getResult();
     }
 
+    // SLQ : (tested, functional) remplacer plant_id
+    //     SELECT name, date, file FROM picture 
+    //     INNER JOIN picture_plant ON picture.id = picture_plant.picture_id 
+    //     WHERE plant_id = 482 
+    //     ORDER BY date DESC
+    //     LIMIT 3
+//=====================================================================================
 
     // /**
     //  * @return Picture[] Returns an array of Picture objects

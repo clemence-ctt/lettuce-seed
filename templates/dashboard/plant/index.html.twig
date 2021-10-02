@@ -20,6 +20,7 @@
         </thead>
         <tbody>
         {% for plant in plants %}
+        {{ dump(plant) }}
             <tr> 
                 <!--LATER PLANT VIEW ajouter les 3 dernières photos de chaque plante ? -->
                 <td>{{ plant.name }}</td>

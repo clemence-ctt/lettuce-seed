@@ -23,15 +23,15 @@ class PlantController extends CoreController
     {
         $user = $this->getUser();
         $userPlants = $user->getPlants();
-        //REMINDER toArray dd($userPlants->toArray());
-
-        $userPlants = array_reverse($userPlants->toArray());
+        //$userPlants = $userPlants->toArray();
         
         return $this->render('dashboard/plant/index.html.twig' , [
             'plants' => $userPlants,
-            'user' => $this->getUser(),
+            'user' => $user,
         ]);
     }
+    //REMINDER toArray
+    //REMINDER array_reverse() > pour inverser l'ordre du tableau, plus très utile avec le datatable
 
     /**
      * @Route("/new", name="dashboard_plant_new", methods={"GET","POST"})

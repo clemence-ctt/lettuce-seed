@@ -17,7 +17,6 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
  */
 class DashboardController extends CoreController
 {
-
     /**
      * @Route("/", name="dashboard_index", methods={"GET"})
      */
@@ -25,7 +24,7 @@ class DashboardController extends CoreController
     {
         // REMINDER SECURITY deny access if not logged
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
-
+        
         return $this->render('dashboard/index.html.twig', [
             'user' => $this->getUser(),
         ]);
@@ -49,6 +48,9 @@ class DashboardController extends CoreController
      */
     public function profileEdit(Request $request, UserPasswordHasherInterface $encoder): Response
     {
+        // REMINDER SECURITY deny access if not logged
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
         $user = $this->getUser();
         $oldFile = $user->getAvatar();
 

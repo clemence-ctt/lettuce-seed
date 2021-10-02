@@ -7,22 +7,17 @@ stylesheet.setAttribute('rel', 'stylesheet');
 stylesheet.setAttribute('href', 'http://localhost/lettuce-seed/public/css/themes/_' + userTheme + '.css');
 document.querySelector('head').appendChild(stylesheet);
 
-
+    
+    // TIPS JS GLOBAL micro regex ; g=global sinon il s'arrête à la première occurence ; en gros on encapsule la tickbox et son label dans une div "choice" pour les css-er
 function createPictureForm()
 {
     console.log('%c' + 'FORM', 'color: #0bf; font-size: 1rem; background-color:#fff');
-
+    
     let list = document.querySelector('#picture_plants');
     let content = list.innerHTML;
-
-    // console.log(content);
-
-    // micro regex ; g=global sinon il s'arrête à la première occurence ; en gros on encapsule la tickbox et son label dans une div "choice" pour les css-er
     content = content.replace(/<input/g, '<div class="choice"><input');
     content = content.replace(/<\/label>/g, '</label></div>' + "\n");
-
-    // console.log(content);
-
+    
     list.innerHTML = content;
 
     console.log("Initliaze list");

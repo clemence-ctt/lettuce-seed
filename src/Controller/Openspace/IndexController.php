@@ -20,7 +20,6 @@ class IndexController extends CoreController
         $lastCreatedUsers = $this->getUserRepository()->findLastCreatedUsers(3);
         $lastCreatedPictures = $this->getPictureRepository()->findLastUploadedPictures(5);
         
-        
         return $this->render('openspace/index.html.twig', [
             'lastCreatedUsers' => $lastCreatedUsers,
             'lastCreatedPictures' => $lastCreatedPictures,
