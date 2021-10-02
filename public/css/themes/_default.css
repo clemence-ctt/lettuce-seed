@@ -41,7 +41,7 @@
     --border-width-default: 1px;
     --border-default : solid var(--border-width-default) var(--color-darkest);
 
-    --border-radius-default: var(--spacing-default);
+    --border-radius-default: calc(var(--spacing-default) / 4);
     --border-radius-small: 4px;
 
     --font-fancy-00: 'Baloo Paaji 2', cursive;

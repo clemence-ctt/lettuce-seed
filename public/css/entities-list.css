@@ -1,25 +1,10 @@
 /*===================================================*/
 
-/*
-.table td {
-    border: solid 1px var(--color-darkest);
-    position: relative;
-    height: 100%;
-}
-
-*/
 
 .table thead th {
     border: solid 1px var(--color-lightest); 
     background-color: var(--color-darkest);
 }
-
-
-/*
-.table tr:nth-child(even) {
-    background-color: var(--color-medium-dark);
-}
-*/
 
 
 #plants-list-container {
@@ -44,19 +29,41 @@
 .plant-list {
     display: flex;
     flex-wrap: wrap;
-    justify-content: start;
+    justify-content: space-between;
 }
+
+
+
+:root {
+    --plant-thumbnail-width: 100%;
+}
+
+@media only screen and (min-width: 600px) {
+    :root {
+        --plant-thumbnail-width: calc(50% - var(--spacing-default));
+    }
+}
+
+
+@media only screen and (min-width: 900px) {
+    :root {
+        --plant-thumbnail-width: calc(33% - var(--spacing-default));
+    }
+}
+
+
 
 .plant {
     position: relative;
     display: block;
     box-sizing: border-box;
 
-    width: 256px;
+    width: var(--plant-thumbnail-width);
     height: 312px;
     overflow: hidden;
     margin: var(--spacing-smallest);
     border: var(--border-default);
+    border-radius: var(--border-radius-default);
     background-size: cover;
     cursor: pointer;
 }
@@ -108,8 +115,6 @@
     display: flex;
     box-sizing: border-box;
 
-
-    /* margin: var(--spacing-default) var(--spacing-default) var(--spacing-default) var(--spacing-default); */
     flex-direction: column;
     justify-content: space-between;
     backdrop-filter: grayscale(0.8);
@@ -187,3 +192,18 @@
     text-align: right;
 }
 
+
+
+/*
+.plant__pictures img {
+    max-width: 64px;
+}
+.plant {
+    background-image: none !important;
+}
+
+.plant figure {
+    display: inline-block;
+}
+
+*/
