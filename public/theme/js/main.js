@@ -1,4 +1,8 @@
- AOS.init({
+
+console.log('%c' + 'js theme loaded', 'color: #0bf; font-size: 1rem; background-color:#fff');
+
+
+AOS.init({
  	duration: 800,
  	easing: 'slide'
  });

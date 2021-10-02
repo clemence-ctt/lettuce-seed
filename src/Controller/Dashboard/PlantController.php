@@ -81,10 +81,17 @@ class PlantController extends CoreController
 
         $plant->setCover($picture);
         $this->persist($plant);
-                
+        $this->addFlash('success', 'The cover has been changed.');
+        return $this->redirectToRoute('dashboard_plant_pictures', [
+            'plantId' => $plantId,
+            'pictureId' => $pictureId,
+        ], Response::HTTP_SEE_OTHER);
+
+        /*
         return $this->json([
             'message' => 'success'
         ]);
+        */
     }
 
     /**

@@ -17,6 +17,8 @@
     --color-medium: #805b49;
     --color-darkest: #000;
 
+    --color-interactive-00: #805b49;
+
 
 
 
@@ -27,7 +29,7 @@
     
 
     --spacing-default: 1rem;
-    --spacing-smallest: calc(var(--spacing-default) / 3);
+    --spacing-smallest: calc(var(--spacing-default) / 4);
     --spacing-biggest: calc(var(--spacing-default) * 3);;
 
     

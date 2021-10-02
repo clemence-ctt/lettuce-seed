@@ -6,7 +6,7 @@
 
 body {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    background-color: var(--color-lightest) !important;
+    background-color: #fff !important;
     min-height: 100vh;
 }
 
@@ -18,14 +18,18 @@ body {
 
 
 /** Base **/
-h1 {
+
+
+h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-fancy-00);
+}
+
+h1 {
     font-size: 3rem;
     margin-bottom: var(--spacing-default);;
 }
 
 h3 {
-    font-family: var(--font-fancy-00);
     font-size: 2rem;
 }
 

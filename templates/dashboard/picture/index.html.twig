@@ -1,16 +1,27 @@
 {% extends 'default.html.twig' %}
 
 {% block title %}
-    Pictures of {{ currentPlant.name }}
+    Pictures of {{ selectedPlant.name }}
+{% endblock %}
+
+{% block flash %}
+    {# read and display all flash messages #}
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{ label }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
 {% endblock %}
 
 {% block body %}
 
-<h1>Pictures of {{ currentPlant.name }}</h1>
+<h1>Pictures of {{ selectedPlant.name }}</h1>
 
 <section class="menu">
     <a class="button" href="{{ path('dashboard_plants') }}">back to plant list</a>
-    <a class="button" href="{{ path('dashboard_picture_new', {'plantId' : currentPlant.id}) }}">Create new</a>
+    <a class="button" href="{{ path('dashboard_picture_new', {'plantId' : selectedPlant.id}) }}">Create new</a>
 </section>
 
 
@@ -32,8 +43,9 @@
                             </h3>
                             <span class="tag">
                                 <div>
-                                    <button class="button" onclick="document.location='{{ path('dashboard_picture_show', {'plantId' : currentPlant.id, 'id': picture.id}) }}'">show</button>
-                                    <button class="button" onclick="document.location='{{ path('dashboard_picture_edit', {'plantId' : currentPlant.id, 'id': picture.id}) }}'">edit</button>
+                                    <button class="button" onclick="document.location='{{ path('dashboard_picture_show', {'plantId' : selectedPlant.id, 'id': picture.id}) }}'">show</button>
+                                    <button class="button" onclick="document.location='{{ path('dashboard_plant_setcover', {'plantId' : selectedPlant.id, 'pictureId': picture.id}) }}'">set as cover</button>
+                                    <button class="button" onclick="document.location='{{ path('dashboard_picture_edit', {'plantId' : selectedPlant.id, 'id': picture.id}) }}'">edit</button>
                                 </div>
                             </span>
                         </div>

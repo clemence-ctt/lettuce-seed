@@ -8,7 +8,11 @@
     padding: var(--spacing-smallest) var(--spacing-default);
     background-color: var(--color-interactive-00);
     border-radius: var(--border-radius-small);
-   
+}
+
+.button--small {
+    font-size: 0.7rem;
+    padding: var(--spacing-smallest) var(--spacing-smallest) !important;
 }
 
 .button--icon {
@@ -27,3 +31,4 @@
 .paginate_button  {
     background-color: #f0f;
 }
+

@@ -26,9 +26,12 @@ class PictureController extends CoreController
         $currentPlant = $plantRepository->find($plantId);
         $pictures = $currentPlant->getPictures();
 
+    
+        // return new Response('hello');
+
         return $this->render('dashboard/picture/index.html.twig', [
             'pictures' => $pictures,
-            'currentPlant' => $currentPlant,
+            'selectedPlant' => $currentPlant,
             'user' => $this->getUser(),
         ]);
     }
