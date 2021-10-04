@@ -46,10 +46,12 @@ class PictureController extends CoreController
         $picture->setDate(DateTime::createFromFormat('Y-m-d', date('Y-m-d')));
         $picture->addPlant($plant);
 
+
         $form = $this->createForm(PictureType::class, $picture);
         $form->handleRequest($request);
-
+        
         if ($form->isSubmitted() && $form->isValid()) {
+            
             $this->savePicture($form, $picture);
             return $this->redirectAfterPersist($request, $picture);
         
@@ -74,7 +76,7 @@ class PictureController extends CoreController
     
         return $this->render('dashboard/picture/show.html.twig', [
             'picture' => $picture,
-            'currentPlant' => $currentPlant,
+            'selectedPlant' => $currentPlant,
             'user' => $this->getUser(),
         ]);
     }
@@ -155,6 +157,7 @@ class PictureController extends CoreController
         $pictureFile = $form->get('file')->getData();
         // On génère un nom de fichier unique en devinant l'extension MIME avant de sauvegarder
         $fileName = base64_encode(uniqid()).'.'.$pictureFile->guessExtension();
+
         // Déplacement du fichier dans un répertoire de notre projet
         $pictureFile->move($this->getParameter('pictures_directory'), $fileName);
         // Met à jour le nom de l'image finale dans notre Post

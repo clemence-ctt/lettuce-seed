@@ -7,12 +7,13 @@ stylesheet.setAttribute('rel', 'stylesheet');
 stylesheet.setAttribute('href', 'http://localhost/lettuce-seed/public/css/themes/_' + userTheme + '.css');
 document.querySelector('head').appendChild(stylesheet);
 
-    
-    // TIPS JS GLOBAL micro regex ; g=global sinon il s'arrête à la première occurence ; en gros on encapsule la tickbox et son label dans une div "choice" pour les css-er
+
 function createPictureForm()
 {
-    console.log('%c' + 'FORM', 'color: #0bf; font-size: 1rem; background-color:#fff');
-    
+    //JK console.log('%c' + 'FORM', 'color: #f00; font-size: 1rem;'); 
+
+    // TIPS JS GLOBAL - micro regex ; g=global to carry on after the first match ; 
+    // encapsulating the checkbox & its label in a "choice" div to apply CSS
     let list = document.querySelector('#picture_plants');
     let content = list.innerHTML;
     content = content.replace(/<input/g, '<div class="choice"><input');

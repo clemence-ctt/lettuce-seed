@@ -44,13 +44,11 @@
     }
 }
 
-
 @media only screen and (min-width: 900px) {
     :root {
         --plant-thumbnail-width: calc(33% - var(--spacing-default));
     }
 }
-
 
 
 .plant {
@@ -194,8 +192,8 @@
 
 
 
-/*
-.plant__pictures img {
+
+/* .plant__pictures img {
     max-width: 64px;
 }
 .plant {
@@ -204,6 +202,5 @@
 
 .plant figure {
     display: inline-block;
-}
+} */
 
-*/

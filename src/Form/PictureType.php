@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
+
 class PictureType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -64,7 +65,6 @@ class PictureType extends AbstractType
             //         'toto' => 'totol',
             //     ]
             // ])
-            
     }
 
     public function configureOptions(OptionsResolver $resolver)

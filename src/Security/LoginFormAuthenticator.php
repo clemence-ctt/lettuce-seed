@@ -20,10 +20,8 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
 {
     use TargetPathTrait;
 
-
-    // WARNING LOGIN : route name configuration for login
-    public const LOGIN_ROUTE = 'security_login';
-    
+    // STEP LOGIN : route name configuration for login
+    public const LOGIN_ROUTE = 'security_login';    
 
     private UrlGeneratorInterface $urlGenerator;
 

@@ -30,8 +30,7 @@ class PlantController extends CoreController
             'user' => $user,
         ]);
     }
-    //REMINDER toArray
-    //REMINDER array_reverse() > pour inverser l'ordre du tableau, plus très utile avec le datatable
+    //REMINDER ARRAY FUNCS : toArray & array_reverse()
 
     /**
      * @Route("/new", name="dashboard_plant_new", methods={"GET","POST"})

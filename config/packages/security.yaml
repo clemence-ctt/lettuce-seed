@@ -5,6 +5,7 @@ security:
         App\Entity\User:
             algorithm: auto
 
+    # STEP LOGIN .yaml
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
         # used to reload user from session & other features (e.g. switch_user)
@@ -31,7 +32,8 @@ security:
             # https://symfony.com/doc/current/security/impersonating_user.html
             # switch_user: true
 
-            # LATER login attempts https://symfony.com/doc/current/security.html#limiting-login-attempts
+            # TODO LIMIT login attempts 
+            # see https://symfony.com/doc/current/security.html#limiting-login-attempts
 
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used

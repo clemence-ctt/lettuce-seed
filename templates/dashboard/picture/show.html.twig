@@ -11,12 +11,12 @@
     {% endfor %}
 {% endblock %}
 
-{% block title %}Picture of {{currentPlant.name}}{% endblock %}
+{% block title %}Picture of {{selectedPlant.name}}{% endblock %}
 
 {% block body %}
     {% set route_parameters = app.request.attributes.get('_route_params') %}    
     
-    <h1>Picture of {{currentPlant.name}}</h1>
+    <h1>Picture of {{selectedPlant.name}}</h1>
     {# mettre directement la photo, ou le nom s'il y en a un ?  #}
 
     <table class="table">
@@ -47,7 +47,7 @@
                 <th>Other plants in this picture</th>
                 <td>
                     {% for plant in picture.plants %}
-                        {% if (plant.id != currentPlant.id) %}
+                        {% if (plant.id != selectedPlant.id) %}
                             <a href="{{ path('dashboard_plant_pictures', {'plantId' : plant.id}) }}">{{ plant.name }}</a>
                         {% endif %}
                     {% endfor %}
@@ -57,9 +57,9 @@
     </table>
     
     <br>
-    <a class="button" href="{{ path('dashboard_plant_pictures', {'plantId' : currentPlant.id}) }}">back to {{currentPlant.name}} photos</a>
+    <a class="button" href="{{ path('dashboard_plant_pictures', {'plantId' : selectedPlant.id}) }}">back to {{selectedPlant.name}} photos</a>
     
-    <a class="button" href="{{ path('dashboard_picture_edit', {'plantId' : currentPlant.id, 'id': picture.id}) }}">edit infos</a>
+    <a class="button" href="{{ path('dashboard_picture_edit', {'plantId' : selectedPlant.id, 'id': picture.id}) }}">edit infos</a>
  
     {{ include('dashboard/_partials/_picture-delete-form.html.twig') }}
 

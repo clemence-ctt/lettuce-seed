@@ -22,7 +22,6 @@ class DashboardController extends CoreController
      */
     public function index(): Response
     {
-        // REMINDER SECURITY deny access if not logged
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         
         return $this->render('dashboard/index.html.twig', [

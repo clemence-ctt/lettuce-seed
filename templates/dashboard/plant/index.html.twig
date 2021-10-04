@@ -24,7 +24,7 @@
                 <tr class="plant" style="background-image: url({{  asset('uploads/pictures/' ~ plant.getCover().file ) }})">
             {% else %}
                 {% if plant.getPictures()|first %}
-                <tr class="plant" style="background-image: url({{  asset('uploads/pictures/' ~ plant.getPictures()|first.file ) }})">
+                <tr class="plant" style="background-image: url({{  asset('uploads/pictures/' ~ plant.getPictures()|last.file ) }})">
                 {% else %}
                     <tr class="plant"> 
                 {% endif %}
@@ -47,8 +47,8 @@
                     <td class=""></td>
                 {% endif %}
 
-                <!--LATER PLANT VIEW ajouter les 3 dernières photos de chaque plante ? -->
-                <td data-order="{{ plant.name|slugify }}" class="plant__info" onclick="document.location='{{ path('dashboard_plant_pictures', {'plantId': plant.id}) }}'">
+                <td data-order="{{ plant.name|slugify }}" class="plant__info"
+                 onclick="document.location='{{ path('dashboard_plant_pictures', {'plantId': plant.id}) }}'">
                     <div class="container">
                         <div class="plant__name">
                             <h4><a class="" href="{{ path('dashboard_plant_pictures', {'plantId': plant.id}) }}">{{ plant.name }}</a></h4>
