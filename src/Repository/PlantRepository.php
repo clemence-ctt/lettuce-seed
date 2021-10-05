@@ -19,14 +19,11 @@ class PlantRepository extends ServiceEntityRepository
         parent::__construct($registry, Plant::class);
     }
 
+    // REMINDER SQL CONSOLE php bin/console doctrine:query:sql
+    
     public function findBiggestId() {
 
         $entityManager = $this->getEntityManager();
-
-        // php bin/console doctrine:query:sql
-        // ~ 'SELECT MAX(id) FROM plant'
-        // mettre ds une variable + petit et + gd
-        // $picture->addPlant(rand($min, $max));
 
         $query = $entityManager->createQuery(
             'SELECT MAX(id) as maxId
@@ -43,15 +40,10 @@ class PlantRepository extends ServiceEntityRepository
         else {
             return false;
         }
-            //! oskour
-            // => array (size=1)
-            // 0 => 
-            //   array (size=1)
-            //     'MAX(id)' => string '127' (length=3)
     }
 
 
-
+//------------------------------------------------------------------------------------------
     // /**
     //  * @return Plant[] Returns an array of Plant objects
     //  */

@@ -17,9 +17,28 @@ class PictureRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Picture::class);
+    }   
+   
+    // for the index page
+    public function findLastUploadedPictures(int $limit)
+    {
+        return $this->createQueryBuilder('picture')
+        ->orderBy('picture.created_at', 'DESC')
+        ->setMaxResults($limit)
+        ->getQuery()
+        ->getResult();
     }
 
-    // for the dashboard's plant list 
+    // SLQ : (tested, functional) just replace plant_id
+    //     SELECT name, date, file FROM picture 
+    //     INNER JOIN picture_plant ON picture.id = picture_plant.picture_id 
+    //     WHERE plant_id = 482 
+    //     ORDER BY date DESC
+    //     LIMIT 3
+//=====================================================================================
+
+    // unused
+    // LATER modify it with placeholders
     public function findLastPictures(int $plantId, int $nbPics)
     {
         $entityManager = $this->getEntityManager();
@@ -34,25 +53,7 @@ class PictureRepository extends ServiceEntityRepository
 
         //return $query->setMaxResults($limit)->getResult();
         return $query->getResult();
-    }   
-   
-    // for the index page
-    public function findLastUploadedPictures(int $limit)
-    {
-        return $this->createQueryBuilder('picture')
-        ->orderBy('picture.created_at', 'DESC')
-        ->setMaxResults($limit)
-        ->getQuery()
-        ->getResult();
     }
-
-    // SLQ : (tested, functional) remplacer plant_id
-    //     SELECT name, date, file FROM picture 
-    //     INNER JOIN picture_plant ON picture.id = picture_plant.picture_id 
-    //     WHERE plant_id = 482 
-    //     ORDER BY date DESC
-    //     LIMIT 3
-//=====================================================================================
 
     // /**
     //  * @return Picture[] Returns an array of Picture objects
