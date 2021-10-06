@@ -21,9 +21,7 @@ class DashboardController extends CoreController
      * @Route("/", name="dashboard_index", methods={"GET"})
      */
     public function index(): Response
-    {
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
-        
+    {        
         return $this->render('dashboard/index.html.twig', [
             'user' => $this->getUser(),
         ]);

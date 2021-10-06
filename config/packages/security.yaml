@@ -26,11 +26,16 @@ security:
                 # where to redirect after logout
                 target: home            
             
-            # TODO LIMIT login attempts 
-            # see https://symfony.com/doc/current/security.html#limiting-login-attempts
+            # DOC LIMITING LOGIN ATTEMPTS https://symfony.com/doc/current/security.html#limiting-login-attempts
             login_throttling:
-                max_attempts: 3
+                max_attempts: 5
                 interval: '15 minutes'
+
+            # # DOC REMEMBER ME https://symfony.com/doc/current/security/remember_me.html
+            # remember_me:
+            #     secret:   '%kernel.secret%'
+            #     lifetime: 604800 # 1 week in seconds
+            #     secure: true
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
