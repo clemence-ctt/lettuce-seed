@@ -52,7 +52,7 @@ function createPictureForm() {
 
 
 document.addEventListener('DOMContentLoaded', function () {
-    // TIPS DATATABLE initializing datatable on element
+    // STEP DATATABLE initializing datatable on element
     $(document).ready(function () {
         const onPlantsList = document.querySelector('#plants-list-container');
         if (onPlantsList) {

@@ -10,7 +10,9 @@ body {
     min-height: 100vh;
 }
 
-
+img {
+    max-width: 100%;
+}
 
 * {
     box-sizing: border-box;
@@ -32,6 +34,43 @@ h1 {
 h3 {
     font-size: 2rem;
 }
+/* ===================================================================== */
+.user-avatar {
+    position: relative;
+}
+
+
+
+.user-avatar .remove-avatar {
+    position: absolute;
+    left: calc(50% + 100px);
+    top: 100px;
+    z-index: 10;
+    color: var(--color-medium);
+    background-color: #fff;
+    border-radius: 2rem;
+    
+    
+    width: 2.1em;
+    height: 1.9rem;
+    overflow: hidden;
+
+    transition: all 0.3s;
+    display: flex;
+
+    border: var(--border-default);
+}
+.user-avatar .remove-avatar:hover {
+    width: 170px;
+}
+
+.user-avatar .remove-avatar span {
+    margin-left: var(--spacing-smallest);
+}
+
+
+/* ===================================================================== */
+
 
 /* BUTTON CUSTOMIZATION ================================================ */
 
@@ -196,9 +235,12 @@ form:not(.delete) {
     border: var(--border-default);
 }
 
-form img {
+form .uploaded-image {
     height: 100px;
-    max-width: 100px;
+    width: 100px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
 
     transform: scale(3);
 
@@ -211,6 +253,10 @@ form img {
     border-radius: 50%;
     border: var(--border-default);
 }
+
+
+
+
 
 form label {
     font-weight: bold;

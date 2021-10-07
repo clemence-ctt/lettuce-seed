@@ -5,8 +5,10 @@
     {{ form_row(form.oldPassword) }}  
     {{ form_row(form.avatar) }}
         {% if oldAvatarFile is empty == false %}
-            <a href="{{ path('dashboard_avatar_delete') }}"> <i class="fas fa-times"></i> Remove avatar</a>
-            <img src="{{ asset('uploads/avatars/' ~ oldAvatarFile) }}"/>
+            <div class="user-avatar">
+                <a class="remove-avatar" href="{{ path('dashboard_avatar_delete') }}"> <i class="far fa-times-circle fa-2x"></i> <span> Remove avatar</span></a>
+                <div class="uploaded-image round-thumb" style="background-image: url({{ asset('uploads/avatars/' ~ oldAvatarFile) }}")></div>
+            </div>
         {% endif %}     
     <button class="button">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}

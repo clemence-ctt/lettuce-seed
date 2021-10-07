@@ -78,7 +78,7 @@ class DashboardController extends CoreController
     public function deleteAvatar(Request $request): Response
     {
         $user = $this->getUser();
-
+// TODO authorisation pour le dossier uploads/ava
         $filePath = $this->getParameter('avatars_directory').'/'.$user->getAvatar();
         if (is_file($filePath)) {
             $this->deleteFile($filePath);
