@@ -13,10 +13,18 @@
 
     --color-interactive-00: #CA1235;
     */
+    
     --color-lightest: #f6efd0;
+    --color-light: #E3F9CE;
+
+
+
     --color-medium: #805b49;
+
+    --color-medium-dark: #aaa9;
     --color-darkest: #000;
 
+    --color-highlight: #6AA729;
     --color-interactive-00: #805b49;
 
 
@@ -39,7 +47,7 @@
 
 
     --border-width-default: 1px;
-    --border-default : solid var(--border-width-default) var(--color-darkest);
+    --border-default : solid var(--border-width-default) var(--color-medium-dark);
 
     --border-radius-default: calc(var(--spacing-default) / 4);
     --border-radius-small: 4px;

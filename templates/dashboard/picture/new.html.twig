@@ -1,5 +1,7 @@
 {% extends 'default.html.twig' %}
 
+{% set route_parameters = app.request.attributes.get('_route_params') %}
+
 {% block flash %}
     {# read and display all flash messages #}
     {% for label, messages in app.flashes %}
@@ -13,16 +15,18 @@
 
 {% block title %}New Picture{% endblock %}
 
-{% block body %}
+{% block body %}    
+
+    <div class='return'>
+        <a class='button' href="{{ path('dashboard_plant_pictures', {'plantId' : route_parameters.plantId}) }}">Back to plant photos</a>
+    </div>
+
     <h1>Create new Picture</h1>
 
     <p class="component info">
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Doloremque est repellendus ducimus cupiditate pariatur maxime aperiam voluptatem cumque quibusdam error quasi ex distinctio consequuntur explicabo blanditiis accusantium, similique voluptatum nesciunt temporibus nihil eos! Excepturi quo nihil voluptatem a perspiciatis non placeat repellendus unde, suscipit architecto corporis, aspernatur nemo rerum dolor.
+       Add a new picture and tell us about it ! 
     </p>
 
-    {{ include('dashboard/_partials/_picture-new-form.html.twig', {'button_label': 'ALEA JACTA EST'}) }}
-
-    {% set route_parameters = app.request.attributes.get('_route_params') %}
-    <a href="{{ path('dashboard_plant_pictures', {'plantId' : route_parameters.plantId}) }}">back to plant photos</a>
+    {{ include('dashboard/_partials/_picture-new-form.html.twig', {'button_label': 'SEND THIS PICTURE'}) }}
 
 {% endblock %}

@@ -1,0 +1,99 @@
+form > div {
+    margin-bottom: 0 !important;
+    background-color: #fff8;
+    margin-bottom: var(--spacing-smallest) !important;
+    padding: var(--spacing-smallest) var(--spacing-default) !important;
+}
+
+
+
+form .button {
+    margin-top: var(--spacing-default);
+    width: 100%;
+}
+
+
+
+form label {
+    font-family: var(--font-fancy-00) ! important;
+    font-weight: normal !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    font-size: 1.5rem !important;
+    color: var(--color-medium) !important;
+}
+
+
+form label::before {
+    content: '\f06c';
+    display: inline-block;
+    font-family: 'Font Awesome\ 5 Free';
+    font-weight: bold;
+    margin-right: var(--spacing-default);
+    font-size: 1rem;
+
+}
+
+
+
+form > div > ul li {
+    color: #f00;
+    list-style: none;
+}
+
+form > div > ul li::before{
+    font-family: 'Font Awesome\ 5 Free';
+    font-weight: bold;
+    content: '\f071';
+}
+
+
+form  #picture_plants {
+    /*
+    display: flex;
+    flex-wrap: wrap;
+    */
+    text-align: center;
+}
+
+form  #picture_plants .choice {
+    display: inline-block;
+}
+
+form  #picture_plants .choice label {
+    cursor: pointer;
+    font-size: 0.75rem !important;
+    /* width: 50%; */
+    overflow: hidden;
+    
+    border: solid 1px var(--color-medium-dark);
+    color: var(--color-darkest);
+    background-color: var(--color-lightest);
+    display: inline-block;
+    border-radius: 0.5rem;
+    margin: 2px 2px;
+    padding: 0 0.5rem;
+
+    /* flex-grow: 1; */
+}
+form  #picture_plants .choice label::before {
+    content: '';
+    margin-right: 0;
+}
+
+
+form  #picture_plants .choice label:hover {
+    background-color: var(--color-medium);
+    box-shadow: 3px 3px 3px var(--color-medium-dark);
+}
+
+form  #picture_plants .choice label.checked {
+    color: var(--color-lightest);
+    background-color: var(--color-highlight);
+    
+}
+
+form  #picture_plants .choice input {
+    display: none;
+}
+
