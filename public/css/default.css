@@ -42,13 +42,11 @@ h3 {
 
 /* THEME CUSTOMIZATION=================================================*/
 
-.colorlib-nav-toggle {
-    position: fixed !important;
-    z-index:1000;
-    
-    top: 0 !important;
-    right: 0 !important;
+body.offcanvas #colorlib-main, body.offcanvas .colorlib-nav-toggle {
+    transform: translateX(0) !important;
+}
 
+.colorlib-nav-toggle {
     background-color: #fff3 !important;
     padding: 0.3rem 0.5rem 0.5rem 0.5rem !important;
     margin: 1rem 0 0 1rem  !important;
@@ -169,11 +167,11 @@ main.main-content {
     text-align: right;
 }
 
+
 /* =================================================*/
 
 
-
-form {
+form:not(.delete) {
     padding: 
         calc(var(--spacing-default))
         calc(var(--spacing-default))

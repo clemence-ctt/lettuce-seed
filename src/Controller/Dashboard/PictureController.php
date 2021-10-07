@@ -122,7 +122,7 @@ class PictureController extends CoreController
         return $this->renderForm('dashboard/picture/edit.html.twig', [
             'picture' => $picture,
             'form' => $form,
-            'currentPlant' => $currentPlant,
+            'selectedPlant' => $currentPlant,
             'oldPictureFile' => $oldPictureFile,
             'user' => $this->getUser(),
         ]);

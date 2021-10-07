@@ -6,12 +6,10 @@ form > div {
 }
 
 
-
 form .button {
     margin-top: var(--spacing-default);
     width: 100%;
 }
-
 
 
 form label {
@@ -22,7 +20,6 @@ form label {
     font-size: 1.5rem !important;
     color: var(--color-medium) !important;
 }
-
 
 form label::before {
     content: '\f06c';

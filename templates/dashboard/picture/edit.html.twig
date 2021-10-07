@@ -19,10 +19,10 @@
     {{ include('dashboard/_partials/_picture-edit-form.html.twig', {'button_label': 'Update'}) }}
 
     
-    <a href="{{ path('dashboard_picture_show', {'plantId' : currentPlant.id, 'id': picture.id}) }}">back to picture infos</a>  
+    <a href="{{ path('dashboard_picture_show', {'plantId' : selectedPlant.id, 'id': picture.id}) }}">back to picture infos</a>  
     ||
     {% set route_parameters = app.request.attributes.get('_route_params') %}
-    <a href="{{ path('dashboard_plant_pictures', {'plantId' : route_parameters.plantId}) }}">back to {{currentPlant.name}} photos</a>
+    <a href="{{ path('dashboard_plant_pictures', {'plantId' : route_parameters.plantId}) }}">back to {{selectedPlant.name}} photos</a>
     
     {{ include('dashboard/_partials/_picture-delete-form.html.twig') }}
 {% endblock %}
