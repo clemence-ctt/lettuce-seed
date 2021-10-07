@@ -6,9 +6,12 @@
 
     <h1>Plant index</h1>
 
-    <a href="{{ path('dashboard_plant_new') }}">Add a plant</a>
+    <div class="button-mb">
+        <a class="button" href="{{ path('dashboard_plant_new') }}">Add a plant</a>
+    </div>
 
     <table class="table" id="plants-list-container">
+        {# mostly hidden #}
         <thead>
             <tr>
                 <th>action</th>
@@ -17,9 +20,11 @@
                 <th>Pictures</th>
             </tr>
         </thead>
+        
         <tbody class="plant-list">
         {% for plant in plants %}
 
+            {# opening the <table row> and adding the card's background #}
             {% if plant.getCover() %}
                 <tr class="plant" style="background-image: url({{  asset('uploads/pictures/' ~ plant.getCover().file ) }})">
             {% else %}
@@ -29,61 +34,45 @@
                     <tr class="plant"> 
                 {% endif %}
             {% endif %}
-
-
-
-            <td class="plant__actions">
-                <a class="button--small button bi bi-pencil-fill" href="{{ path('dashboard_plant_edit', {'id': plant.id}) }}"> Edit</a>
-                <a class="button--small button" href="{{ path('dashboard_plant_show', {'id': plant.id}) }}">Infos</a>
-            </td>
-
-
-
-                {% if plant.date %}
-                    <td class="plant__date">
-                        <div>{{ plant.date ? plant.date|date('Y-m-d') : '' }}</div>
+                    
+                    {# table datas : actions on plants #}
+                    <td class="plant__actions">
+                        <a class="button--small button bi bi-pencil-fill" href="{{ path('dashboard_plant_edit', {'id': plant.id}) }}"> Edit</a>
+                        <a class="button--small button" href="{{ path('dashboard_plant_show', {'id': plant.id}) }}">Infos</a>
                     </td>
-                {% else %}
-                    <td class=""></td>
-                {% endif %}
 
-                <td data-order="{{ plant.name|slugify }}" class="plant__info"
-                 onclick="document.location='{{ path('dashboard_plant_pictures', {'plantId': plant.id}) }}'">
-                    <div class="container">
-                        <div class="plant__name">
-                            <h4><a class="" href="{{ path('dashboard_plant_pictures', {'plantId': plant.id}) }}">{{ plant.name }}</a></h4>
+                    {# table datas : date, if there's one#}
+                    {% if plant.date %}
+                        <td class="plant__date">
+                            <div>{{ plant.date ? plant.date|date('Y-m-d') : '' }}</div>
+                        </td>
+                    {% else %}
+                        <td class=""></td>
+                    {% endif %}
+
+                    {# table datas : name #}
+                    <td data-order="{{ plant.name|slugify }}" class="plant__info"
+                        onclick="document.location='{{ path('dashboard_plant_pictures', {'plantId': plant.id}) }}'">
+                        <div class="container">
+                            <div class="plant__name">
+                                <h4><a class="" href="{{ path('dashboard_plant_pictures', {'plantId': plant.id}) }}">{{ plant.name }}</a></h4>
+                            </div>
                         </div>
-                        
-                        
-                        <!--
-                        <div class="plant__description-container">
-                            <p>
-                                {{ plant.description }}
-                            </p>
+                    </td>
+
+                    {# display: none ; keepin it for table's structure #}
+                    <td class="plant__pictures">
+                        <div class="container">
+                        {% for  picture in plant.getPictures %}
+
+                            <figure  class="plant-thumbnail">
+                                <img src="{{ asset('uploads/pictures/' ~ picture.file ) }}" />
+                            </figure>
+                        {% endfor %}
                         </div>
-                        //-->
-                    </div>
-                </td>
-
-
-                <td class="plant__pictures">
-                    <div class="container">
-                    {% for  picture in plant.getPictures %}
-                        <!--
-                        <span class="button"> {{ picture.getName }} </span>
-                        //-->
-
-                        <figure  class="plant-thumbnail">
-                            <img src="{{ asset('uploads/pictures/' ~ picture.file ) }}" />
-                        </figure>
-                    {% endfor %}
-                    </div>
-
-                    <div class="photo-actions">
-                        
-                    </div>
-                </td>
-            </tr>
+                    </td>
+                    
+                </tr>
         {% else %}
             <tr>
                 <td colspan="7">no records found</td>

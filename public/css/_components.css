@@ -27,8 +27,7 @@
 }
 
 
-
 .paginate_button  {
-    background-color: #f0f;
+    background-color: var(--color-medium-dark);
 }
 

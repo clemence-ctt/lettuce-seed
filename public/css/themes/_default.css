@@ -1,41 +1,31 @@
 :root {
     --default-width: 920px;
-
-
     /*
     --color-lightest: #fff;
     --color-medium: #ccc9;
     --color-medium-light: #ddd9;
     --color-medium-dark: #aaa9;
-
     --color-darkest: #0009;
     --color-highlight: #b4d455;
-
     --color-interactive-00: #CA1235;
     */
     
     --color-lightest: #f6efd0;
     --color-light: #E3F9CE;
-
-
-
     --color-medium: #805b49;
-
     --color-medium-dark: #aaa9;
     --color-darkest: #000;
-
+    
     --color-highlight: #6AA729;
     --color-interactive-00: #805b49;
 
 
-
-
     --font-default: Verdana, Geneva, Tahoma, sans-serif;
+    --font-fancy-00: 'Baloo Paaji 2', cursive;
     --font-size-default: 1rem;
     --font-size-big: calc(var(--font-size-default) * 2);
 
-    
-
+ 
     --spacing-default: 1rem;
     --spacing-smallest: calc(var(--spacing-default) / 4);
     --spacing-biggest: calc(var(--spacing-default) * 3);;
@@ -49,9 +39,8 @@
     --border-width-default: 1px;
     --border-default : solid var(--border-width-default) var(--color-medium-dark);
 
+
     --border-radius-default: calc(var(--spacing-default) / 4);
     --border-radius-small: 4px;
-
-    --font-fancy-00: 'Baloo Paaji 2', cursive;
 
 }

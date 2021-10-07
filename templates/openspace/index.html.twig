@@ -8,22 +8,32 @@
 
 
 
-<section class="blabla">
-    <h2>What is it ?</h2>
-    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem molestiae et sapiente numquam, tempora minima quia, cumque maxime nisi quos dolore voluptatum fugiat laboriosam deleniti nam ab? Perspiciatis, laudantium sequi? Architecto corporis distinctio laboriosam qui blanditiis quo, impedit maxime exercitationem consequuntur atque ex animi fugiat similique, minima ipsum ea voluptates amet officiis nihil nobis iusto accusamus! Maiores cupiditate minima dolore numquam quasi pariatur sunt! Accusamus, voluptates minus! Quod velit ab nihil repellat sint mollitia necessitatibus vitae dignissimos rerum praesentium nesciunt exercitationem voluptates blanditiis modi consequuntur, ea, odio molestiae impedit, autem unde. Cumque, culpa officiis. Impedit autem adipisci ut porro reprehenderit, quisquam molestias cupiditate nesciunt odit quidem, eum dolores temporibus incidunt inventore? Dolor fuga odit harum alias fugit rem ea! Magni aut provident numquam at omnis, commodi aliquid velit possimus placeat distinctio necessitatibus iusto officia alias unde reprehenderit explicabo natus perspiciatis. Alias ea magni veritatis voluptate, facilis impedit similique voluptatibus deleniti?
-
+<section class="blabla">    
     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-    <div class="cta">(pas de bouton, on est connecté)</div>
+        <h2>Hello {{ user.username }} !</h2>
+        <div>
+            What does your garden look like today ? 
+            Fancy takin' us for a ride ?
+        </div>
+        <div class="cta"></div>
     {% else %}
-    <div class="cta">
-        <a href="{{ path('member_signup') }}" class="button">Sign up</a>
-    </div>
+        <h2>What is it ?</h2>
+        <div>
+            Ever dreamt of a nice board to keep your garden diary tidy and see all your plants in a glance ?
+            This place is made for you ! Come and join a friendly community of organised gardeners :)
+            Take picture, keep note of everything that's going and share your gallery with friends !
+        </div>
+
+        <div class="cta">
+            <a href="{{ path('member_signup') }}" class="button">Sign up</a>
+        </div>
     {% endif %}
 </section>
 
 
 <hr/>
 
+{# LAST PICTURES #}
 <section class="ftco-section instagram">
     <div class="container">
         <div class="row justify-content-center mb-2 pb-3">
@@ -32,7 +42,6 @@
             </div>
         </div>
         <div class="row no-gutters">
-
 
             {% for picture in  lastCreatedPictures %}  
                 <div class="col-sm-12 col-md ftco-animate fadeInUp ftco-animated">
@@ -51,6 +60,7 @@
 
 <hr/>
 
+{# LAST USERS #}
 <section class="ftco-section instagram">
     <div class="container">
         <div class="row justify-content-center mb-2 pb-3">
@@ -81,16 +91,5 @@
         </div>
     </div>
 </section>
-
-
-<!--
-<div class="user-list">
-    {% for user in lastCreatedUsers %}
-    <span class="user-list-item">
-        <a href="{{ path('user_plants', {'userId': user.id}) }}">{{ user.username }}</a>
-    </span>
-    {% endfor %}
-</div>
-//-->
 
 {% endblock %}

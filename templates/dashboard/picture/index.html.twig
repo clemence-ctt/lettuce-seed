@@ -21,14 +21,16 @@ Pictures of {{ selectedPlant.name }}
 
 
 <div class="return">
-    <a class="button" href="{{ path('dashboard_plants') }}">Back to plant list</a>
+    <a class="button" href="{{ path('dashboard_plants') }}">See all my plants</a>
 </div>
 
 <h1>Pictures of {{ selectedPlant.name }}</h1>
 
 
 <div>
-    <a class="button" href="{{ path('dashboard_picture_new', {'plantId' : selectedPlant.id}) }}">Create new</a>
+    <a class="button" href="{{ path('dashboard_picture_new', {'plantId' : selectedPlant.id}) }}">Add picture</a>
+    <a class="button" href="{{ path('dashboard_plant_show', {'id': selectedPlant.id}) }}">See plant infos</a>
+    <a class="button" href="{{ path('dashboard_plant_edit', {'id': selectedPlant.id}) }}">Edit plant infos </a> 
 </div>
 
 
@@ -52,12 +54,12 @@ Pictures of {{ selectedPlant.name }}
                         <span class="tag">
                             <div>
                                 <button class="button"
-                                    onclick="document.location='{{ path('dashboard_picture_show', {'plantId' : selectedPlant.id, 'id': picture.id}) }}'">show</button>
+                                    onclick="document.location='{{ path('dashboard_picture_show', {'plantId' : selectedPlant.id, 'id': picture.id}) }}'">Infos</button>
                                 <button class="button"
-                                    onclick="document.location='{{ path('dashboard_plant_setcover', {'plantId' : selectedPlant.id, 'pictureId': picture.id}) }}'">set
+                                    onclick="document.location='{{ path('dashboard_picture_edit', {'plantId' : selectedPlant.id, 'id': picture.id}) }}'">Edit</button>
+                                <button class="button"
+                                    onclick="document.location='{{ path('dashboard_plant_setcover', {'plantId' : selectedPlant.id, 'pictureId': picture.id}) }}'">Set
                                     as cover</button>
-                                <button class="button"
-                                    onclick="document.location='{{ path('dashboard_picture_edit', {'plantId' : selectedPlant.id, 'id': picture.id}) }}'">edit</button>
                             </div>
                         </span>
                     </div>

@@ -29,7 +29,16 @@
                 <th>Email</th>
                 <td>{{ user.email }}</td>
             </tr>
+            <tr>
+                <th>Avatar</th>
+                <td>
+                    <img class="round-thumb" src="{{ asset('uploads/avatars/' ~ user.avatar) }}"/>
+                </td>
+            </tr>
         </tbody>
     </table>
-    <a href="{{ path('dashboard_profile_edit') }}">edit</a>
+    <div>
+        <a class="button" href="{{ path('dashboard_profile_edit') }}">Edit my profile</a>
+    </div>
+
 {% endblock %}

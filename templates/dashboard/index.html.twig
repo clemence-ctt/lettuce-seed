@@ -6,8 +6,8 @@
 
 {% block body %}
     <h1>Welcome {{ user.username }}</h1>
-
-    <a href="{{ path('dashboard_profile') }}">Go to my profile</a> 
-    <br>
-    <a href="{{ path('dashboard_plants') }}">See my plants</a>
+    <div>
+        <a class="button button-mb" href="{{ path('dashboard_profile') }}">Go to my profile</a> 
+        <a class="button button-mt" href="{{ path('dashboard_plants') }}">See my plants</a>
+    </div>
 {% endblock %}

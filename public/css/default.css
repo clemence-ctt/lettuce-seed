@@ -33,12 +33,26 @@ h3 {
     font-size: 2rem;
 }
 
+/* BUTTON CUSTOMIZATION ================================================ */
+
 .return {
    display:flex ;
    justify-content: flex-end;
    margin-top: -5rem;
    margin-bottom: 3rem;
 }
+.return .button {
+    margin-left: var(--spacing-default);
+}
+
+.button-mb {
+    margin-bottom: var(--spacing-default);
+}
+
+.button-mt {
+    margin-top: var(--spacing-default);
+}
+
 
 /* THEME CUSTOMIZATION=================================================*/
 
