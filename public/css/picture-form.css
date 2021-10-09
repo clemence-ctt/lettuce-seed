@@ -94,3 +94,19 @@ form  #picture_plants .choice input {
     display: none;
 }
 
+
+
+form *[required]::before {
+    color:#a00;
+    content: '\f621';
+    display: inline-block;
+    font-family: 'Font Awesome\ 5 Free';
+    font-weight: bold;
+    margin-right: var(--spacing-default);
+    font-size: 1rem;
+
+}
+
+.required-info i {
+    color:#a00;
+}
