@@ -4,7 +4,7 @@
 
 {% block body %}
 
-    <h1>Plant index</h1>
+    <h1>My plants</h1>
 
     <div class="button-mb">
         <a class="button" href="{{ path('dashboard_plant_new') }}">Add a plant</a>
@@ -38,7 +38,7 @@
                     {# table datas : actions on plants #}
                     <td class="plant__actions">
                         <a class="button--small button bi bi-pencil-fill" href="{{ path('dashboard_plant_edit', {'id': plant.id}) }}"> Edit</a>
-                        <a class="button--small button" href="{{ path('dashboard_plant_show', {'id': plant.id}) }}">Infos</a>
+                        <a class="button--small button bi bi-eye" href="{{ path('dashboard_plant_show', {'id': plant.id}) }}"> Infos</a>
                     </td>
 
                     {# table datas : date, if there's one#}

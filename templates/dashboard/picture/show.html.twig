@@ -33,6 +33,13 @@
             </div>
             <p class="card-text">{{ picture.description }}</p>
 
+            <div class="card__plant-links">
+                Other plants in this picture : 
+                {% for plant in picture.plants %}
+                    <a class="" href="{{ path('dashboard_plant_pictures', {'plantId': plant.id}) }}">{{ plant.name }}</a>
+                {% endfor %}
+            </div>
+            
             <div style="text-align: right">
                 <a class="button" href="{{ path('dashboard_picture_edit', {'plantId' : selectedPlant.id, 'id': picture.id}) }}">Edit</a> 
                 {{ include('dashboard/_partials/_picture-delete-form.html.twig') }}

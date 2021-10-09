@@ -76,6 +76,10 @@ h3 {
 
 .return {
    display:flex ;
+   position: absolute;
+   right: var(--spacing-default);
+   top: 250px;
+
    justify-content: flex-end;
    margin-top: -5rem;
    margin-bottom: 3rem;
@@ -169,8 +173,6 @@ main.main-content {
     color: #fff !important;
 }
 
-/* =================================================*/
-
 
 /* =================================================*/
 .ftco-section.ftco-bread {
@@ -186,7 +188,7 @@ main.main-content {
     color: var(--color-lightest) !important;
 }
 
-/* =================================================*/
+/* BUTTONS  =================================================*/
 
 .button {
     border: var(--border-default);
@@ -204,24 +206,31 @@ main.main-content {
     appearance: button;
     -webkit-appearance: button;
     -moz-appearance: button;
-    
-
 }
 
 .button:hover {
     box-shadow: 3px 3px 3px var(--color-medium);
 }
 
-
-/* =================================================*/
-
 .cta {
     margin-top: var(--spacing-biggest);
     text-align: right;
 }
 
+.card__plant-links a {
+    color: var(--color-medium);
+    border: solid 1px var(--color-medium);
+    border-radius: var(--border-radius-small);
+    padding : 0 var(--spacing-default);
+}
 
-/* =================================================*/
+.card__plant-links a:hover {
+    /* color: var(--color-darkest); */
+    background-color: var(--color-highlight);
+    font-size: larger;
+}
+
+/* FORMS =================================================*/
 
 
 form:not(.delete) {
@@ -255,14 +264,10 @@ form .uploaded-image {
 }
 
 
-
-
-
 form label {
     font-weight: bold;
     margin-bottom: var(--spacing-smallest);
 }
-
 
 input, textarea {
     border: var(--border-default);
@@ -276,17 +281,12 @@ textarea {
     min-height: 100px;
 }
 
-/** Layout **/
-
-
 
 /** Generic styles **/
 
 .info {
     margin-bottom: var(--spacing-default);
 }
-
-
 
 .sf-form > div {
     margin-bottom: var(--gutter-large);
