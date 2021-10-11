@@ -26,6 +26,9 @@ Pictures of {{ selectedPlant.name }}
 
 <h1>Pictures of {{ selectedPlant.name }}</h1>
 
+<p class="component info">
+    {{ selectedPlant.description }}
+ </p>
 
 <div>
     <a class="button" href="{{ path('dashboard_picture_new', {'plantId' : selectedPlant.id}) }}">Add picture</a>
