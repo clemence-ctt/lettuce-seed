@@ -300,6 +300,7 @@ textarea {
     margin-bottom: var(--gutter-default);
 }
 
-
-
+.plant-info-links {
+    display: inline-block;
+}
 

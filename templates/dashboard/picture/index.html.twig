@@ -1,76 +1,67 @@
 {% extends 'default.html.twig' %}
 
 {% block title %}
-Pictures of {{ selectedPlant.name }}
+    Pictures of {{ selectedPlant.name }}
 {% endblock %}
 
 {% block flash %}
-{# read and display all flash messages #}
-{% for label, messages in app.flashes %}
-{% for message in messages %}
-<div class="alert alert-{{ label }}">
-    {{ message }}
-</div>
-{% endfor %}
-{% endfor %}
+    {# read and display all flash messages #}
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{ label }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
 {% endblock %}
 
 {% block body %}
-
-
-
-
-<div class="return">
-    <a class="button" href="{{ path('dashboard_plants') }}">See all my plants</a>
-</div>
-
-<h1>Pictures of {{ selectedPlant.name }}</h1>
-
-<p class="component info">
-    {{ selectedPlant.description }}
- </p>
-
-<div>
-    <a class="button" href="{{ path('dashboard_picture_new', {'plantId' : selectedPlant.id}) }}">Add picture</a>
-    <a class="button" href="{{ path('dashboard_plant_show', {'id': selectedPlant.id}) }}">See plant infos</a>
-    <a class="button" href="{{ path('dashboard_plant_edit', {'id': selectedPlant.id}) }}">Edit plant infos </a> 
-</div>
-
-
-
-
-
-<section class="ftco-section-3">
-    <div class="photograhy">
-        <div class="row">
-            {% for picture in pictures %}
-
-            <div class="col-md-4 ftco-animate">
-                <span href="{{ asset('uploads/pictures/' ~ picture.file ) }}"
-                    class="thumbnail photography-entry img  d-flex justify-content-start align-items-end"
-                    style="background-image: url({{ asset('uploads/pictures/' ~ picture.file ) }});">
-                    <div class="overlay"></div>
-                    <div class="text ml-4 mb-4">
-                        <h3>
-                            {{ picture.name }}
-                        </h3>
-                        <span class="tag">
-                            <div>
-                                <button class="button"
-                                    onclick="document.location='{{ path('dashboard_picture_show', {'plantId' : selectedPlant.id, 'id': picture.id}) }}'">Infos</button>
-                                <button class="button"
-                                    onclick="document.location='{{ path('dashboard_picture_edit', {'plantId' : selectedPlant.id, 'id': picture.id}) }}'">Edit</button>
-                                <button class="button"
-                                    onclick="document.location='{{ path('dashboard_plant_setcover', {'plantId' : selectedPlant.id, 'pictureId': picture.id}) }}'">Set
-                                    as cover</button>
-                            </div>
-                        </span>
-                    </div>
-                </span>
-            </div>
-            {% endfor %}
-        </div>
+    <div class="return">
+        <a class="button" href="{{ path('dashboard_plants') }}">See all my plants</a>
     </div>
-</section>
 
+    <h1>Pictures of {{ selectedPlant.name }}</h1>
+
+    <p class="component info">
+        {{ selectedPlant.description }}
+    </p>
+
+    <div>
+        <a class="button" href="{{ path('dashboard_picture_new', {'plantId' : selectedPlant.id}) }}">Add picture</a>
+        <a class="button" href="{{ path('dashboard_plant_show', {'id': selectedPlant.id}) }}">See plant infos</a>
+        <a class="button" href="{{ path('dashboard_plant_edit', {'id': selectedPlant.id}) }}">Edit plant infos </a> 
+    </div>
+
+    <section class="ftco-section-3">
+        <div class="photograhy">
+            <div class="row">
+                {% for picture in pictures %}
+
+                <div class="col-md-4 ftco-animate">
+                    <span href="{{ asset('uploads/pictures/' ~ picture.file ) }}"
+                        class="thumbnail photography-entry img  d-flex justify-content-start align-items-end"
+                        style="background-image: url({{ asset('uploads/pictures/' ~ picture.file ) }});">
+                        <div class="overlay"></div>
+                        <div class="text ml-4 mb-4">
+                            <h3>
+                                {{ picture.name }}
+                            </h3>
+                            <span class="tag">
+                                <div>
+                                    <button class="button"
+                                        onclick="document.location='{{ path('dashboard_picture_show', {'plantId' : selectedPlant.id, 'id': picture.id}) }}'">Infos</button>
+                                    <button class="button"
+                                        onclick="document.location='{{ path('dashboard_picture_edit', {'plantId' : selectedPlant.id, 'id': picture.id}) }}'">Edit</button>
+                                    <button class="button"
+                                        onclick="document.location='{{ path('dashboard_plant_setcover', {'plantId' : selectedPlant.id, 'pictureId': picture.id}) }}'">Set
+                                        as cover</button>
+                                </div>
+                            </span>
+                        </div>
+                    </span>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
 {% endblock %}

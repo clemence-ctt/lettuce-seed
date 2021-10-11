@@ -24,7 +24,7 @@
 
     <h1>Picture of {{selectedPlant.name}}</h1>
 
-    <div class="card">
+    <div class="card" style="max-width: 60rem;">
         <img class="card-img-top" src="{{ asset('uploads/pictures/' ~ picture.file ) }}" alt="Card image cap">
         <div class="card-body">
             <h5 class="card-title">{{ picture.name }}</h5>
@@ -34,7 +34,7 @@
             <p class="card-text">{{ picture.description }}</p>
 
             <div class="card__plant-links">
-                Other plants in this picture : 
+                Plants in this picture : 
                 {% for plant in picture.plants %}
                     <a class="" href="{{ path('dashboard_plant_pictures', {'plantId': plant.id}) }}">{{ plant.name }}</a>
                 {% endfor %}

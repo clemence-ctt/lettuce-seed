@@ -57,7 +57,7 @@ class Picture
      * @Assert\NotBlank(
      *      message = "You should upload a picture.")
      * @Assert\File(
-     *     maxSize = "15000k",
+     *     maxSize = "10000k",
      *     mimeTypes = {"image/png", "image/jpg", "image/jpeg"},
      *     mimeTypesMessage = "The mime type of the file is invalid ({{ type }}). Allowed mime types are {{ types }}"
      * )

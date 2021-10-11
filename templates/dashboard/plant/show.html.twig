@@ -28,12 +28,12 @@
         </tbody>
     </table>
     
-    <div >
+    <div class="plant-info-links" >
         <a class="button" href="{{ path('dashboard_plant_edit', {'id': plant.id}) }}">Edit infos </a> 
         <a class="button" href="{{ path('dashboard_plant_pictures', {'plantId': plant.id}) }}">See photos</a>
 
+        {{ include('dashboard/_partials/_plant-delete-form.html.twig') }}
     </div>
 
-    {{ include('dashboard/_partials/_plant-delete-form.html.twig') }}
 
     {% endblock %}

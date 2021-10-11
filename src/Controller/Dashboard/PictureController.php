@@ -3,10 +3,11 @@
 namespace App\Controller\Dashboard;
 
 use DateTime;
-use App\Controller\CoreController;
 use App\Entity\Picture;
 use App\Form\PictureType;
+use App\Controller\CoreController;
 use App\Repository\PlantRepository;
+use App\Repository\PictureRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\File\File;
@@ -21,13 +22,13 @@ class PictureController extends CoreController
     /**
      * @Route("/", name="dashboard_plant_pictures", methods={"GET"})
      */
-    public function index(int $plantId, PlantRepository $plantRepository): Response
+    public function index(int $plantId, PlantRepository $plantRepository, PictureRepository $pictureRepository): Response
     {
         $currentPlant = $plantRepository->find($plantId);
         $pictures = $currentPlant->getPictures();
 
-    
-        // return new Response('hello');
+        $pictures= $pictureRepository->orderPicsByDateSQL($plantId);
+        //JK dd($pictures);
 
         return $this->render('dashboard/picture/index.html.twig', [
             'pictures' => $pictures,
@@ -155,12 +156,11 @@ class PictureController extends CoreController
         // DOC UPLOAD https://symfony.com/doc/current/controller/upload_file.html
 
         $pictureFile = $form->get('file')->getData();
-        // On génère un nom de fichier unique en devinant l'extension MIME avant de sauvegarder
+        // generating unique name and guessing mime extension to add it
         $fileName = base64_encode(uniqid()).'.'.$pictureFile->guessExtension();
-
-        // Déplacement du fichier dans un répertoire de notre projet
+        // moving the file in the right directory
         $pictureFile->move($this->getParameter('pictures_directory'), $fileName);
-        // Met à jour le nom de l'image finale dans notre Post
+        // update name
         $picture->setFile($fileName);
         // flush and flash
         $this->persist($picture);
