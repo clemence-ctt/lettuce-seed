@@ -20,6 +20,21 @@ class PictureRepository extends ServiceEntityRepository
     }   
 
     // for picture index page
+    // NOTICE ORDER PICS Use the sql one
+    public function orderPicsByDateSQL(int $plantId) 
+    {  
+        $conn = $this->getEntityManager()
+            ->getConnection
+            ();
+        $sql = "SELECT * FROM picture 
+            INNER JOIN picture_plant ON picture.id = picture_plant.picture_id 
+            WHERE plant_id = :id
+            ORDER BY date DESC";
+        $query = $conn->prepare($sql);
+        $query->execute(array(':id' => $plantId));
+        return $query->fetchAll();
+    }
+    
     public function orderPicsByDate(int $plantId)  
     {
         $qb = $this->createQueryBuilder('p');
@@ -35,19 +50,6 @@ class PictureRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    public function orderPicsByDateSQL(int $plantId) {  
- 
-        $conn = $this->getEntityManager()
-            ->getConnection();
-        $sql = "SELECT * FROM picture 
-            INNER JOIN picture_plant ON picture.id = picture_plant.picture_id 
-            WHERE plant_id = :id
-            ORDER BY date DESC";
-        $query = $conn->prepare($sql);
-        $query->execute(array(':id' => $plantId));
-        return $query->fetchAll();
-    }
-   
     // for the index page
     public function findLastUploadedPictures(int $limit)
     {
