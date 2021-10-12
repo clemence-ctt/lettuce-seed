@@ -1,4 +1,9 @@
-{# not sure if it's called somewhere... #}
+<!-- BUG (IT WORKS) HEADER TEMPLATE check this out (currentPlant problem)-->
+
+<!-- NORMAL BEHAVIOUR : IFs don't work cause currentPlant has been changed for selectedPlant in controllers-->
+
+<!-- BUT it's probably the only place where it hasn't been changed -->
+<!-- could it be the root of all evil ???????????? check also code around that tpl -->
 
 {% if currentPlant is defined %}
 <section class="ftco-section ftco-bread" style="background-image: url({{ asset('uploads/avatars/' ~ currentPlant.cover) }})">
@@ -15,15 +20,13 @@
                 <h1 class="bread">{{ currentPlant.name }}</h1>
             {% else %} 
                 <h1 class="bread">Lettuce seed</h1>
-            {% endif %}
-            
-            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            {% endif %}            
 
-                <p class="breadcrumbs">
-                    Tracking plants with ease. 
-                </p>
-            {% endif %}
-                                            
+            <!-- NOTICE BREADCRUMBS check auth if "really" adding breadcrumbs here -->
+            <!-- for now, keeping class for style purposes only -->
+            <p class="breadcrumbs">
+                Tracking plants with ease. 
+            </p>
 
         </div>
     </div>

@@ -11,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class CoreController extends AbstractController
 {
 
+//==PICTURE RELATED==//
     public function deleteFile($file, $log = 'activity.log')
     {
         //DOC REMOVING FILES from directory  https://symfony.com/doc/current/components/filesystem.html
@@ -24,19 +25,18 @@ class CoreController extends AbstractController
     }
 
 
-
+//==SYMFONY MANAGER & REPO==//
     public function em()
     {
         return $this->getDoctrine()->getManager();
     }
-
 
     public function getRepository($name)
     {
         return $this->getDoctrine()->getRepository($name);
     }
 
-
+//==GET BY ID==//
     protected function getPlantById($plantId)
     {
         return $this->getPlantRepository()->find($plantId);
@@ -52,6 +52,7 @@ class CoreController extends AbstractController
         return $this->getUserRepository()->find($userId);
     }
 
+//==GET REPO==//
     protected function getPlantRepository()
     {
         return $this->getRepository(Plant::class);
@@ -67,6 +68,7 @@ class CoreController extends AbstractController
         return $this->getRepository(User::class);
     }
 
+//==ACTIONS==//
     protected function persist($entity)
     {
         $this->em()->persist($entity);
@@ -85,7 +87,7 @@ class CoreController extends AbstractController
         $this->flush();
     }
 
-
+//==FLASH==//
     protected function addSuccessFlash($name, $status) 
     {
         return $this->addFlash(

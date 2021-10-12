@@ -31,12 +31,15 @@ class PictureType extends AbstractType
                 'expanded' => true,
                 'required' => true,
             ]) 
+
+            // launching this part when datas are set in the form
             ->addEventListener(FormEvents::PRE_SET_DATA, function(FormEvent $event) {
-                // On récupère l'entité User
+                // getting User entity
                 $picture = $event->getData();
-                // On récupère le builder pour continuer le form
+                // getting builder to carry on the form building :clap:
                 $builder = $event->getForm();         
             
+                // BUG (IT WORKS THOUGH) in FORM : WHY the 'mapped' field in one case and 'data_class' on the other ? 
                 if ($picture->getId() !== null) {
                     $builder
                         ->add('file', FileType::class, [
@@ -71,7 +74,7 @@ class PictureType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Picture::class,
-            //REMINDER FORMS : novalidate (pour ne pas avoir les messages du navig)
+            //REMINDER FORMS : novalidate 
             'attr' => [
                 'novalidate' => 'novalidate'
             ]

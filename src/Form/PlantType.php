@@ -20,7 +20,7 @@ class PlantType extends AbstractType
                 'format' => 'yyyy-MM-dd',
                 'label' => "Planting date : "
             ])
-        // REMINDER FORMS : add('user') in da controller (otherwise its a security breach)
+        // REMINDER FORMS : set() 'user' in da controller (otherwise its a security breach)
         ;
     }
 

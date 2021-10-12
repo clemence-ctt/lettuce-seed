@@ -86,7 +86,7 @@ class PlantController extends CoreController
             'pictureId' => $pictureId,
         ], Response::HTTP_SEE_OTHER);
 
-        /*
+        /* JK
         return $this->json([
             'message' => 'success'
         ]);
@@ -117,7 +117,7 @@ class PlantController extends CoreController
             //flush and flash
             $this->persist($plant);
             $this->addSuccessFlash('plant', 'modified');
-            //redirection
+            //redirect
             $id = $plant->getId();
             return $this->redirectToRoute('dashboard_plant_show', ['id' => $id], Response::HTTP_SEE_OTHER);
         
