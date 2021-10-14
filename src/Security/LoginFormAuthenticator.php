@@ -52,7 +52,7 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
             return new RedirectResponse($targetPath);
         }
 
-        // REMINDER LOGIN redirection after successfull login
+        // STEP LOGIN redirection after successfull login
         return new RedirectResponse($this->urlGenerator->generate('dashboard_index'));
     }
 

@@ -11,20 +11,6 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class UserController extends CoreController
 {
-    /**
-     * @Route("/dafuqisthisroute", name="users_all", methods={"GET"})
-     */
-    // public function index(): Response
-    // {
-    //     $user = $this->getUser();
-
-    //     $userPlants = array_reverse($user->getPlants()->toArray());
-        
-    //     return $this->render('dashboard/plant/index.html.twig' , [
-    //         'plants' => $userPlants,
-    //     ]);
-    // }
-
      /**
      * @Route("/", name="members_index", methods={"GET"})
      */
@@ -43,7 +29,7 @@ class UserController extends CoreController
         dd($user);
     }
 
-    //https://localhost/lettuce-seed/public/member/14/plants
+    //JK see verif https://localhost/lettuce-seed/public/member/14/plants 
     /**
      * @Route("/{userId}/plants", name="user_plants", methods={"GET"})
      */
@@ -58,7 +44,7 @@ class UserController extends CoreController
         exit;
     }
 
-    //https://localhost/lettuce-seed/public/member/14/plant/482/photos
+    //JK see verif https://localhost/lettuce-seed/public/member/14/plant/482/photos
     /**
      * @Route("/{userId}/plant/{plantId}/photos", name="user_plant_pictures", methods={"GET"})
      */

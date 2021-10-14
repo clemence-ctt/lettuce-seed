@@ -22,6 +22,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         parent::__construct($registry, User::class);
     }
 
+    // LATER PWD automatic rehash - useable ?
     /**
      * Used to upgrade (rehash) the user's password automatically over time.
      */

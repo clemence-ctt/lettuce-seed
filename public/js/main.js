@@ -1,9 +1,8 @@
 console.log('%cmain.js loaded', 'color: #f00; font-size: 2rem');
 
-
+// Picture form checkboxes modifications
 function createPictureForm() {
     //JK console.log('%c' + 'FORM', 'color: #f00; font-size: 1rem;'); 
-
     // TIPS JS GLOBAL - micro regex ; g=global to carry on after the first match ; 
     // encapsulating the checkbox & its label in a "choice" div to apply CSS
     let list = document.querySelector('#picture_plants');
@@ -15,6 +14,8 @@ function createPictureForm() {
 
     console.log("Initliaze list");
 
+    // selecting labels "instead" of checkboxes (they're hidden)
+    // hence the "manual" modification of class 'checked'
     document.querySelectorAll('.choice').forEach((element, index) => {
         const checkbox = element.querySelector('input');
         const label = element.querySelector('label');
@@ -22,7 +23,6 @@ function createPictureForm() {
         if (checkbox.checked) {
             label.classList.add('checked');
         }
-
 
         element.addEventListener('click', (event) => {
 
@@ -43,16 +43,14 @@ function createPictureForm() {
                 checkbox.checked = true;
                 label.classList.add('checked');
             }
-
         });
     });
 
 
 }
-
-
+// STEP DATATABLE initializing datatable when page content is loaded 
 document.addEventListener('DOMContentLoaded', function () {
-    // STEP DATATABLE initializing datatable on element
+    
     $(document).ready(function () {
         const onPlantsList = document.querySelector('#plants-list-container');
         if (onPlantsList) {
@@ -67,7 +65,6 @@ document.addEventListener('DOMContentLoaded', function () {
         if (createPictureFormElement) {
             createPictureForm();
         }
-
     });
 })
 

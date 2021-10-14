@@ -78,7 +78,7 @@ class DashboardController extends CoreController
     public function deleteAvatar(Request $request): Response
     {
         $user = $this->getUser();
-// TODO authorisation pour le dossier uploads/ava
+        // TODO authorisation pour le dossier uploads/ava
         $filePath = $this->getParameter('avatars_directory').'/'.$user->getAvatar();
         if (is_file($filePath)) {
             $this->deleteFile($filePath);
@@ -97,7 +97,7 @@ class DashboardController extends CoreController
     protected function updateInfos ($form, $encoder, $user, $oldFile) {
         $user->setUpdatedAt();
         $this->updateAvatar($form, 'avatar', $user, $oldFile, 'avatars_directory');
-        // Le nouveau password transmis non mappé sur l'entité (voir UserType)
+        // new password, not mapped on the entity -see UserType
         $newPassword = $form->get('password')->getData();
 
         if (!empty($newPassword)) {

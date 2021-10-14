@@ -20,27 +20,17 @@ class AppFixtures extends Fixture
 
     public function __construct(UserPasswordHasherInterface $encoder)
     {
-
-        // var_dump($encoder);
-
-        /*
-        $reflector = new ReflectionClass($encoder);
-        print_r(
-            $reflector->getMethods()
-        );
-        */
-
         $this->encoder = $encoder;
     }
     
     public function load(ObjectManager $em)
     {
 
-        // test ajout d'un User
+        // adding User
         $user = new User();
         $user->setEmail('admin@admin.com');
         $user->setPassword($this->encoder->hashPassword($user, 'admin'));
-        // admin : $2y$13$93tWCzD0lD4MWn0Vu.zU4OOElsskLh3NzvP1bPT9QgNgaG4q90st2
+        // hash pwd admin: $2y$13$93tWCzD0lD4MWn0Vu.zU4OOElsskLh3NzvP1bPT9QgNgaG4q90st2
         $user->setRoles(['ROLE_ADMIN']);
         $user->setUsername('caca');
         $em->persist($user);
@@ -111,18 +101,14 @@ class AppFixtures extends Fixture
             'Wasabi',
         ];
 
-
+        // adding plants and images
         foreach($vegetables as $vegetable) {
+            // creating and returning plant
             $plant = $this->createPlant($vegetable, $user, $em);
-
-            print_r($plant->getId());
-            echo "\n";
-
+            // creating 1 image for each plant created
             $this->createImage($plant, $em);
         }
-
         $em->flush();
-       
         return;
     }
 
@@ -142,9 +128,8 @@ class AppFixtures extends Fixture
 
         $picture->addPlant($plant);
 
-        // On persist
         $em->persist($picture);
-        // $em->flush();
+        // no $em->flush(); cause it's in the prev method
     }
 
     protected function createPlant($plantName, $user, $em)
@@ -155,12 +140,7 @@ class AppFixtures extends Fixture
         $plant->setUser($user);
         $plant->setCreatedAt($now);
         $em->persist($plant);
-        // $em->flush();
+        // no $em->flush(); cause it's in the prev method
         return $plant;
     }
-
-// fixtures populator ↓
-// https://github.com/O-clock-Fantasy/Symfo-Eval-FAQ-O-Clock-complet/blob/master/src/DataFixtures/AppFixtures.php
-// $populator = new Faker\ORM\Doctrine\Populator($generator, $manager);
-// $populator->execute()
 };  

@@ -22,13 +22,11 @@ class UserType extends AbstractType
 
             // REMINDER FORMS : pwd & event listener PRE_SET_DATA 
             ->addEventListener(FormEvents::PRE_SET_DATA, function(FormEvent $event) {
-                // On récupère l'entité User
                 $user = $event->getData();
-                // On récupère le builder pour continuer le form
                 $builder = $event->getForm();
     
-                // Si notre user a un id, il existe en base
-                // S'il est existant en database, on applique le mapped=false.
+                // if the user has an id, he's in the database
+                // if he exists, we need to unmap the field so it gets processed in da controller
                 if ($user->getId() !== null) {
                     $builder
                         ->add('avatar', FileType::class, [
@@ -38,7 +36,7 @@ class UserType extends AbstractType
                             // 'data_class' => null,
                             'mapped' => false
                         ])
-                        // LATER FORMS MDP mettre à la fin pour vérif même au changement d'email/pseudo
+            
                         ->add('oldPassword', PasswordType::class, [
                             'empty_data' => '',
                             'mapped' => false,
@@ -57,7 +55,7 @@ class UserType extends AbstractType
                                 'label' => 'Repeat Password',
                                 'attr' => ['placeholder' => 'Leave empty if unmodified.']
                             ],
-                            //NOTICE USERTYPE "the value is not valid" si les passwords don't match // corrigé mais ca vient d'ou ?! (vu que ça override les messages d'erreur par def du repeated ET du password type !?)
+                            //NOTICE USERTYPE "the value is not valid" si les passwords don't match // WHERE DOES IT COME FROM???? (overrides default error messages of repeated AND password type !?)
                             'invalid_message' => "The passwords don't match."
                         ]);
                 } else {

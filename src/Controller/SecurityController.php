@@ -15,7 +15,7 @@ class SecurityController extends AbstractController
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        // this code is just for testing purposes
+        // this code is just for testing purposes 
         // if ($this->getUser()) {
         //     return $this->redirectToRoute('target_path');
         // }
@@ -33,7 +33,7 @@ class SecurityController extends AbstractController
      */
     public function logout()
     {
-        // NOTICE LOGOUT pointless to implement this method ; following code is useless
+        // NOTICE LOGOUT pointless to implement this method ; the following code is useless
         // throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
 }

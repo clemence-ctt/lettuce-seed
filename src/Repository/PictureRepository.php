@@ -21,6 +21,7 @@ class PictureRepository extends ServiceEntityRepository
 
     // for picture index page
     // NOTICE ORDER PICS Use the sql one
+    
     public function orderPicsByDateSQL(int $plantId) 
     {  
         $conn = $this->getEntityManager()
