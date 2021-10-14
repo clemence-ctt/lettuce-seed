@@ -28,11 +28,12 @@
         </tbody>
     </table>
     
-    <br>
-    <a href="{{ path('dashboard_plants') }}">back to plant list</a>
-    || 
-    <a href="{{ path('dashboard_plant_edit', {'id': plant.id}) }}">edit infos </a> 
-    <br><br>
-    {{ include('dashboard/_partials/_plant-delete-form.html.twig') }}
+    <div class="plant-info-links" >
+        <a class="button" href="{{ path('dashboard_plant_edit', {'id': plant.id}) }}">Edit infos </a> 
+        <a class="button" href="{{ path('dashboard_plant_pictures', {'plantId': plant.id}) }}">See photos</a>
+
+        {{ include('dashboard/_partials/_plant-delete-form.html.twig') }}
+    </div>
+
 
     {% endblock %}

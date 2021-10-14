@@ -18,12 +18,6 @@
 {% block body %}
     <h1>Edit User</h1>
 
-    {{ include('/dashboard/_partials/_profile-edit-form.html.twig', {'button_label': 'Update'}) }}
-
-    {% if oldAvatarFile is empty == false %}
-    <a href="{{ path('dashboard_avatar_delete') }}">Remove avatar</a>
-    {% endif %}
-
-    <a href="{{ path('dashboard_profile') }}">back to profile</a>
+    {{ include('/dashboard/_partials/_profile-edit-form.html.twig', {'button_label': 'UPDATE MY PROFILE'}) }}
 
 {% endblock %}

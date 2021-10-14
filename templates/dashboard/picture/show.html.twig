@@ -11,56 +11,41 @@
     {% endfor %}
 {% endblock %}
 
-{% block title %}Picture of {{currentPlant.name}}{% endblock %}
+
+{% block title %}Picture of {{selectedPlant.name}}{% endblock %}
+
 
 {% block body %}
     {% set route_parameters = app.request.attributes.get('_route_params') %}    
-    
-    <h1>Picture of {{currentPlant.name}}</h1>
-    {# mettre directement la photo, ou le nom s'il y en a un ?  #}
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Name</th>
-                <td>{{ picture.name }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ picture.description }}</td>
-            </tr>
-            <tr>
-                <th>Date</th>
-                <td>{{ picture.date ? picture.date|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>File</th>
-                <td><img src="{{ asset('uploads/pictures/' ~ picture.file ) }}"/></td>
-            </tr>
-            <tr>
-                <th>Like_counter</th>
-                <td>{{ picture.likeCounter }}</td>
-            </tr>
+    <div class="return">
+        <a class="button" href="{{ path('dashboard_plant_pictures', {'plantId' : selectedPlant.id}) }}">Back to the gallery</a>
+    </div>
+
+    <h1>Picture of {{selectedPlant.name}}</h1>
+
+    <div class="card" style="max-width: 60rem;">
+        <img class="card-img-top" src="{{ asset('uploads/pictures/' ~ picture.file ) }}" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title">{{ picture.name }}</h5>
+            <div style="text-align: left;">
+                {{ picture.date ? picture.date|date('Y-m-d') : '' }}
+            </div>
+            <p class="card-text">{{ picture.description }}</p>
+
+            <div class="card__plant-links">
+                Plants in this picture : 
+                {% for plant in picture.plants %}
+                    <a class="" href="{{ path('dashboard_plant_pictures', {'plantId': plant.id}) }}">{{ plant.name }}</a>
+                {% endfor %}
+            </div>
             
-            <tr>
-                {#LATER VIEW PICTURE afficher uniquement quand il y a plus d'une plante sur la photo :  #}
-                <th>Other plants in this picture</th>
-                <td>
-                    {% for plant in picture.plants %}
-                        {% if (plant.id != currentPlant.id) %}
-                            <a href="{{ path('dashboard_plant_pictures', {'plantId' : plant.id}) }}">{{ plant.name }}</a>
-                        {% endif %}
-                    {% endfor %}
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    
-    <br>
-    <a class="button" href="{{ path('dashboard_plant_pictures', {'plantId' : currentPlant.id}) }}">back to {{currentPlant.name}} photos</a>
-    
-    <a class="button" href="{{ path('dashboard_picture_edit', {'plantId' : currentPlant.id, 'id': picture.id}) }}">edit infos</a>
- 
-    {{ include('dashboard/_partials/_picture-delete-form.html.twig') }}
+            <div style="text-align: right">
+                <a class="button" href="{{ path('dashboard_picture_edit', {'plantId' : selectedPlant.id, 'id': picture.id}) }}">Edit</a> 
+                {{ include('dashboard/_partials/_picture-delete-form.html.twig') }}
+                <a class="button" href="{{ path('dashboard_picture_new', {'plantId' : selectedPlant.id}) }}">Add another picture</a>
+            </div>
+        </div>
+    </div>
 
 {% endblock %}

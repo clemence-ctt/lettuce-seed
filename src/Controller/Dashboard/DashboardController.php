@@ -21,10 +21,7 @@ class DashboardController extends CoreController
      * @Route("/", name="dashboard_index", methods={"GET"})
      */
     public function index(): Response
-    {
-        // REMINDER SECURITY deny access if not logged
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
-        
+    {        
         return $this->render('dashboard/index.html.twig', [
             'user' => $this->getUser(),
         ]);
@@ -81,7 +78,7 @@ class DashboardController extends CoreController
     public function deleteAvatar(Request $request): Response
     {
         $user = $this->getUser();
-
+// TODO authorisation pour le dossier uploads/ava
         $filePath = $this->getParameter('avatars_directory').'/'.$user->getAvatar();
         if (is_file($filePath)) {
             $this->deleteFile($filePath);

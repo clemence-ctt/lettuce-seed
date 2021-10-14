@@ -3,7 +3,6 @@
 !!! todo interactive routes
 !!! danger delete routes
 
-<!-- TODO ROUTES A MAJ -->
 ## Public
 
 !!! attention home 

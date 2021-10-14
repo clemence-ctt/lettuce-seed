@@ -1,5 +1,9 @@
-<div class="sf-form">
-{{ form_start(form) }}
+<div>
+    {{ form_start(form, {
+        'attr': {
+            'class': 'sf-form'
+        }
+    }) }}
     {{ form_row(form.name) }}
     {{ form_row(form.description) }}
     {{ form_row(form.date) }}
@@ -13,4 +17,6 @@
     <button class="button">{{ button_label|default('Update') }}</button>
    
 {{ form_end(form) }}
+
+<div class="required-info"><i class="fas fa-star-of-life"></i> Required fields</div>
 </div>

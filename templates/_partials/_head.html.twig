@@ -4,15 +4,15 @@
    and uncomment the following Encore helpers to start using Symfony UX #}
 {% block stylesheets %}
     {#{{ encore_entry_link_tags('app') }}#}
-
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- THEME assets importation -->
-
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Herr+Von+Muellerhoff" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" />
 
     <link rel="stylesheet" href="{{ asset('theme/css/open-iconic-bootstrap.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('theme/css/animate.css') }}" />
@@ -27,36 +27,18 @@
     <link rel="stylesheet" href="{{ asset('theme/css/icomoon.css') }}" />
     <link rel="stylesheet" href="{{ asset('theme/css/style.css') }}" />
 
-
     <!-- TIPS DATATABLE jquery integration -->
     <link rel="stylesheet" href="//cdn.datatables.net/1.11.0/css/jquery.dataTables.min.css"/> 
 
-
+    {# Fontawesome #}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/> 
     
-    <link rel="stylesheet" href="{{ asset('css/_variables.css') }}"/> 
-    <link rel="stylesheet" href="{{ asset('css/default.css') }}"/> 
-
-    <!--
+    {# CSS custom #}
+    <link rel="stylesheet" href="{{ asset('css/themes/_default.css') }}"/>
     <link rel="stylesheet" href="{{ asset('css/_components.css') }}"/> 
+
+    <link rel="stylesheet" href="{{ asset('css/default.css') }}"/> 
     <link rel="stylesheet" href="{{ asset('css/entities-list.css') }}"/>
-    //-->
-
-    
-
-{% endblock %}
-
-{% block javascripts %}
-    {#{{ encore_entry_script_tags('app') }}#}
-
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-
-    <!-- TIPS DATATABLE jquery integration -->
-    <script src="//cdn.datatables.net/1.11.0/js/jquery.dataTables.min.js"></script>
-
-    <script  src="{{ asset('js/main.js') }}"></script>
-
-
-
+    <link rel="stylesheet" href="{{ asset('css/picture-form.css') }}"/> 
 
 {% endblock %}

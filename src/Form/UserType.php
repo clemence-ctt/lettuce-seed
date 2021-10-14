@@ -20,7 +20,7 @@ class UserType extends AbstractType
             ->add('email')
             ->add('username')
 
-            // REMINDER FORMS : mdp et event listener PRE_SET_DATA 
+            // REMINDER FORMS : pwd & event listener PRE_SET_DATA 
             ->addEventListener(FormEvents::PRE_SET_DATA, function(FormEvent $event) {
                 // On récupère l'entité User
                 $user = $event->getData();

@@ -1,4 +1,4 @@
-
+{# not sure if it's called somewhere... #}
 
 {% if currentPlant is defined %}
 <section class="ftco-section ftco-bread" style="background-image: url({{ asset('uploads/avatars/' ~ currentPlant.cover) }})">
@@ -20,8 +20,7 @@
             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
 
                 <p class="breadcrumbs">
-                    <span class="mr-2"><a href="{{ path('dashboard_profile') }}">Go to my profile</a></span>
-                    <span><a href="{{ path('dashboard_plants') }}">See my plants</a></span>
+                    Tracking plants with ease. 
                 </p>
             {% endif %}
                                             
