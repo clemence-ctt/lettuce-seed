@@ -2,19 +2,32 @@
 
 namespace App\Form;
 
+use App\Entity\Plant;
 use App\Entity\Picture;
+use App\Repository\PlantRepository;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class PictureType extends AbstractType
 {
+    private $entityManager;
+    private $tokenStorage;
+
+    public function __construct(EntityManagerInterface $entityManager, TokenStorageInterface $tokenStorage)
+    {
+        $this->entityManager = $entityManager;
+        $this->tokenStorage = $tokenStorage;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -24,7 +37,24 @@ class PictureType extends AbstractType
                 'widget' => 'single_text',
                 'format' => 'yyyy-MM-dd',
             ])         
-            ->add('plants', null, [
+            ->add('plants', EntityType::class, [
+                'class' => Plant::class,
+                'query_builder' => function (PlantRepository $pr) {
+                    // TIPS FORM get user
+                    $user = $this->tokenStorage->getToken()->getUser();
+
+                    return $pr->createQueryBuilder('plant')
+                    ->setParameter('userId', $user->getId())
+                    ->where('plant.user = :userId')
+                    ->orderBy('plant.name', 'ASC');
+
+                    /* TIPS research
+                    return $pr->createQueryBuilder('plant')
+                    ->setParameter('name', 'a%')
+                    ->where('plant.name LIKE :name')
+                    ->orderBy('plant.name', 'ASC');
+                    */
+                },
                 'label' => 'Which plant is it ?',
                 'choice_label' => 'name',
                 'multiple' => true,
@@ -32,7 +62,13 @@ class PictureType extends AbstractType
                 'required' => true,
             ]) 
             ->addEventListener(FormEvents::PRE_SET_DATA, function(FormEvent $event) {
-                // On récupère l'entité User
+                // dd($event->getData());
+                // dd($event->getData()->getPlants());
+                // $user = $this->getUser();
+                // $userPlants = $user->getPlants();
+            })
+            ->addEventListener(FormEvents::PRE_SET_DATA, function(FormEvent $event) {
+                // On récupère l'entité 
                 $picture = $event->getData();
                 // On récupère le builder pour continuer le form
                 $builder = $event->getForm();         
