@@ -5,6 +5,7 @@ security:
         App\Entity\User:
             algorithm: auto
 
+    # STEP LOGIN .yaml
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
         # used to reload user from session & other features (e.g. switch_user)
@@ -23,7 +24,18 @@ security:
             logout:
                 path: security_logout
                 # where to redirect after logout
-                target: home
+                target: home            
+            
+            # DOC LIMITING LOGIN ATTEMPTS https://symfony.com/doc/current/security.html#limiting-login-attempts
+            login_throttling:
+                max_attempts: 5
+                interval: '15 minutes'
+
+            # # DOC REMEMBER ME https://symfony.com/doc/current/security/remember_me.html
+            # remember_me:
+            #     secret:   '%kernel.secret%'
+            #     lifetime: 604800 # 1 week in seconds
+            #     secure: true
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
@@ -31,15 +43,15 @@ security:
             # https://symfony.com/doc/current/security/impersonating_user.html
             # switch_user: true
 
-            # LATER login attempts https://symfony.com/doc/current/security.html#limiting-login-attempts
+
 
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/me/, roles: ROLE_USER }
         # LATER path authorizations/ access control
+        # - { path: ^/admin, roles: ROLE_ADMIN }
 
     # role_hierarchy:
     #     ROLE_ADMIN: ROLE_USER
-    # LATER role hierarchy , vérif si c'est utile        
+    # LATER role hierarchy 

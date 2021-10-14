@@ -1,4 +1,15 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+    {{ form_row(form.email) }}
+    {{ form_row(form.username) }}
+    {{ form_row(form.password) }} 
+    {{ form_row(form.oldPassword) }}  
+    {{ form_row(form.avatar) }}
+        {% if oldAvatarFile is empty == false %}
+            <div class="user-avatar">
+                <a class="remove-avatar" href="{{ path('dashboard_avatar_delete') }}"> <i class="far fa-times-circle fa-2x"></i> <span> Remove avatar</span></a>
+                <div class="uploaded-image round-thumb" style="background-image: url({{ asset('uploads/avatars/' ~ oldAvatarFile) }}")></div>
+            </div>
+        {% endif %}     
+    <button class="button">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}
+<div class="required-info"><i class="fas fa-star-of-life"></i> Required fields</div>

@@ -1,0 +1,95 @@
+{% extends 'default.html.twig' %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block body %}
+
+
+
+<section class="blabla">    
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <h2>Hello {{ user.username }} !</h2>
+        <div>
+            What does your garden look like today ? 
+            Fancy takin' us for a ride ?
+        </div>
+        <div class="cta"></div>
+    {% else %}
+        <h2>What is it ?</h2>
+        <div>
+            Ever dreamt of a nice board to keep your garden diary tidy and see all your plants in a glance ?
+            This place is made for you ! Come and join a friendly community of organised gardeners :)
+            Take pictures, keep notes of everything — growth, blossoming, disease, weather... — and share your gallery with your friends !
+        </div>
+
+        <div class="cta">
+            <a href="{{ path('member_signup') }}" class="button">Sign up</a>
+        </div>
+    {% endif %}
+</section>
+
+
+<hr/>
+
+{# LAST PICTURES #}
+<section class="ftco-section instagram">
+    <div class="container">
+        <div class="row justify-content-center mb-2 pb-3">
+            <div class="col-md-7 heading-section heading-section-2 text-center ftco-animate fadeInUp ftco-animated">
+                <h2 class="mb-4">Our last posted pictures</h2>
+            </div>
+        </div>
+        <div class="row no-gutters">
+
+            {% for picture in  lastCreatedPictures %}  
+                <div class="col-sm-12 col-md ftco-animate fadeInUp ftco-animated">
+                    <a href="#" class="insta-img thumbnail"
+                        style="background-image: url({{ asset('uploads/pictures/' ~ picture.file) }});">
+                        <div class="icon d-flex justify-content-center">
+                            <i class="align-self-center fas fa-seedling fa-3x"></i>
+                        </div>
+                    </a>
+                </div>
+            {% endfor %}
+
+        </div>
+    </div>
+</section>
+
+<hr/>
+
+{# LAST USERS #}
+<section class="ftco-section instagram">
+    <div class="container">
+        <div class="row justify-content-center mb-2 pb-3">
+            <div class="col-md-7 heading-section heading-section-2 text-center ftco-animate fadeInUp ftco-animated">
+                <h2 class="mb-4">Our last registered users</h2>
+            </div>
+        </div>
+        <div class="row no-gutters">
+            {% for user in lastCreatedUsers %}
+            <div class="col-sm-12 col-md ftco-animate fadeInUp ftco-animated">
+                <a href="{{ path('user_plants', {'userId': user.id}) }}" class="insta-img"
+                    style="background-image: url(
+
+                        {% if user.avatar is empty %}
+                            {{ asset('default-assets/avatar.png') }}
+                        {% else %}
+                            {{ asset('uploads/avatars/' ~ user.avatar) }}
+                        {% endif %}
+                    
+                    ); background-size:contain ">
+
+                    <div class="icon d-flex justify-content-center">
+                        <span class="align-self-center">{{ user.username }}</span>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% endblock %}

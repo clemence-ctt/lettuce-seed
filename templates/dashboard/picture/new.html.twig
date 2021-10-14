@@ -1,0 +1,32 @@
+{% extends 'default.html.twig' %}
+
+{% set route_parameters = app.request.attributes.get('_route_params') %}
+
+{% block flash %}
+    {# read and display all flash messages #}
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{ label }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+{% endblock %}
+
+{% block title %}New Picture{% endblock %}
+
+{% block body %}    
+
+    <div class='return'>
+        <a class='button' href="{{ path('dashboard_plant_pictures', {'plantId' : route_parameters.plantId}) }}">Back to plant photos</a>
+    </div>
+
+    <h1>Create new Picture</h1>
+
+    <p class="component info">
+       Add a new picture and tell us about it ! 
+    </p>
+
+    {{ include('dashboard/_partials/_picture-new-form.html.twig', {'button_label': 'SEND THIS PICTURE'}) }}
+
+{% endblock %}

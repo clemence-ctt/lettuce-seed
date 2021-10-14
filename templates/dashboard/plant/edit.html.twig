@@ -1,0 +1,30 @@
+{% extends 'default.html.twig' %}
+
+{% block flash %}
+    {# read and display all flash messages #}
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{ label }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+{% endblock %}
+
+{% block title %}Edit {{plant.name}}{% endblock %}
+
+{% block body %}
+    
+
+    <div class="return">
+        <a class="button" href="{{ path('dashboard_plant_show', {'id': plant.id}) }}">Plant infos</a>
+    </div>
+
+    <h1>Edit {{plant.name}}</h1>
+
+    {{ include('dashboard/_partials/_plant-edit-form.html.twig', {'button_label': 'UPDATE MY PLANT'}) }}
+
+  
+    {{ include('dashboard/_partials/_plant-delete-form.html.twig') }}
+
+{% endblock %}

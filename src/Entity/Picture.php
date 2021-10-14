@@ -8,6 +8,7 @@ use App\Repository\PictureRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=PictureRepository::class)
@@ -42,19 +43,26 @@ class Picture
     private $description;
 
     /**
-     * @ORM\Column(type="date", nullable=true)
+     * @ORM\Column(type="date")
+     * @Assert\LessThanOrEqual("today",
+     *      message = "Unless you're Marty McFly, this photo probably hasn't been taken in the future.")
+     * @Assert\NotBlank(
+     *      message = "You must enter a date.")
      */
     private $date;
 
+    //DOC MIMETYPES https://developer.mozilla.org/fr/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(
+     *      message = "You should upload a picture.")
+     * @Assert\File(
+     *     maxSize = "10000k",
+     *     mimeTypes = {"image/png", "image/jpg", "image/jpeg"},
+     *     mimeTypesMessage = "The mime type of the file is invalid ({{ type }}). Allowed mime types are {{ types }}"
+     * )
      */
     private $file;
-
-    /**
-     * @ORM\Column(type="boolean", nullable=true)
-     */
-    private $is_cover;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -63,6 +71,7 @@ class Picture
 
     /**
      * @ORM\ManyToMany(targetEntity=Plant::class, inversedBy="pictures")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $plants;
 
@@ -147,20 +156,6 @@ class Picture
 
         return $this;
     }
-
-
-    public function getIsCover(): ?bool
-    {
-        return $this->is_cover;
-    }
-
-    public function setIsCover(?bool $is_cover): self
-    {
-        $this->is_cover = $is_cover;
-
-        return $this;
-    }
-
 
     public function getLikeCounter(): ?int
     {

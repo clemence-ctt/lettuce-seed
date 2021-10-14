@@ -7,7 +7,9 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\PlantRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=PlantRepository::class)
@@ -30,6 +32,8 @@ class Plant
      *      minMessage = "The plant name must be at least {{ limit }} characters long",
      *      maxMessage = "The plant name cannot be longer than {{ limit }} characters"
      * )
+     * @Assert\NotBlank(
+     *      message = "You must name your plant.")
      */
     private $name;
 
@@ -44,6 +48,8 @@ class Plant
 
     /**
      * @ORM\Column(type="date", nullable=true)
+     * @Assert\NotBlank(
+     *      message = "You must enter a planting date.")
      */
     private $date;
 
@@ -51,6 +57,11 @@ class Plant
      * @ORM\ManyToMany(targetEntity=Picture::class, mappedBy="plants")
      */
     private $pictures;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Picture::class)
+     */
+    private $cover;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="plants")
@@ -67,6 +78,7 @@ class Plant
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $updated_at;
+
 
 
     public function __construct()
@@ -144,6 +156,19 @@ class Plant
         if ($this->pictures->removeElement($picture)) {
             $picture->removePlant($this);
         }
+
+        return $this;
+    }
+    
+
+    public function getCover(): ?Picture
+    {
+        return $this->cover;
+    }
+
+    public function setCover(?Picture $cover): self
+    {
+        $this->cover = $cover;
 
         return $this;
     }

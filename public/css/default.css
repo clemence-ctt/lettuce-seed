@@ -1,0 +1,306 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Paaji+2:wght@400;500;600;700;800&display=swap');
+
+
+@import '_debug.css';
+
+
+body {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: #fff !important;
+    min-height: 100vh;
+}
+
+img {
+    max-width: 100%;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+
+/** Base **/
+
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-fancy-00);
+}
+
+h1 {
+    font-size: 3rem;
+    margin-bottom: var(--spacing-default);;
+}
+
+h3 {
+    font-size: 2rem;
+}
+/* ===================================================================== */
+.user-avatar {
+    position: relative;
+}
+
+
+
+.user-avatar .remove-avatar {
+    position: absolute;
+    left: calc(50% + 100px);
+    top: 100px;
+    z-index: 10;
+    color: var(--color-medium);
+    background-color: #fff;
+    border-radius: 2rem;
+    
+    
+    width: 2.1em;
+    height: 1.9rem;
+    overflow: hidden;
+
+    transition: all 0.3s;
+    display: flex;
+
+    border: var(--border-default);
+}
+.user-avatar .remove-avatar:hover {
+    width: 170px;
+}
+
+.user-avatar .remove-avatar span {
+    margin-left: var(--spacing-smallest);
+}
+
+
+/* ===================================================================== */
+
+
+/* BUTTON CUSTOMIZATION ================================================ */
+
+.return {
+   display:flex ;
+   position: absolute;
+   right: var(--spacing-default);
+   top: 250px;
+
+   justify-content: flex-end;
+   margin-top: -5rem;
+   margin-bottom: 3rem;
+}
+.return .button {
+    margin-left: var(--spacing-default);
+}
+
+.button-mb {
+    margin-bottom: var(--spacing-default);
+}
+
+.button-mt {
+    margin-top: var(--spacing-default);
+}
+
+
+/* THEME CUSTOMIZATION=================================================*/
+
+body.offcanvas #colorlib-main, body.offcanvas .colorlib-nav-toggle {
+    transform: translateX(0) !important;
+}
+
+.colorlib-nav-toggle {
+    background-color: #fff3 !important;
+    padding: 0.3rem 0.5rem 0.5rem 0.5rem !important;
+    margin: 1rem 0 0 1rem  !important;
+    border: solid 1px var(--color-darkest);
+    
+    height: 3rem;
+    width: 3rem;
+    border-radius: 2rem;
+    backdrop-filter: sepia(1) blur(2px);
+    box-shadow: 2px 2px 2px #0005;
+}
+
+.main-content > h1 {
+    /* margin-left: 2rem; */
+}
+
+#colorlib-main {
+    min-height: 100vh;
+}
+
+#colorlib-page {
+    min-height: 100vh;
+}
+
+
+main.main-content {
+    padding: calc(var(--spacing-default) * 2 ) var(--spacing-default);
+}
+
+.ftco-footer {
+    padding: calc(var(--spacing-default) * 2 ) var(--spacing-default);
+}
+
+.thumbnail {
+    margin: var(--spacing-smallest);
+    border: var(--border-default);
+    border-color: var(--color-medium);
+    border-width: 2px;
+    border-radius: var(--border-radius-small);
+
+    background-color: #fff;
+
+    /*filter: grayscale(0.5);*/
+}
+
+.thumbnail:hover {
+    box-shadow: 3px 3px 3px var(--color-medium);
+    transform: translateY(5px) /*rotateZ(-5deg)*/ scale(1.1);
+    /*filter: grayscale(0);*/
+}
+
+
+
+#colorlib-main {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* =================================================*/
+.main-menu {
+    background-color: var(--color-medium) !important;
+    
+}
+
+.main-menu a {
+    color: #fff !important;
+}
+
+
+/* =================================================*/
+.ftco-section.ftco-bread {
+    background-image: url(../default-assets/head1.jpg) !important;
+    background-size: cover !important;
+}
+.ftco-section.ftco-bread h1 {
+    color: var(--color-lightest) !important;
+}
+
+
+.ftco-section.ftco-bread a {
+    color: var(--color-lightest) !important;
+}
+
+/* BUTTONS  =================================================*/
+
+.button {
+    border: var(--border-default);
+    border-radius: var(--border-radius-small);
+    padding: var(--spacing-smallest) var(--spacing-default) !important;
+
+    padding-top: var(--spacing-smallest) !important;
+    padding-bottom: var(--spacing-smallest) !important;
+
+    background-color: var(--color-medium);
+    color: var(--color-lightest);
+    font-size: 1rem;
+    display: inline-block;
+
+    appearance: button;
+    -webkit-appearance: button;
+    -moz-appearance: button;
+}
+
+.button:hover {
+    box-shadow: 3px 3px 3px var(--color-medium);
+}
+
+.cta {
+    margin-top: var(--spacing-biggest);
+    text-align: right;
+}
+
+.card__plant-links a {
+    color: var(--color-medium);
+    border: solid 1px var(--color-medium);
+    border-radius: var(--border-radius-small);
+    padding : 0 var(--spacing-default);
+}
+
+.card__plant-links a:hover {
+    /* color: var(--color-darkest); */
+    background-color: var(--color-highlight);
+    font-size: larger;
+}
+
+/* FORMS =================================================*/
+
+
+form:not(.delete) {
+    padding: 
+        calc(var(--spacing-default))
+        calc(var(--spacing-default))
+    ;
+
+    background-color: var(--color-light);
+    border-radius: var(--border-radius-default);
+    border: var(--border-default);
+}
+
+form .uploaded-image {
+    height: 100px;
+    width: 100px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+
+    transform: scale(3);
+
+    display: block;
+    margin: auto;
+
+    margin-top: 150px;
+    margin-bottom: 150px;
+
+    border-radius: 50%;
+    border: var(--border-default);
+}
+
+
+form label {
+    font-weight: bold;
+    margin-bottom: var(--spacing-smallest);
+}
+
+input, textarea {
+    border: var(--border-default);
+    border-radius: 4px;
+    padding:  var(--spacing-smallest);
+    width: 100%;
+    margin-bottom: 0;
+}
+
+textarea {
+    min-height: 100px;
+}
+
+
+/** Generic styles **/
+
+.info {
+    margin-bottom: var(--spacing-default);
+}
+
+.sf-form > div {
+    margin-bottom: var(--gutter-large);
+}
+
+.sf-form > div > label {
+    color: var(--color-darkest);
+    font-size: var(--font-size-big);
+    display: block;
+    margin-top: var(--gutter-large);
+    margin-bottom: var(--gutter-default);
+}
+
+.plant-info-links {
+    display: inline-block;
+}
+

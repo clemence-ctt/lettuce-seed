@@ -1,0 +1,33 @@
+.button {
+
+    display: inline-block;
+    position: relative;
+    text-align: center;
+
+    border: var(--border-default);
+    padding: var(--spacing-smallest) var(--spacing-default);
+    background-color: var(--color-interactive-00);
+    border-radius: var(--border-radius-small);
+}
+
+.button--small {
+    font-size: 0.7rem;
+    padding: var(--spacing-smallest) var(--spacing-smallest) !important;
+}
+
+.button--icon {
+  
+    display: inline-block;
+    position: relative;
+    text-align: center;
+}
+
+.button--icon  {
+    color: var(--color-interactive-00);
+}
+
+
+.paginate_button  {
+    background-color: var(--color-medium-dark);
+}
+

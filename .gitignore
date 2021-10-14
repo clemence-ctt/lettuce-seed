@@ -11,6 +11,14 @@
 /vendor/
 ###< symfony/framework-bundle ###
 
+### uploads ###
+/public/uploads
+### uploads ###
+
+### server config ###
+www
+### server config ###
+
 ###> symfony/phpunit-bridge ###
 .phpunit.result.cache
 /phpunit.xml

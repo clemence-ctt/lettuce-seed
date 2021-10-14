@@ -1,6 +1,8 @@
 {% extends 'default.html.twig' %}
 
-{% block title %}Edit User{% endblock %}
+{% block title %}
+    Edit my profile
+{% endblock %}
 
 {% block flash %}
     {# read and display all flash messages #}
@@ -16,8 +18,6 @@
 {% block body %}
     <h1>Edit User</h1>
 
-    {{ include('/dashboard/_partials/_profile-edit-form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('dashboard_profile') }}">back to profile</a>
+    {{ include('/dashboard/_partials/_profile-edit-form.html.twig', {'button_label': 'UPDATE MY PROFILE'}) }}
 
 {% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'default.html.twig' %}
+
+{% block flash %}
+    {# read and display all flash messages #}
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{ label }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+{% endblock %}
+
+{% block title %}Plant > {{ plant.name }}{% endblock %}
+
+{% block body %}
+    <h1>{{ plant.name }}</h1>
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Description</th>
+                <td>{{ plant.description }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ plant.date ? plant.date|date('Y-m-d') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <div class="plant-info-links" >
+        <a class="button" href="{{ path('dashboard_plant_edit', {'id': plant.id}) }}">Edit infos </a> 
+        <a class="button" href="{{ path('dashboard_plant_pictures', {'plantId': plant.id}) }}">See photos</a>
+
+        {{ include('dashboard/_partials/_plant-delete-form.html.twig') }}
+    </div>
+
+
+    {% endblock %}

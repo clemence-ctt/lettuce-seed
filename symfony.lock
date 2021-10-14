@@ -1,4 +1,7 @@
 {
+    "cocur/slugify": {
+        "version": "v4.0.0"
+    },
     "composer/package-versions-deprecated": {
         "version": "1.11.99.2"
     },
@@ -100,47 +103,29 @@
     "egulias/email-validator": {
         "version": "3.1.1"
     },
-    "fakerphp/faker": {
-        "version": "v1.15.0"
-    },
     "friendsofphp/proxy-manager-lts": {
         "version": "v1.0.5"
     },
-    "hautelook/alice-bundle": {
-        "version": "2.1",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "master",
-            "version": "2.1",
-            "ref": "71822522faf7ed2792d86b7f94ce73443358ccb9"
-        },
-        "files": [
-            "config/packages/dev/hautelook_alice.yaml",
-            "config/packages/test/hautelook_alice.yaml",
-            "fixtures/.gitignore"
-        ]
+    "imagine/imagine": {
+        "version": "1.2.4"
     },
     "laminas/laminas-code": {
         "version": "4.4.2"
+    },
+    "liip/imagine-bundle": {
+        "version": "1.8",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "1.8",
+            "ref": "5a5bdc2d0e2533ed6935d5ae562f2b318a8fc1ee"
+        }
     },
     "monolog/monolog": {
         "version": "2.3.2"
     },
     "myclabs/deep-copy": {
         "version": "1.10.2"
-    },
-    "nelmio/alice": {
-        "version": "3.2",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "master",
-            "version": "3.2",
-            "ref": "0b9900ece737bec7752e4155c0164639dd9b0cb0"
-        },
-        "files": [
-            "config/packages/dev/nelmio_alice.yaml",
-            "config/packages/test/nelmio_alice.yaml"
-        ]
     },
     "nikic/php-parser": {
         "version": "v4.12.0"
@@ -406,6 +391,18 @@
     "symfony/intl": {
         "version": "v5.3.4"
     },
+    "symfony/lock": {
+        "version": "5.2",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "5.2",
+            "ref": "a1c8800e40ae735206bb14586fdd6c4630a51b8d"
+        },
+        "files": [
+            "config/packages/lock.yaml"
+        ]
+    },
     "symfony/mailer": {
         "version": "4.3",
         "recipe": {
@@ -521,6 +518,9 @@
         "version": "v5.3.4"
     },
     "symfony/proxy-manager-bridge": {
+        "version": "v5.3.4"
+    },
+    "symfony/rate-limiter": {
         "version": "v5.3.4"
     },
     "symfony/routing": {
@@ -654,15 +654,6 @@
     },
     "symfony/yaml": {
         "version": "v5.3.6"
-    },
-    "theofidry/alice-data-fixtures": {
-        "version": "1.0",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "master",
-            "version": "1.0",
-            "ref": "fe5a50faf580eb58f08ada2abe8afbd2d4941e05"
-        }
     },
     "theseer/tokenizer": {
         "version": "1.2.1"

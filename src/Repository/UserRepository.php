@@ -36,6 +36,23 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->_em->flush();
     }
 
+    /**
+     * returns an array of User objects
+     * @return User[]
+     */
+    public function findLastCreatedUsers(int $limit): array
+    {
+        $entityManager = $this->getEntityManager();
+        $query = $entityManager->createQuery(
+            'SELECT u.username, u.id, u.avatar
+            FROM App\Entity\User u
+            ORDER BY u.created_at DESC'
+        );
+        return $query->setMaxResults($limit)->getResult();
+    }
+}
+
+//-----------------------------------------------------------------------------------------
     // /**
     //  * @return User[] Returns an array of User objects
     //  */
@@ -64,4 +81,4 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         ;
     }
     */
-}
+

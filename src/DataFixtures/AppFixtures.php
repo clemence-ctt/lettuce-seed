@@ -12,6 +12,7 @@ use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
+//DOC FIXTURES https://symfony.com/bundles/DoctrineFixturesBundle/current/index.html
 class AppFixtures extends Fixture
 {
     // Une propriété pour accueillir notre encodeur
@@ -19,7 +20,6 @@ class AppFixtures extends Fixture
 
     public function __construct(UserPasswordHasherInterface $encoder)
     {
-
 
         // var_dump($encoder);
 
@@ -40,14 +40,10 @@ class AppFixtures extends Fixture
         $user = new User();
         $user->setEmail('admin@admin.com');
         $user->setPassword($this->encoder->hashPassword($user, 'admin'));
+        // admin : $2y$13$93tWCzD0lD4MWn0Vu.zU4OOElsskLh3NzvP1bPT9QgNgaG4q90st2
         $user->setRoles(['ROLE_ADMIN']);
         $user->setUsername('caca');
         $em->persist($user);
-
-        // NOTICE récup le password via la console : 
-        // security:hash-password
-        // ce qui donne : $2y$13$93tWCzD0lD4MWn0Vu.zU4OOElsskLh3NzvP1bPT9QgNgaG4q90st2
-
 
         $vegetables = [
             'Ail',
@@ -139,7 +135,7 @@ class AppFixtures extends Fixture
         $picture->setName($faker->name);
         $picture->setDescription($faker->text);
         $picture->setFile($picture->getName());
-        $picture->setIsCover(1);
+        // $picture->setIsCover(1);
         $picture->setLikeCounter(random_int(0,500));
         $picture->setDate($faker->dateTime($max = 'now', $timezone = null));
         $picture->setCreatedAt($now);

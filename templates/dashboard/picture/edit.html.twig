@@ -1,0 +1,33 @@
+{% extends 'default.html.twig' %}
+
+{% set route_parameters = app.request.attributes.get('_route_params') %}
+
+{% block flash %}
+    {# read and display all flash messages #}
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{ label }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+{% endblock %}
+
+{% block title %}Edit picture{% endblock %}
+
+{% block body %}
+
+    <div class="return">
+        <a class="button" href="{{ path('dashboard_picture_show', {'plantId' : selectedPlant.id, 'id': picture.id}) }}">Picture infos</a>
+        <a class="button" href="{{ path('dashboard_plant_pictures', {'plantId' : route_parameters.plantId}) }}">See gallery</a>
+    </div>
+
+    
+    
+    <h1>Edit Picture</h1>
+
+    {{ include('dashboard/_partials/_picture-edit-form.html.twig', {'button_label': 'UPDATE MY PHOTO'}) }}
+    
+    
+    {{ include('dashboard/_partials/_picture-delete-form.html.twig') }}
+{% endblock %}

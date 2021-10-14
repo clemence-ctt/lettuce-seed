@@ -1,0 +1,20 @@
+{% extends 'default.html.twig' %}
+
+{% block title %}
+    500 Internal Server Error
+{% endblock %}
+
+{% block body %}
+<!-- DOC TEMPLATE OVERRIDE https://symfony.com/doc/current/bundles/override.html#templates -->
+<!-- dev access : http://localhost/lettuce-seed/public/_error/404 -->
+
+    
+    <h1><i class="fas fa-tree"></i> Error 500 : Sorry I can't do that :'( </h1>
+    
+    <h2>
+        Follow this 
+            <a href="{{ path('dashboard_profile') }}">path</a>
+        to come back home.
+    </h2>
+
+{% endblock %}
